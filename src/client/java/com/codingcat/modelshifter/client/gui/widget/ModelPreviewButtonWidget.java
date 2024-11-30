@@ -13,10 +13,13 @@ import net.minecraft.client.gui.screen.narration.NarrationPart;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.PressableWidget;
 import net.minecraft.client.render.LightmapTextureManager;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 
@@ -113,7 +116,9 @@ public class ModelPreviewButtonWidget extends PressableWidget {
     }
 
     private void renderBackground(DrawContext context) {
+        //? <1.21.3 {
         context.setShaderColor(1.0f, 1.0f, 1.0f, this.alpha);
+        //?}
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
         Util.drawGuiTexture(context, this.type == Type.DISABLE_BUTTON ?
@@ -149,7 +154,7 @@ public class ModelPreviewButtonWidget extends PressableWidget {
         if (tweakFunction != null)
             tweakFunction.accept(matrices);
         renderer.setRenderColor(color, color, color, color);
-        renderer.render(skinProvider.getSkin(), 0, 0, matrices, context.getVertexConsumers(), LightmapTextureManager.MAX_BLOCK_LIGHT_COORDINATE);
+        renderer.render(skinProvider.getSkin(), 0, 0, matrices, Util.obtainVertexConsumer(skinProvider.getSkin()).getRight(), LightmapTextureManager.MAX_BLOCK_LIGHT_COORDINATE);
         context.draw();
         matrices.pop();
         context.disableScissor();

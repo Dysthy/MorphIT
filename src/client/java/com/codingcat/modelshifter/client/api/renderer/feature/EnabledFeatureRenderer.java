@@ -1,7 +1,7 @@
 package com.codingcat.modelshifter.client.api.renderer.feature;
 
+import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,7 +10,7 @@ import java.util.function.BiConsumer;
 
 public record EnabledFeatureRenderer(
         @NotNull FeatureRendererType type,
-        @Nullable BiConsumer<LivingEntity, MatrixStack> renderModifierConsumer
+        @Nullable BiConsumer<EntityRenderStateWrapper, MatrixStack> renderModifierConsumer
 ) {
 
     @Override

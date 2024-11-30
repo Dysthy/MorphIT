@@ -10,7 +10,10 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
-//? >1.20.4 {
+//? >=1.21.3 {
+/*import software.bernie.geckolib.object.Color;
+import software.bernie.geckolib.animation.RawAnimation;
+*///?} else if >1.20.4 {
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.Color;
 //?} else {
@@ -26,7 +29,7 @@ public class GuiPlayerEntityRenderer extends GeoObjectRenderer<ReplacedPlayerEnt
 
     public GuiPlayerEntityRenderer(Identifier modelIdentifier, @NotNull RawAnimation animation) {
         super(new GuiPlayerModel(modelIdentifier));
-        this.replacedPlayerEntity = new ReplacedPlayerEntity(player -> animation, false,true);
+        this.replacedPlayerEntity = new ReplacedPlayerEntity(player -> animation, false, true);
         this.renderColor = Color.WHITE;
     }
 
@@ -42,7 +45,7 @@ public class GuiPlayerEntityRenderer extends GeoObjectRenderer<ReplacedPlayerEnt
     public void render(Identifier skin, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         this.animatable = replacedPlayerEntity;
         RenderLayer type = getRenderType(animatable, skin, vertexConsumerProvider, g);
-        defaultRender(matrixStack, animatable, vertexConsumerProvider, type, null, f, g, i);
+        defaultRender(matrixStack, animatable, vertexConsumerProvider, type, null, f, i);
         this.animatable = null;
     }
 

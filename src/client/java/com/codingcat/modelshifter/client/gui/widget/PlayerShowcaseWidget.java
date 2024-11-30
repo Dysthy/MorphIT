@@ -23,6 +23,7 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
@@ -37,7 +38,11 @@ public class PlayerShowcaseWidget extends TextWidget {
     private final SingleAsyncSkinProvider skinProvider;
     @NotNull
     private GameProfile gameProfile;
+    //? >=1.21.3 {
+    /*private final PlayerEntityModel playerEntityModel;
+    *///?} else {
     private final PlayerEntityModel<?> playerEntityModel;
+     //?}
     private final TextMode textMode;
     private boolean contentVisible;
 
@@ -97,7 +102,9 @@ public class PlayerShowcaseWidget extends TextWidget {
     }
 
     private void renderBackground(DrawContext context) {
+        //? <1.21.3 {
         context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+         //?}
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
         Util.drawGuiTexture(context, BACKGROUND,
@@ -145,6 +152,7 @@ public class PlayerShowcaseWidget extends TextWidget {
         quaternionf.mul(quaternionf2);
         matrices.multiply(quaternionf);
         float size = getHeight() / 4f;
+        Pair<VertexConsumer, VertexConsumerProvider.Immediate> consumers = Util.obtainVertexConsumer(skinProvider.getSkin());
         if (ModelShifterClient.state.isRendererStateEnabled(gameProfile.getId()) && renderer != null) {
             PlayerModel model = getPlayerModel();
             assert model != null;
@@ -153,25 +161,23 @@ public class PlayerShowcaseWidget extends TextWidget {
             if (tweakFunction != null)
                 tweakFunction.accept(matrices);
             renderer.setRenderColor(255, 255, 255, 255);
-            renderer.render(skinProvider.getSkin(), 0, 0, matrices, context.getVertexConsumers(), LightmapTextureManager.MAX_BLOCK_LIGHT_COORDINATE);
+            renderer.render(skinProvider.getSkin(), 0, 0, matrices, consumers.getRight(), LightmapTextureManager.MAX_BLOCK_LIGHT_COORDINATE);
         } else if (!ModelShifterClient.state.isRendererStateEnabled(gameProfile.getId()) && playerEntityModel != null) {
             size /= 1.2f;
             matrices.scale(size, size, -size);
             matrices.translate(0, 1.4f, 0);
             matrices.multiply(new Quaternionf().rotateZ((float) Math.PI));
-            VertexConsumerProvider.Immediate vertexConsumer = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-            VertexConsumer consumer = vertexConsumer.getBuffer(RenderLayer.getEntityTranslucent(skinProvider.getSkin()));
             int overlay = OverlayTexture.packUv(OverlayTexture.getU(0), OverlayTexture.getV(false));
 
             playerEntityModel.render(matrices,
-                    consumer,
+                    consumers.getLeft(),
                     LightmapTextureManager.MAX_BLOCK_LIGHT_COORDINATE,
                     overlay,
                     //? <1.21 {
                     /*1f, 1f, 1f, 1f
-                    *///?} else {
+                     *///?} else {
                     -1
-                     //?}
+                    //?}
             );
         }
 
@@ -193,11 +199,20 @@ public class PlayerShowcaseWidget extends TextWidget {
                     : Text.translatable(active ? "modelshifter.text.model_info" : "modelshifter.text.no_model_active", modelName);
     }
 
-    private PlayerEntityModel<?> createModel() {
+    //? >=1.21.3 {
+    /*private PlayerEntityModel createModel() {
+        *///?} else {
+        private PlayerEntityModel<?> createModel () {
+         //?}
         ModelData data = PlayerEntityModel.getTexturedModelData(Dilation.NONE, false);
         ModelPart root = TexturedModelData.of(data, 64, 64).createModel();
+        //? >=1.21.3 {
+        /*@SuppressWarnings("UnnecessaryLocalVariable")
+        PlayerEntityModel model = new PlayerEntityModel(root, false);
+        *///?} else {
         PlayerEntityModel<?> model = new PlayerEntityModel<>(root, false);
         model.child = false;
+        //?}
 
         return model;
     }

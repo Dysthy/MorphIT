@@ -69,7 +69,7 @@ public class PlayerOverridesListWidgetEntry extends AlwaysSelectedEntryListWidge
 
 
         if (skinProvider.hasSkin())
-            PlayerSkinDrawer.draw(context, skinProvider.getSkin(), x1, y1, 30);
+            PlayerSkinDrawer.draw(context, skinProvider.getSkinTextures(), x1, y1, 30);
         if (hovered)
             context.fill(x1, y1, x1 + 30, y1 + 30, 0x37FFFFFF);
 

@@ -4,9 +4,10 @@ import com.codingcat.modelshifter.client.api.skin.SingleAsyncSkinProvider;
 import com.mojang.authlib.GameProfile;
 //? <=1.20.1 {
 /*import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-*///?}
+ *///?}
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.DefaultSkinHelper;
+import net.minecraft.client.util.SkinTextures;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,6 +19,9 @@ public class SingleAsyncSkinProviderImpl implements SingleAsyncSkinProvider {
     @Nullable
     private GameProfile profile;
     private final AtomicReference<Identifier> cachedSkin;
+    //? >=1.21.3 {
+    /*private final AtomicReference<SkinTextures> cachedSkinTextures;
+    // }
 
     public SingleAsyncSkinProviderImpl() {
         this(null);
@@ -27,6 +31,9 @@ public class SingleAsyncSkinProviderImpl implements SingleAsyncSkinProvider {
         this.client = MinecraftClient.getInstance();
         this.profile = profile;
         this.cachedSkin = new AtomicReference<>();
+        //? >=1.21.3 {
+        this.cachedSkinTextures = new AtomicReference<>();
+        //?}
     }
 
     @Override
@@ -39,14 +46,26 @@ public class SingleAsyncSkinProviderImpl implements SingleAsyncSkinProvider {
         //? >1.20.1 {
         client.getSkinProvider()
                 .fetchSkinTextures(this.profile)
-                .thenAccept(textures -> cachedSkin.set(textures.texture()));
+                .thenAccept(textures -> {
+                    //? >=1.21.3 {
+                    cachedSkinTextures.set(textures);
+                    //?}
+                    cachedSkin.set(textures.texture());
+                });
         //?} else {
-        /*client.getSkinProvider().loadSkin(profile, (type, id, texture) -> {
+        /^client.getSkinProvider().loadSkin(profile, (type, id, texture) -> {
             if (type != MinecraftProfileTexture.Type.SKIN) return;
             cachedSkin.set(client.getSkinProvider().loadSkin(texture, type));
         }, false);
-        *///?}
+        ^///?}
     }
+
+    //? >=1.21.3 {
+    @Override
+    public @Nullable SkinTextures getSkinTextures() {
+        return this.cachedSkinTextures.get();
+    }
+    //?}
 
     @Override
     public @Nullable Identifier getSkinOrNull() {
@@ -62,8 +81,8 @@ public class SingleAsyncSkinProviderImpl implements SingleAsyncSkinProvider {
         //? >1.20.1 {
         return client.getSkinProvider().getSkinTextures(gameProfile).texture();
         //?} else {
-        /*return client.getSkinProvider().loadSkin(gameProfile);
-         *///?}
+        /^return client.getSkinProvider().loadSkin(gameProfile);
+         ^///?}
     }
 
     @Override
@@ -71,3 +90,4 @@ public class SingleAsyncSkinProviderImpl implements SingleAsyncSkinProvider {
         this.profile = profile;
     }
 }
+*/

@@ -12,7 +12,7 @@
     "renderer.EntityRenderDispatcherMixin",
     "renderer.EntityRendererMixin",
     "renderer.HeldItemFeatureRendererMixin",
-    "renderer.PlayerEntityModelMixin",
+    "renderer.LivingEntityRendererMixin",
     "renderer.PlayerEntityRendererMixin",
     "renderer.ShoulderParrotFeatureRendererMixin",
     "renderer.StuckArrowsFeatureRendererMixin",
