@@ -4,11 +4,13 @@ import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererType;
 import com.codingcat.modelshifter.client.util.MixinUtil;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.feature.FeatureRenderer;
+//? >=1.21.3 {
+/*import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
-import net.minecraft.client.render.entity.feature.ShoulderParrotFeatureRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
+*///?}
+import net.minecraft.client.render.entity.feature.ShoulderParrotFeatureRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 //? <1.21.3 {
 import net.minecraft.entity.player.PlayerEntity;

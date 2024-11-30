@@ -1,19 +1,21 @@
 package com.codingcat.modelshifter.client.render;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
-import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.render.entity.ReplacedPlayerEntity;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+//? >=1.21.3 {
+/*import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
+import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import org.jetbrains.annotations.Nullable;
+*///?}
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
 
@@ -31,10 +33,17 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
         return this.modelIdentifier;
     }
 
-    public void render(AbstractClientPlayerEntity clientPlayer, Identifier skin, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+    public void render(AbstractClientPlayerEntity clientPlayer, Identifier skin, float partialTick, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+        //? >=1.21.3 {
+        /*partialTick = this.partialTick;
+        *///?}
         this.currentEntity = clientPlayer;
-        RenderLayer type = getRenderType(animatable, skin, vertexConsumerProvider, this.partialTick);
-        defaultRender(matrixStack, animatable, vertexConsumerProvider, type, null, this.partialTick, i);
+        RenderLayer type = getRenderType(animatable, skin, vertexConsumerProvider, partialTick);
+        defaultRender(matrixStack, animatable, vertexConsumerProvider, type, null,
+                //? <1.21.3 {
+                0,
+                //?}
+                partialTick, i);
         this.currentEntity = null;
     }
 

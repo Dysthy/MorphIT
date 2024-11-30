@@ -8,11 +8,11 @@ import net.minecraft.client.render.entity.feature.ElytraFeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 //? >=1.21.3 {
-/*import net.minecraft.entity.LivingEntity;
+/*import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 *///?}
+import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

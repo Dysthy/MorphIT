@@ -12,10 +12,10 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.ModelWithArms;
-import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 //? >=1.21.3 {
 /*import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.item.ModelTransformationMode;
+import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 *///?} else {
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.entity.LivingEntity;

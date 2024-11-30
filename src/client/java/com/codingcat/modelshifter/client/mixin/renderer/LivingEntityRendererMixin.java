@@ -1,5 +1,15 @@
 package com.codingcat.modelshifter.client.mixin.renderer;
 
+
+import org.spongepowered.asm.mixin.Mixin;
+import net.minecraft.client.render.entity.LivingEntityRenderer;
+
+//? >=1.21.3 {
+/*import net.minecraft.entity.LivingEntity;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.codingcat.modelshifter.client.ModelShifterClient;
 import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
@@ -7,22 +17,20 @@ import com.codingcat.modelshifter.client.render.ReplacedPlayerEntityRenderer;
 import com.codingcat.modelshifter.client.util.MixinUtil;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
-import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
+import net.minecraft.client.render.entity.PlayerEntityRenderer;
+import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.LivingEntity;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+*///?}
 
 @Mixin(LivingEntityRenderer.class)
-public abstract class LivingEntityRendererMixin<T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> {
+public abstract class LivingEntityRendererMixin
+        //? >=1.21.3 {
+        /*<T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>>
+*///?}
+{
     //? >=1.21.3 {
     /*@Shadow protected M model;
 

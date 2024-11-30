@@ -1,16 +1,26 @@
 package com.codingcat.modelshifter.client.impl.entity;
 
-import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
-import net.minecraft.client.MinecraftClient;
+//? >=1.21.3 {
+/*import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.state.EntityRenderState;
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.Nullable;
+import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
+*///?}
 
-public class StateEntityWrapper implements EntityRenderStateWrapper {
-    private final EntityRenderState state;
+//? <1.21.3 {
+@SuppressWarnings("unused")
+//? }
+public class StateEntityWrapper
+    //? >=1.21.3 {
+        /*implements EntityRenderStateWrapper
+    *///?}
+{
+    //? >=1.21.3 {
+    /*private final EntityRenderState state;
 
     public StateEntityWrapper(EntityRenderState state) {
         this.state = state;
@@ -44,4 +54,5 @@ public class StateEntityWrapper implements EntityRenderStateWrapper {
     public float getHeight() {
         return state.height;
     }
+    *///?}
 }

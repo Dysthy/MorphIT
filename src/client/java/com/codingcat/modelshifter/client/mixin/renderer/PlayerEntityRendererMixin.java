@@ -10,18 +10,19 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 //? <1.21.3 {
 import com.codingcat.modelshifter.client.render.ReplacedPlayerEntityRenderer;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
-import org.spongepowered.asm.mixin.Shadow;
-//?}
+import com.codingcat.modelshifter.client.util.MixinUtil;
+//?} else {
+/*import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.Identifier;
+*///?}
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -69,7 +70,7 @@ public abstract class PlayerEntityRendererMixin
         //? >=1.21.3 {
         /*cir.setReturnValue(super.getPositionOffset(e));
         *///?} else {
-        cir.setReturnValue(super.getPositionOffset(abstractClientPlayerEntity, f));
+        cir.setReturnValue(super.getPositionOffset(e, f));
          //?}
         cir.cancel();
     }
@@ -127,9 +128,9 @@ public abstract class PlayerEntityRendererMixin
         //? >=1.21.3 {
         /*super.setupTransforms(e, matrixStack, f, g);
         *///?} else if >1.20.4 {
-        super.setupTransforms(abstractClientPlayerEntity, matrixStack, f, g, h, i);
+        super.setupTransforms(e, matrixStack, f, g, h, i);
          //?} else {
-        /*super.setupTransforms(abstractClientPlayerEntity, matrixStack, f, g, h);
+        /*super.setupTransforms(e, matrixStack, f, g, h);
          *///?}
         ci.cancel();
     }
@@ -144,7 +145,7 @@ public abstract class PlayerEntityRendererMixin
         PlayerModel playerModel = ModelShifterClient.state.getState(clientPlayer.getUuid()).getPlayerModel();
         ReplacedPlayerEntityRenderer renderer = ModelShifterClient.holder.getRenderer(playerModel);
         if (renderer != null)
-            renderer.render(clientPlayer, getTexture(clientPlayer), matrixStack, vertexConsumerProvider, i);
+            renderer.render(clientPlayer, getTexture(clientPlayer), g, matrixStack, vertexConsumerProvider, i);
     }
     //?}
 }

@@ -5,11 +5,12 @@ import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererTyp
 import com.codingcat.modelshifter.client.util.MixinUtil;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.TridentRiptideFeatureRenderer;
-import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 //? <1.21.3 {
 import net.minecraft.entity.LivingEntity;
-//?}
+//?} else {
+/*import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
+*///?}
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

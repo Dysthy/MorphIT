@@ -45,7 +45,11 @@ public class GuiPlayerEntityRenderer extends GeoObjectRenderer<ReplacedPlayerEnt
     public void render(Identifier skin, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         this.animatable = replacedPlayerEntity;
         RenderLayer type = getRenderType(animatable, skin, vertexConsumerProvider, g);
-        defaultRender(matrixStack, animatable, vertexConsumerProvider, type, null, f, i);
+        defaultRender(matrixStack, animatable, vertexConsumerProvider, type, null, f,
+                //? <1.21.3 {
+                g,
+                //?}
+                i);
         this.animatable = null;
     }
 

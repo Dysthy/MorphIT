@@ -5,10 +5,11 @@ import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererTyp
 import com.codingcat.modelshifter.client.util.MixinUtil;
 //? <1.21.3 {
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-//?}
+//?} else {
+/*import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
+*///?}
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.Deadmau5FeatureRenderer;
-import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

@@ -2,7 +2,6 @@ package com.codingcat.modelshifter.client.mixin.renderer;
 
 import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererType;
 import net.minecraft.client.render.entity.feature.StuckArrowsFeatureRenderer;
-import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
@@ -16,8 +15,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.entity.Entity;
-//?}
+//?} else {
+/*import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+*///?}
 
 @Mixin(StuckArrowsFeatureRenderer.class)
 public class StuckArrowsFeatureRendererMixin {
