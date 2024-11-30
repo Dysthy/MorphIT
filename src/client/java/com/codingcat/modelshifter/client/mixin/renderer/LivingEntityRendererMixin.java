@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 
 //? >=1.21.3 {
-/*import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,16 +23,16 @@ import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
-*///?}
+//?}
 
 @Mixin(LivingEntityRenderer.class)
 public abstract class LivingEntityRendererMixin
         //? >=1.21.3 {
-        /*<T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>>
-*///?}
+        <T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>>
+//?}
 {
     //? >=1.21.3 {
-    /*@Shadow protected M model;
+    @Shadow protected M model;
 
     @Inject(at = @At("HEAD"),
             method = "render(Lnet/minecraft/client/render/entity/state/LivingEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
@@ -50,7 +50,7 @@ public abstract class LivingEntityRendererMixin
         PlayerModel playerModel = ModelShifterClient.state.getState(state.getPlayer().getUuid()).getPlayerModel();
         ReplacedPlayerEntityRenderer renderer = ModelShifterClient.holder.getRenderer(playerModel);
         if (renderer != null)
-            renderer.render(clientPlayer, playerEntityRenderer.getTexture(playerState), matrixStack, vertexConsumerProvider, i);
+            renderer.render(clientPlayer, playerEntityRenderer.getTexture(playerState), -1, matrixStack, vertexConsumerProvider, i);
     }
 
     @Inject(
@@ -65,5 +65,5 @@ public abstract class LivingEntityRendererMixin
 
         MixinUtil.setModelVisibility(playerEntity, playerModel);
     }
-    *///?}
+    //?}
 }

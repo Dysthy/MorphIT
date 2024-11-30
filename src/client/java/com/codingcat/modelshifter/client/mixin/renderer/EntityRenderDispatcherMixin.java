@@ -7,8 +7,8 @@ import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 //? >=1.21.3 {
-/*import net.minecraft.client.render.entity.state.EntityRenderState;
-*///?}
+import net.minecraft.client.render.entity.state.EntityRenderState;
+//?}
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Box;
@@ -23,14 +23,14 @@ public class EntityRenderDispatcherMixin {
     @Redirect(
             method = "renderFire",
             //? >=1.21.3 {
-            /*at = @At(value = "FIELD", target = "Lnet/minecraft/client/render/entity/state/EntityRenderState;width:F")
+            at = @At(value = "FIELD", target = "Lnet/minecraft/client/render/entity/state/EntityRenderState;width:F")
     )
     public float redirectGetWidth(EntityRenderState e) {
-        *///?} else {
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;getWidth()F")
+        //?} else {
+        /*at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;getWidth()F")
     )
     public float redirectGetWidth(Entity e) {
-    //?}
+    *///?}
         EntityRenderStateWrapper state = EntityRenderStateWrapper.of(e);
         ModelDimensions dimensions = getDimensions(state);
         return dimensions != null ? dimensions.width() : state.getWidth();
@@ -39,14 +39,14 @@ public class EntityRenderDispatcherMixin {
     @Redirect(
             method = "renderFire",
             //? >=1.21.3 {
-            /*at = @At(value = "FIELD", target = "Lnet/minecraft/client/render/entity/state/EntityRenderState;height:F")
+            at = @At(value = "FIELD", target = "Lnet/minecraft/client/render/entity/state/EntityRenderState;height:F")
     )
     public float redirectGetHeight(EntityRenderState e) {
-        *///?} else {
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;getHeight()F")
+        //?} else {
+        /*at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;getHeight()F")
     )
     public float redirectGetHeight(Entity e) {
-    //?}
+    *///?}
         EntityRenderStateWrapper state = EntityRenderStateWrapper.of(e);
         ModelDimensions dimensions = getDimensions(state);
         return dimensions != null ? dimensions.height() : state.getHeight();

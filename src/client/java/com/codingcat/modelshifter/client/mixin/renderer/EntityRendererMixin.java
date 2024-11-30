@@ -6,10 +6,11 @@ import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 //? >=1.21.3 {
-/*import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.render.entity.state.EntityRenderState;
+//?} else {
+/*import net.minecraft.entity.Entity;
 *///?}
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,31 +20,32 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityRenderer.class)
 //? >=1.21.3 {
-/*public class EntityRendererMixin<T extends Entity, S extends EntityRenderState> {
-*///?} else {
-public class EntityRendererMixin<T extends Entity> {
-//?}
+public class EntityRendererMixin<S extends EntityRenderState> {
+//?} else {
+/*public class EntityRendererMixin<T extends Entity> {
+*///?}
     @Inject(
-            //? >1.20.4 <1.21.3 {
-            method = "renderLabelIfPresent(Lnet/minecraft/entity/Entity;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IF)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(DDD)V")
-            //?} else {
-            /*method = "renderLabelIfPresent",
-            *///?}
-            //? <=1.20.4 >=1.21.3 {
+            //? if >1.20.4 <1.21.3 {
+            /*method = "renderLabelIfPresent(Lnet/minecraft/entity/Entity;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IF)V",
+            *///?} else {
+            method = "renderLabelIfPresent",
+            //?}
+            //? if <=1.20.4 {
             /*at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V")
-            *///?}
+            *///?} else {
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(DDD)V")
+            //?}
     )
     protected void injectLabelPositionOffset(
             //? >=1.21.3 {
-            /*S e,
-            *///?} else {
-            T e,
-            //?}
+            S e,
+            //?} else {
+            /*T e,
+            *///?}
             Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light,
                                              //? >1.20.4 <1.21.3 {
-                                             float tickDelta,
-                                             //?}
+                                             /*float tickDelta,
+                                             *///?}
                                              CallbackInfo ci) {
         EntityRenderStateWrapper state = EntityRenderStateWrapper.of(e);
         if (!state.isPlayer()) return;

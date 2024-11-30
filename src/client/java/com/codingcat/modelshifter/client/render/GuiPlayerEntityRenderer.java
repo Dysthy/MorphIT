@@ -11,12 +11,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 //? >=1.21.3 {
-/*import software.bernie.geckolib.object.Color;
+import software.bernie.geckolib.object.Color;
 import software.bernie.geckolib.animation.RawAnimation;
-*///?} else if >1.20.4 {
-import software.bernie.geckolib.animation.RawAnimation;
+//?} else if >1.20.4 {
+/*import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.Color;
-//?} else {
+*///?} else {
 /*import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.Color;
 *///?}
@@ -47,8 +47,8 @@ public class GuiPlayerEntityRenderer extends GeoObjectRenderer<ReplacedPlayerEnt
         RenderLayer type = getRenderType(animatable, skin, vertexConsumerProvider, g);
         defaultRender(matrixStack, animatable, vertexConsumerProvider, type, null, f,
                 //? <1.21.3 {
-                g,
-                //?}
+                /*g,
+                *///?}
                 i);
         this.animatable = null;
     }

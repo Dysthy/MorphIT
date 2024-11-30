@@ -114,8 +114,8 @@ public class ModelPreviewButtonWidget extends PressableWidget {
 
     private void renderBackground(DrawContext context) {
         //? <1.21.3 {
-        context.setShaderColor(1.0f, 1.0f, 1.0f, this.alpha);
-        //?}
+        /*context.setShaderColor(1.0f, 1.0f, 1.0f, this.alpha);
+        *///?}
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
         Util.drawGuiTexture(context, this.type == Type.DISABLE_BUTTON ?

@@ -186,19 +186,19 @@ public class PlayerOverridesScreen extends AbstractCustomGameOptionsScreen {
     }
 
     //? >=1.21.3 {
-    /*@Override
+    @Override
     protected void refreshWidgetPositions() {
         super.refreshWidgetPositions();
         reloadOverrides();
     }
 
-    *///?} else {
-    @Override
+    //?} else {
+    /*@Override
     protected void initTabNavigation() {
         super.initTabNavigation();
         reloadOverrides();
     }
-    //?}
+    *///?}
 
     @Override
     public void resize(MinecraftClient client, int width, int height) {

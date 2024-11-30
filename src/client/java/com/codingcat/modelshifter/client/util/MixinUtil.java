@@ -39,7 +39,9 @@ public class MixinUtil {
             ci.cancel();
     }
 
-    @SuppressWarnings("rawtypes")
+    //? <1.21.3 {
+    /*@SuppressWarnings("rawtypes")
+    *///?}
     public static void setModelVisibility(PlayerEntity player, PlayerEntityModel model) {
         boolean rendererEnabled = ModelShifterClient.state.isRendererEnabled(player);
         model.setVisible(!rendererEnabled);

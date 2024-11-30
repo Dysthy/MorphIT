@@ -8,8 +8,8 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.DefaultSkinHelper;
 //? >=1.21.3 {
-/*import net.minecraft.client.util.SkinTextures;
-*///?}
+import net.minecraft.client.util.SkinTextures;
+//?}
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,8 +22,8 @@ public class SingleAsyncSkinProviderImpl implements SingleAsyncSkinProvider {
     private GameProfile profile;
     private final AtomicReference<Identifier> cachedSkin;
     //? >=1.21.3 {
-    /*private final AtomicReference<SkinTextures> cachedSkinTextures;
-    *///?}
+    private final AtomicReference<SkinTextures> cachedSkinTextures;
+    //?}
 
     public SingleAsyncSkinProviderImpl() {
         this(null);
@@ -34,8 +34,8 @@ public class SingleAsyncSkinProviderImpl implements SingleAsyncSkinProvider {
         this.profile = profile;
         this.cachedSkin = new AtomicReference<>();
         //? >=1.21.3 {
-        /*this.cachedSkinTextures = new AtomicReference<>();
-        *///?}
+        this.cachedSkinTextures = new AtomicReference<>();
+        //?}
     }
 
     @Override
@@ -50,8 +50,8 @@ public class SingleAsyncSkinProviderImpl implements SingleAsyncSkinProvider {
                 .fetchSkinTextures(this.profile)
                 .thenAccept(textures -> {
                     //? >=1.21.3 {
-                    /*cachedSkinTextures.set(textures);
-                    *///?}
+                    cachedSkinTextures.set(textures);
+                    //?}
                     cachedSkin.set(textures.texture());
                 });
         //?} else {
@@ -63,11 +63,11 @@ public class SingleAsyncSkinProviderImpl implements SingleAsyncSkinProvider {
     }
 
     //? >=1.21.3 {
-    /*@Override
+    @Override
     public @Nullable SkinTextures getSkinTextures() {
         return this.cachedSkinTextures.get();
     }
-    *///?}
+    //?}
 
     @Override
     public @Nullable Identifier getSkinOrNull() {

@@ -39,10 +39,10 @@ public class PlayerShowcaseWidget extends TextWidget {
     @NotNull
     private GameProfile gameProfile;
     //? >=1.21.3 {
-    /*private final PlayerEntityModel playerEntityModel;
-    *///?} else {
-    private final PlayerEntityModel<?> playerEntityModel;
-     //?}
+    private final PlayerEntityModel playerEntityModel;
+    //?} else {
+    /*private final PlayerEntityModel<?> playerEntityModel;
+     *///?}
     private final TextMode textMode;
     private boolean contentVisible;
 
@@ -103,8 +103,8 @@ public class PlayerShowcaseWidget extends TextWidget {
 
     private void renderBackground(DrawContext context) {
         //? <1.21.3 {
-        context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-         //?}
+        /*context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+         *///?}
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
         Util.drawGuiTexture(context, BACKGROUND,
@@ -200,19 +200,19 @@ public class PlayerShowcaseWidget extends TextWidget {
     }
 
     //? >=1.21.3 {
-    /*private PlayerEntityModel createModel() {
-        *///?} else {
-        private PlayerEntityModel<?> createModel () {
-         //?}
+    private PlayerEntityModel createModel() {
+        //?} else {
+        /*private PlayerEntityModel<?> createModel () {
+         *///?}
         ModelData data = PlayerEntityModel.getTexturedModelData(Dilation.NONE, false);
         ModelPart root = TexturedModelData.of(data, 64, 64).createModel();
         //? >=1.21.3 {
-        /*@SuppressWarnings("UnnecessaryLocalVariable")
+        @SuppressWarnings("UnnecessaryLocalVariable")
         PlayerEntityModel model = new PlayerEntityModel(root, false);
-        *///?} else {
-        PlayerEntityModel<?> model = new PlayerEntityModel<>(root, false);
+        //?} else {
+        /*PlayerEntityModel<?> model = new PlayerEntityModel<>(root, false);
         model.child = false;
-        //?}
+        *///?}
 
         return model;
     }

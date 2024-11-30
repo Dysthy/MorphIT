@@ -2,8 +2,8 @@ package com.codingcat.modelshifter.client.api.skin;
 
 import com.mojang.authlib.GameProfile;
 //? >=1.21.3 {
-/*import net.minecraft.client.util.SkinTextures;
-*///?}
+import net.minecraft.client.util.SkinTextures;
+//?}
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,8 +19,8 @@ public interface SingleAsyncSkinProvider {
     void fetchSkin();
 
     //? >=1.21.3 {
-    /*SkinTextures getSkinTextures();
-    *///?}
+    SkinTextures getSkinTextures();
+    //?}
 
     @NotNull
     default Identifier getSkin() {

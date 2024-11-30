@@ -11,11 +11,10 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 //? >=1.21.3 {
-/*import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import net.minecraft.client.render.entity.state.EntityRenderState;
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import org.jetbrains.annotations.Nullable;
-*///?}
+//?}
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
 
@@ -33,22 +32,25 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
         return this.modelIdentifier;
     }
 
+    //? >=1.21.3 {
+    @SuppressWarnings("ParameterCanBeLocal")
+    //?}
     public void render(AbstractClientPlayerEntity clientPlayer, Identifier skin, float partialTick, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         //? >=1.21.3 {
-        /*partialTick = this.partialTick;
-        *///?}
+        partialTick = this.partialTick;
+        //?}
         this.currentEntity = clientPlayer;
         RenderLayer type = getRenderType(animatable, skin, vertexConsumerProvider, partialTick);
         defaultRender(matrixStack, animatable, vertexConsumerProvider, type, null,
                 //? <1.21.3 {
-                0,
-                //?}
+                /*0,
+                *///?}
                 partialTick, i);
         this.currentEntity = null;
     }
 
     //? >=1.21.3 {
-    /*@Override
+    @Override
     protected void renderLabelIfPresent(EntityRenderState state, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
     }
 
@@ -58,12 +60,12 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
         return new PlayerEntityRenderState();
     }
 
-    *///?} else if >1.20.4 {
-    @Override
+    //?} else if >1.20.4 {
+    /*@Override
     protected void renderLabelIfPresent(AbstractClientPlayerEntity entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, float tickDelta) {
     }
 
-    //?} else {
+    *///?} else {
     /*@Override
     protected void renderLabelIfPresent(AbstractClientPlayerEntity entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
     }

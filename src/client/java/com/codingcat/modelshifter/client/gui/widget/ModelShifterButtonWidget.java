@@ -43,8 +43,8 @@ public class ModelShifterButtonWidget extends PressableWidget {
 
     protected void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
         //? <1.21.3 {
-        context.setShaderColor(1.0f, 1.0f, 1.0f, this.alpha);
-        //?}
+        /*context.setShaderColor(1.0f, 1.0f, 1.0f, this.alpha);
+        *///?}
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
         Identifier texture = this.isPlayersButton ?

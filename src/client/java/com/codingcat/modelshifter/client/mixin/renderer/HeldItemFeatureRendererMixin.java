@@ -13,13 +13,13 @@ import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 //? >=1.21.3 {
-/*import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
-*///?} else {
-import net.minecraft.client.render.model.json.ModelTransformationMode;
+//?} else {
+/*import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.entity.LivingEntity;
- //?}
+ *///?}
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
@@ -32,35 +32,35 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HeldItemFeatureRenderer.class)
 //? >=1.21.3 {
-/*public abstract class HeldItemFeatureRendererMixin<S extends LivingEntityRenderState, M extends EntityModel<S>>
+public abstract class HeldItemFeatureRendererMixin<S extends LivingEntityRenderState, M extends EntityModel<S>>
         extends FeatureRenderer<S, M> {
-    *///?} else {
-    public abstract class HeldItemFeatureRendererMixin<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
-     //?}
+    //?} else {
+    /*public abstract class HeldItemFeatureRendererMixin<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
+     *///?}
     @Unique
     private static final FeatureRendererType TYPE = FeatureRendererType.HELD_ITEM;
 
     //? >=1.21.3 {
-    /*public HeldItemFeatureRendererMixin(FeatureRendererContext<S, M> context) {
+    public HeldItemFeatureRendererMixin(FeatureRendererContext<S, M> context) {
         super(context);
     }
-    *///?} else {
-    public HeldItemFeatureRendererMixin(FeatureRendererContext<T, M> context) {
+    //?} else {
+    /*public HeldItemFeatureRendererMixin(FeatureRendererContext<T, M> context) {
         super(context);
     }
-    //?}
+    *///?}
 
     //? >=1.21.3 {
-    /*@Inject(at = @At(value = "HEAD"),
+    @Inject(at = @At(value = "HEAD"),
             method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/render/entity/state/LivingEntityRenderState;FF)V",
             cancellable = true)
     public void insertModifyRendering(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, LivingEntityRenderState e, float f, float g, CallbackInfo ci) {
-        *///?} else {
-        @Inject(at = @At(value = "HEAD"),
+        //?} else {
+        /*@Inject(at = @At(value = "HEAD"),
                 method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;FFFFFF)V",
                 cancellable = true)
         public void insertModifyRendering(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T e,float f, float g, float h, float j, float k, float l, CallbackInfo ci) {
-        //?}
+        *///?}
         MixinUtil.ifRendererEnabled(TYPE, EntityRenderStateWrapper.of(e), false, states -> ci.cancel());
     }
 
@@ -68,10 +68,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/ModelWithArms;setArmAngle(Lnet/minecraft/util/Arm;Lnet/minecraft/client/util/math/MatrixStack;)V"), method = "renderItem")
     public void insertModifyRendering(ModelWithArms instance, Arm arm, MatrixStack matrixStack,
                                       //? >=1.21.3 {
-                                      /*@Local(argsOnly = true) S e
-                                      *///?} else {
-            @Local(argsOnly = true) LivingEntity e
-             //?}
+                                      @Local(argsOnly = true) S e
+                                      //?} else {
+            /*@Local(argsOnly = true) LivingEntity e
+             *///?}
     ) {
         EntityRenderStateWrapper state = EntityRenderStateWrapper.of(e);
         if (!state.isPlayer()) return;
@@ -85,12 +85,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V"), method = "renderItem")
     //? >=1.21.3 {
-    /*public void insertModifyRendering(LivingEntityRenderState state, BakedModel model, ItemStack stack, ModelTransformationMode modelTransformation, Arm arm, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
+    public void insertModifyRendering(LivingEntityRenderState state, BakedModel model, ItemStack stack, ModelTransformationMode modelTransformation, Arm arm, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         EntityRenderStateWrapper renderState = EntityRenderStateWrapper.of(state);
-        *///?} else {
-    public void insertModifyRendering(LivingEntity entity, ItemStack stack, ModelTransformationMode transformationMode, Arm arm, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
+        //?} else {
+    /*public void insertModifyRendering(LivingEntity entity, ItemStack stack, ModelTransformationMode transformationMode, Arm arm, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
       EntityRenderStateWrapper renderState = EntityRenderStateWrapper.of(entity);
-    //?}
+    *///?}
         MixinUtil.ifRendererEnabled(TYPE, renderState, true, states ->
                 states.modifyRendering(TYPE, renderState, matrices));
     }
