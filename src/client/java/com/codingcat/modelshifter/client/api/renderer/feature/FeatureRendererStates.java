@@ -1,7 +1,7 @@
 package com.codingcat.modelshifter.client.api.renderer.feature;
 
+import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,7 +16,7 @@ public class FeatureRendererStates {
         this.enabledRenderers = new HashSet<>();
     }
 
-    public FeatureRendererStates add(@NotNull FeatureRendererType type, @Nullable BiConsumer<LivingEntity, MatrixStack> renderModifier) {
+    public FeatureRendererStates add(@NotNull FeatureRendererType type, @Nullable BiConsumer<EntityRenderStateWrapper, MatrixStack> renderModifier) {
         this.enabledRenderers.add(new EnabledFeatureRenderer(type, renderModifier));
         return this;
     }
@@ -37,10 +37,10 @@ public class FeatureRendererStates {
         return getFeatureRenderer(type) != null;
     }
 
-    public void modifyRendering(FeatureRendererType type, LivingEntity entity, MatrixStack matrixStack) {
+    public void modifyRendering(FeatureRendererType type, EntityRenderStateWrapper renderState, MatrixStack matrixStack) {
         EnabledFeatureRenderer renderer = getFeatureRenderer(type);
         if (renderer == null || renderer.renderModifierConsumer() == null) return;
 
-        renderer.renderModifierConsumer().accept(entity, matrixStack);
+        renderer.renderModifierConsumer().accept(renderState, matrixStack);
     }
 }

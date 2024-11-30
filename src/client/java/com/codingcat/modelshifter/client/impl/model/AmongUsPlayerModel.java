@@ -1,13 +1,13 @@
 package com.codingcat.modelshifter.client.impl.model;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
+import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.ModelDimensions;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererStates;
 import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererType;
 import com.codingcat.modelshifter.client.impl.Creators;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,9 +28,9 @@ public class AmongUsPlayerModel extends PlayerModel {
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
     }
 
-    private static void modifyHeldItemRendering(LivingEntity entity, MatrixStack matrixStack) {
+    private static void modifyHeldItemRendering(EntityRenderStateWrapper state, MatrixStack matrixStack) {
         matrixStack.translate(0.3f, 0.2f, 0f);
-        if (entity.isInSneakingPose())
+        if (state.isInSneakingPose())
             matrixStack.translate(0f, 0f, -0.2f);
     }
 }

@@ -1,6 +1,7 @@
 package com.codingcat.modelshifter.client.impl.model;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
+import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.ModelDimensions;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.api.renderer.GuiRenderInfo;
@@ -8,7 +9,6 @@ import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererSta
 import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererType;
 import com.codingcat.modelshifter.client.impl.Creators;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,13 +44,13 @@ public class CreakingPlayerModel extends PlayerModel {
         matrixStack.scale(0.7f, 0.7f, 0.7f);
     }
 
-    private static void modifyHeldItemRendering(LivingEntity entity, MatrixStack matrixStack) {
+    private static void modifyHeldItemRendering(EntityRenderStateWrapper state, MatrixStack matrixStack) {
         matrixStack.translate(0.47f, 0f, -0.1f);
-        if (entity.isInSneakingPose())
+        if (state.isInSneakingPose())
             matrixStack.translate(0f, 0f, -0.15f);
     }
 
-    private static void modifyElytraRendering(LivingEntity entity, MatrixStack matrixStack) {
+    private static void modifyElytraRendering(EntityRenderStateWrapper state, MatrixStack matrixStack) {
         matrixStack.translate(-0.1f, -0.4f, 0f);
         matrixStack.scale(1f,1.3f,1f);
     }
