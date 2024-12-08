@@ -1,6 +1,10 @@
 package com.codingcat.modelshifter.client.mixin.renderer;
 
 
+import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererType;
+import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.client.render.entity.feature.FeatureRenderer;
+import net.minecraft.client.render.entity.state.EntityRenderState;
 import org.spongepowered.asm.mixin.Mixin;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 
@@ -9,6 +13,7 @@ import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.codingcat.modelshifter.client.ModelShifterClient;
 import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
@@ -32,7 +37,8 @@ public abstract class LivingEntityRendererMixin
 //?}
 {
     //? >=1.21.3 {
-    @Shadow protected M model;
+    @Shadow
+    protected M model;
 
     @Inject(at = @At("HEAD"),
             method = "render(Lnet/minecraft/client/render/entity/state/LivingEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
@@ -66,4 +72,23 @@ public abstract class LivingEntityRendererMixin
         MixinUtil.setModelVisibility(playerEntity, playerModel);
     }
     //?}
+
+    @Redirect(at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/render/entity/feature/FeatureRenderer;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/render/entity/state/EntityRenderState;FF)V"),
+            method = "render(Lnet/minecraft/client/render/entity/state/LivingEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
+    public void featureRendererRender(FeatureRenderer<S, M> instance, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, EntityRenderState e, float v, float v1, @Local(argsOnly = true) S livingEntityState) {
+        EntityRenderStateWrapper state = EntityRenderStateWrapper.of(e);
+        FeatureRendererType type = FeatureRendererType.findByClass(instance.getClass());
+        //noinspection DataFlowIssue
+        if (!state.isPlayer() || !ModelShifterClient.state.isRendererEnabled(state.getPlayer())) {
+            instance.render(matrixStack, vertexConsumerProvider, i, livingEntityState, v, v1);
+            return;
+        }
+
+        instance.getContextModel().resetTransforms();
+        MixinUtil.ifRendererEnabled(type, state, false, states -> {
+            states.modifyRendering(type, state, matrixStack);
+            instance.render(matrixStack, vertexConsumerProvider, i, livingEntityState, v, v1);
+        });
+    }
 }
