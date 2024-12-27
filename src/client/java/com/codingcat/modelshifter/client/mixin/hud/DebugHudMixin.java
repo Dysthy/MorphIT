@@ -3,7 +3,7 @@ package com.codingcat.modelshifter.client.mixin.hud;
 import com.codingcat.modelshifter.client.ModelShifterClient;
 import com.codingcat.modelshifter.client.api.registry.ModelRegistry;
 import com.codingcat.modelshifter.client.api.renderer.AdditionalRendererState;
-import com.codingcat.modelshifter.client.api.renderer.DynamicAdditionalRendererHolder;
+import com.codingcat.modelshifter.client.api.renderer.AdditionalRendererManager;
 import com.codingcat.modelshifter.client.api.renderer.PlayerDependentStateHolder;
 import com.codingcat.modelshifter.client.util.Util;
 import com.mojang.authlib.GameProfile;
@@ -30,7 +30,7 @@ public class DebugHudMixin {
 
         ArrayList<String> list = new ArrayList<>(cir.getReturnValue());
         PlayerDependentStateHolder stateHolder = ModelShifterClient.state;
-        DynamicAdditionalRendererHolder rendererHolder = ModelShifterClient.holder;
+        AdditionalRendererManager rendererHolder = ModelShifterClient.holder;
         GameProfile gameProfile = Util.getGameProfile();
         AdditionalRendererState state = stateHolder.getState(gameProfile.getId());
         Identifier modelId = null;

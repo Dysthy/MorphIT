@@ -64,17 +64,17 @@ public class PlayerOverridesListWidget extends AlwaysSelectedEntryListWidget<Pla
     }
 
     //? <=1.20.1 {
-    /^@Override
+    @Override
     protected void renderBackground(DrawContext context) {
         this.drawNoItemsText(context);
     }
-    ^///?} else {
-    @Override
+    //?} else {
+    /^@Override
     public void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
         this.drawNoItemsText(context);
         super.renderWidget(context, mouseX, mouseY, delta);
     }
-    //?}
+    ^///?}
     *///?}
 
     private int getScrollbarPos() {

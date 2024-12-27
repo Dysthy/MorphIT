@@ -1,6 +1,6 @@
 package com.codingcat.modelshifter.client;
 
-import com.codingcat.modelshifter.client.api.renderer.DynamicAdditionalRendererHolder;
+import com.codingcat.modelshifter.client.api.renderer.AdditionalRendererManager;
 import com.codingcat.modelshifter.client.api.renderer.PlayerDependentStateHolder;
 import com.codingcat.modelshifter.client.commands.ClientCommands;
 import com.codingcat.modelshifter.client.impl.Models;
@@ -18,7 +18,7 @@ public class ModelShifterClient implements ClientModInitializer {
     public static final String MOD_ID = "modelshifter";
     public static final Identifier EMPTY_TEXTURE = Identifier.of(MOD_ID, "empty");
     public static PlayerDependentStateHolder state;
-    public static DynamicAdditionalRendererHolder holder;
+    public static AdditionalRendererManager holder;
     public static boolean isDev;
 
     @Override
