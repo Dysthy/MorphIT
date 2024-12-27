@@ -1,7 +1,6 @@
 package com.codingcat.modelshifter.client.impl.model;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
-import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.ModelDimensions;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.api.renderer.GuiRenderInfo;
@@ -23,8 +22,9 @@ public class EndermanPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
-                .add(FeatureRendererType.HELD_ITEM, EndermanPlayerModel::modifyHeldItemRendering)
-                .add(FeatureRendererType.ELYTRA, EndermanPlayerModel::modifyElytraRendering);
+                .add(FeatureRendererType.HELD_ITEM_LEFT)
+                .add(FeatureRendererType.HELD_ITEM_RIGHT)
+                .add(FeatureRendererType.ELYTRA);
     }
 
     @Override
@@ -46,17 +46,5 @@ public class EndermanPlayerModel extends PlayerModel {
     private static void modifyGuiInventoryRendering(MatrixStack matrixStack) {
         matrixStack.scale(0.7f, 0.7f, 0.7f);
         matrixStack.translate(0f,-0.2f,0f);
-    }
-
-    private static void modifyHeldItemRendering(EntityRenderStateWrapper state, MatrixStack matrixStack) {
-        matrixStack.translate(0.35f, 0f, 1f);
-        if (state.isInSneakingPose())
-            matrixStack.translate(0f, 0f, -0.7f);
-    }
-
-    private static void modifyElytraRendering(EntityRenderStateWrapper state, MatrixStack matrixStack) {
-        matrixStack.translate(0f, -1.2f, -0.1f);
-        if (state.isInSneakingPose())
-            matrixStack.translate(0f, 0.5f, 0f);
     }
 }

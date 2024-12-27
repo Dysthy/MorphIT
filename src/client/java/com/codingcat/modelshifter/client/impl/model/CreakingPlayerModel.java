@@ -1,7 +1,6 @@
 package com.codingcat.modelshifter.client.impl.model;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
-import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.ModelDimensions;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.api.renderer.GuiRenderInfo;
@@ -23,8 +22,9 @@ public class CreakingPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
-                .add(FeatureRendererType.HELD_ITEM, CreakingPlayerModel::modifyHeldItemRendering)
-                .add(FeatureRendererType.ELYTRA, CreakingPlayerModel::modifyElytraRendering)
+                .add(FeatureRendererType.HELD_ITEM_LEFT)
+                .add(FeatureRendererType.HELD_ITEM_RIGHT)
+                .add(FeatureRendererType.ELYTRA)
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
     }
 
@@ -42,16 +42,5 @@ public class CreakingPlayerModel extends PlayerModel {
 
     private static void modifyGuiShowcaseInventoryRendering(MatrixStack matrixStack) {
         matrixStack.scale(0.7f, 0.7f, 0.7f);
-    }
-
-    private static void modifyHeldItemRendering(EntityRenderStateWrapper state, MatrixStack matrixStack) {
-        matrixStack.translate(0.47f, 0f, -0.1f);
-        if (state.isInSneakingPose())
-            matrixStack.translate(0f, 0f, -0.15f);
-    }
-
-    private static void modifyElytraRendering(EntityRenderStateWrapper state, MatrixStack matrixStack) {
-        matrixStack.translate(-0.1f, -0.4f, 0f);
-        matrixStack.scale(1f,1.3f,1f);
     }
 }

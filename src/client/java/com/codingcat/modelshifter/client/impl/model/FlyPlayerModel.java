@@ -1,7 +1,6 @@
 package com.codingcat.modelshifter.client.impl.model;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
-import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.ModelDimensions;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.api.renderer.GuiRenderInfo;
@@ -23,7 +22,7 @@ public class FlyPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
-                .add(FeatureRendererType.HELD_ITEM, FlyPlayerModel::modifyHeldItemRendering)
+                .add(FeatureRendererType.HELD_ITEM_RIGHT)
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
     }
 
@@ -35,12 +34,5 @@ public class FlyPlayerModel extends PlayerModel {
 
     private static void modifyGuiButtonRendering(MatrixStack matrixStack) {
         matrixStack.scale(1.2f, 1.2f, 1.2f);
-    }
-
-    private static void modifyHeldItemRendering(EntityRenderStateWrapper state, MatrixStack matrixStack) {
-        matrixStack.scale(0.8f, 0.8f, 0.8f);
-        matrixStack.translate(0.2f, 0.4f, -0.8f);
-        if (state.isInSneakingPose())
-            matrixStack.translate(0f, 0f, -0.2f);
     }
 }

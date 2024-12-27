@@ -1,17 +1,15 @@
 package com.codingcat.modelshifter.client.impl.model;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
-import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.ModelDimensions;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
-import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererStates;
 import com.codingcat.modelshifter.client.api.renderer.GuiRenderInfo;
+import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererStates;
 import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererType;
 import com.codingcat.modelshifter.client.impl.Creators;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Quaternionf;
 
 import java.util.Set;
 
@@ -24,7 +22,7 @@ public class DinoPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
-                .add(FeatureRendererType.ELYTRA, DinoPlayerModel::modifyElytraRendering)
+                .add(FeatureRendererType.ELYTRA)
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
     }
 
@@ -42,13 +40,5 @@ public class DinoPlayerModel extends PlayerModel {
 
     private static void modifyGuiInventoryRendering(MatrixStack matrixStack) {
         matrixStack.scale(0.7f, 0.7f, 0.7f);
-    }
-
-    private static void modifyElytraRendering(EntityRenderStateWrapper state, MatrixStack matrixStack) {
-        Quaternionf quaternionf = new Quaternionf().rotateX((float) Math.PI * 0.5f);
-        matrixStack.multiply(quaternionf);
-        matrixStack.translate(0f, -0.4f, -0.2f);
-        if (state.isInSneakingPose())
-            matrixStack.translate(0f, 0f, -0.2f);
     }
 }

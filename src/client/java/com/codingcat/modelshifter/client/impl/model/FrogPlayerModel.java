@@ -1,17 +1,15 @@
 package com.codingcat.modelshifter.client.impl.model;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
-import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.ModelDimensions;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
-import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererStates;
 import com.codingcat.modelshifter.client.api.renderer.GuiRenderInfo;
+import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererStates;
 import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererType;
 import com.codingcat.modelshifter.client.impl.Creators;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Quaternionf;
 
 import java.util.Set;
 
@@ -24,8 +22,8 @@ public class FrogPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
-                .add(FeatureRendererType.HELD_ITEM, FrogPlayerModel::modifyHeldItemRendering)
-                .add(FeatureRendererType.ELYTRA, FrogPlayerModel::modifyElytraRendering)
+                .add(FeatureRendererType.HELD_ITEM_RIGHT)
+                .add(FeatureRendererType.ELYTRA)
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
     }
 
@@ -43,20 +41,5 @@ public class FrogPlayerModel extends PlayerModel {
 
     private static void modifyGuiButtonRendering(MatrixStack matrixStack) {
         matrixStack.scale(1.6f, 1.6f, 1.6f);
-    }
-
-    private static void modifyHeldItemRendering(EntityRenderStateWrapper state, MatrixStack matrixStack) {
-        matrixStack.translate(0.2f, 0.2f, -0.7f);
-        if (state.isInSneakingPose())
-            matrixStack.translate(0f, 0f, -0.1f);
-    }
-
-    private static void modifyElytraRendering(EntityRenderStateWrapper state, MatrixStack matrixStack) {
-        Quaternionf quaternionf = new Quaternionf().rotateX((float) Math.PI * 0.5f);
-        matrixStack.multiply(quaternionf);
-        matrixStack.scale(0.6f, 0.6f, 0.6f);
-        matrixStack.translate(0f, 0.2f, -2f);
-        if (state.isInSneakingPose())
-            matrixStack.translate(0f, -0.2f, 0f);
     }
 }
