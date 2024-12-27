@@ -1,16 +1,16 @@
 package com.codingcat.modelshifter.client.api.renderer;
 
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
-import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererStates;
 import com.codingcat.modelshifter.client.impl.config.ConfigPlayerOverride;
 import com.codingcat.modelshifter.client.impl.option.ModeOption;
-import com.mojang.authlib.GameProfile;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class PlayerDependentStateHolder {
@@ -61,18 +61,12 @@ public class PlayerDependentStateHolder {
         this.stateOverrideMap.put(uuid, hasUniqueState(uuid) ? state : new AdditionalRendererState(rendererEnabled, model));
     }
 
-    public FeatureRendererStates accessFeatureRendererStates(PlayerEntity entity) {
-        return getState(entity.getUuid()).accessFeatureRendererStates();
-    }
-
     public boolean isRendererStateEnabled(UUID uuid) {
         return getState(uuid).isRendererEnabled();
     }
 
     public boolean isRendererEnabled(UUID uuid) {
-        if (displayMode == ModeOption.ONLY_ME && !isSelf(uuid)) return false;
-        if (displayMode == ModeOption.ONLY_OTHERS && isSelf(uuid)) return false;
-
+        if (!displayMode.test(uuid)) return false;
         return isRendererStateEnabled(uuid);
     }
 
@@ -91,15 +85,6 @@ public class PlayerDependentStateHolder {
 
     public boolean hasUniqueState(UUID uuid) {
         return this.stateOverrideMap.get(uuid) != null;
-    }
-
-    private boolean isSelf(UUID uuid) {
-        //? >1.20.1 {
-        GameProfile profile = MinecraftClient.getInstance().getGameProfile();
-         //?} else {
-        /*GameProfile profile = MinecraftClient.getInstance().getSession().getProfile();
-        *///?}
-        return uuid.equals(profile.getId());
     }
 
     public AdditionalRendererState getState(UUID uuid) {
