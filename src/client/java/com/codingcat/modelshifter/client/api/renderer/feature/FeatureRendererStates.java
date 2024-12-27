@@ -33,6 +33,10 @@ public class FeatureRendererStates {
                 .orElse(null);
     }
 
+    public Set<EnabledFeatureRenderer> getEnabledRenderers() {
+        return this.enabledRenderers;
+    }
+
     public boolean isRendererEnabled(FeatureRendererType type) {
         return getFeatureRenderer(type) != null;
     }

@@ -3,11 +3,20 @@ package com.codingcat.modelshifter.client.util;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.util.SkinTextures;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.lang.reflect.Field;
+import java.util.Map;
 
 public class Util {
     public static GameProfile getGameProfile() {
@@ -33,5 +42,16 @@ public class Util {
         VertexConsumer consumer = vertexConsumer.getBuffer(RenderLayer.getEntityTranslucent(texture));
 
         return Pair.of(consumer, vertexConsumer);
+    }
+
+    public static <T extends PlayerEntity, S extends EntityRenderState> EntityRenderer<T, S> getNormalRendererReflect(AbstractClientPlayerEntity playerEntity, EntityRenderDispatcher dispatcher) throws ReflectiveOperationException {
+        Field modelRenderersField = dispatcher.getClass().getDeclaredField("modelRenderers");
+        modelRenderersField.setAccessible(true);
+        @SuppressWarnings("unchecked")
+        Map<SkinTextures.Model, EntityRenderer<T, S>> modelRenderers = (Map<SkinTextures.Model, EntityRenderer<T, S>>) modelRenderersField.get(dispatcher);
+
+        SkinTextures.Model model = playerEntity.getSkinTextures().model();
+        EntityRenderer<T, S> entityRenderer = modelRenderers.get(model);
+        return entityRenderer != null ? entityRenderer : modelRenderers.get(SkinTextures.Model.WIDE);
     }
 }
