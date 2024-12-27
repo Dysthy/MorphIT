@@ -26,9 +26,7 @@ import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @SuppressWarnings("UnstableApiUsage")
 public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<AbstractClientPlayerEntity, ReplacedPlayerEntity>
@@ -36,6 +34,7 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
     private final PlayerModel playerModel;
     private final PlayerEntityModel simulatedModel;
     private final Map<String, FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel>> featureRenderersByBone;
+    private final Set<FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel>> featureRenderers;
     private PlayerEntityRenderState currentState;
     private VertexConsumerProvider currentBufferSource;
     private int currentPackedLight;
@@ -47,13 +46,20 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
         this.playerModel = model;
         this.simulatedModel = this.createModel();
         this.featureRenderersByBone = new HashMap<>();
+        this.featureRenderers = new HashSet<>();
         this.addFeatures(renderManager);
     }
 
     private void addFeatures(EntityRendererFactory.Context ctx) {
         for (EnabledFeatureRenderer renderer : getPlayerModel().getFeatureRendererStates().getEnabledRenderers()) {
             FeatureRendererType type = renderer.type();
-            this.featureRenderersByBone.put(type.getAssignedBone(), type.create(ctx, this));
+            FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel> featureRenderer = type.create(ctx, this);
+            if (type.getAssignedBone() == null) {
+                this.featureRenderers.add(featureRenderer);
+                continue;
+            }
+
+            this.featureRenderersByBone.put(type.getAssignedBone(), featureRenderer);
         }
     }
 
@@ -83,6 +89,13 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
             poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180));
             FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel> renderer = featureRenderersByBone.get(bone.get().getName());
             renderer.render(poseStack, this.currentBufferSource, this.currentPackedLight, this.currentState, currentState.yawDegrees, currentState.pitch);
+            poseStack.pop();
+        }
+
+        for (FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel> featureRenderer : this.featureRenderers) {
+            poseStack.push();
+            poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180));
+            featureRenderer.render(poseStack, this.currentBufferSource, this.currentPackedLight, this.currentState, currentState.yawDegrees, currentState.pitch);
             poseStack.pop();
         }
     }
