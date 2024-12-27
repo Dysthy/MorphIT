@@ -5,12 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-//? >1.20.4 {
 import software.bernie.geckolib.animation.RawAnimation;
-//?} else {
-/*import software.bernie.geckolib.core.animation.RawAnimation;
-*///?}
-import software.bernie.geckolib.constant.DefaultAnimations;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -19,8 +14,9 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import static com.codingcat.modelshifter.client.api.GeoFileDefaults.*;
+
 public class ModelAnimationController<T> {
-    public static final String SNEAK_NAME = "move.sneak";
     private final HashSet<PredicateBasedAnimation<T>> animations;
 
     public ModelAnimationController() {
@@ -29,10 +25,10 @@ public class ModelAnimationController<T> {
 
     public static ModelAnimationController<PlayerEntity> createDefaultController() {
         return new ModelAnimationController<PlayerEntity>()
-                .add(0, Entity::isInSneakingPose, animation -> animation.thenPlayAndHold(SNEAK_NAME))
-                .add(1, Entity::isSprinting, animation -> DefaultAnimations.RUN)
-                .add(2, ModelAnimationController::checkMovement, animation -> DefaultAnimations.WALK)
-                .add(3, animation -> DefaultAnimations.IDLE);
+                .add(0, Entity::isInSneakingPose, animation -> animation.thenPlayAndHold(ANIMATION_SNEAK))
+                .add(1, Entity::isSprinting, animation -> animation.thenLoop(ANIMATION_RUN))
+                .add(2, ModelAnimationController::checkMovement, animation -> animation.thenLoop(ANIMATION_WALk))
+                .add(3, animation -> animation.thenLoop(ANIMATION_IDLE));
     }
 
     private static boolean checkMovement(PlayerEntity player) {
