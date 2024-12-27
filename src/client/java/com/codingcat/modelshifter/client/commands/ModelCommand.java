@@ -34,7 +34,7 @@ public class ModelCommand implements ModCommand<FabricClientCommandSource> {
         else
             ModelShifterClient.state.setGlobalState(false, null);
 
-        ModelShifterClient.holder.applyState();
+        ModelShifterClient.state.writeConfig();
         Text modelName = Text.translatable(Models.getTranslationKey(model));
         context.getSource().sendFeedback(model != null ? SUCCESS_MODEL_CHANGED.apply(modelName) : SUCCESS_MODEL_DISABLED);
         return 1;

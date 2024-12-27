@@ -11,14 +11,17 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 
 public class ModelShifterClient implements ClientModInitializer {
     public static final String MOD_ID = "modelshifter";
+    public static final Logger LOGGER = LoggerFactory.getLogger("ModelShifter");
     public static final Identifier EMPTY_TEXTURE = Identifier.of(MOD_ID, "empty");
     public static PlayerDependentStateHolder state;
-    public static AdditionalRendererManager holder;
+    public static AdditionalRendererManager rendererManager = new AdditionalRendererManager();
     public static boolean isDev;
 
     @Override

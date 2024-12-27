@@ -123,7 +123,7 @@ public class ModelSelectionScreen extends AbstractCustomGameOptionsScreen {
         else
             ModelShifterClient.state.setGlobalState(rendererEnabled, model);
 
-        ModelShifterClient.holder.applyState();
+        ModelShifterClient.state.writeConfig();
     }
 
     private Text getPageText() {
@@ -143,8 +143,8 @@ public class ModelSelectionScreen extends AbstractCustomGameOptionsScreen {
                 ModeOption.OPTIONS,
                 () -> ModelShifterClient.state.getDisplayMode(),
                 modeOption -> {
-                    ModelShifterClient.state.setDisplayMode(modeOption);
-                    ModelShifterClient.holder.applyState();
+                    ModelShifterClient.state.setDisplayMode(modeOption)
+                            .writeConfig();
 
                     return modeOption.getDisplayName();
                 });

@@ -8,7 +8,6 @@
     "renderer.EntityRenderDispatcherMixin",
     "renderer.EntityRendererMixin",
     "renderer.HeldItemRendererMixin",
-    "renderer.PlayerEntityRendererMixin",
     "screen.InventoryScreenMixin",
     "screen.OptionsScreenMixin"
   ],

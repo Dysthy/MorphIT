@@ -1,83 +1,54 @@
 package com.codingcat.modelshifter.client.api.renderer;
 
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
-import com.codingcat.modelshifter.client.impl.config.Configuration;
-import com.codingcat.modelshifter.client.impl.config.ConfigurationLoader;
+import com.codingcat.modelshifter.client.api.registry.ModelRegistry;
 import com.codingcat.modelshifter.client.render.ReplacedPlayerEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.util.Identifier;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-import java.util.function.Predicate;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.codingcat.modelshifter.client.ModelShifterClient.LOGGER;
 
 public class AdditionalRendererManager {
-    private final EntityRendererFactory.Context context;
     @NotNull
-    private final PlayerDependentStateHolder stateHolder;
-    @NotNull
-    private final Set<ReplacedPlayerEntityRenderer> additionalRendererSet;
+    private final Map<Identifier, ReplacedPlayerEntityRenderer> additionalRenderers;
 
-    public AdditionalRendererManager(EntityRendererFactory.Context context, @NotNull PlayerDependentStateHolder stateHolder) {
-        this.context = context;
-        this.stateHolder = stateHolder;
-        this.additionalRendererSet = new HashSet<>();
+    public AdditionalRendererManager() {
+        this.additionalRenderers = new HashMap<>();
     }
 
-    public void applyState() {
-        AdditionalRendererState globalState = stateHolder.getGlobalState();
-        this.additionalRendererSet.clear();
-        if (!globalState.isRendererEnabled()) {
-            writeConfig();
-            return;
+    public void reload(EntityRendererFactory.Context context) {
+        this.additionalRenderers.clear();
+        for (Map.Entry<Pair<Integer, Identifier>, PlayerModel> model : ModelRegistry.entries()) {
+            try {
+                ReplacedPlayerEntityRenderer renderer = new ReplacedPlayerEntityRenderer(context, model.getValue());
+                this.additionalRenderers.put(model.getKey().getValue(), renderer);
+            } catch (Exception e) {
+                LOGGER.error("Failed to create renderer for %s: ".formatted(model.getKey().getValue()), e);
+            }
         }
 
-        PlayerModel globalModel = globalState.getPlayerModel();
-        if (globalState.isRendererEnabled() && globalModel != null)
-            this.additionalRendererSet.add(createRendererInstance(globalModel));
-
-        for (UUID uuid : stateHolder.getStoredPlayers()) {
-            if (!stateHolder.hasUniqueState(uuid)) continue;
-
-            AdditionalRendererState state = stateHolder.getState(uuid);
-            if (state.isRendererEnabled() && state.getPlayerModel() != null)
-                tryAddRenderer(state.getPlayerModel());
-        }
-
-        writeConfig();
-    }
-
-    private void writeConfig() {
-        new ConfigurationLoader().write(new Configuration()
-                .setGlobalState(stateHolder.getGlobalState())
-                .setPlayerOverrides(stateHolder.generateOverrides())
-                .setDisplayMode(stateHolder.getDisplayMode().getId()));
-    }
-
-    public ReplacedPlayerEntityRenderer createRendererInstance(PlayerModel model) {
-        return new ReplacedPlayerEntityRenderer(context, model);
-    }
-
-    private Predicate<ReplacedPlayerEntityRenderer> findRenderer(@NotNull PlayerModel model) {
-        return renderer -> renderer.getPlayerModel().getModelDataIdentifier().equals(model.getModelDataIdentifier());
-    }
-
-    private void tryAddRenderer(@NotNull PlayerModel model) {
-        boolean rendererExists = additionalRendererSet.stream().anyMatch(findRenderer(model));
-        if (!rendererExists)
-            this.additionalRendererSet.add(createRendererInstance(model));
+        LOGGER.info("Created {} additional renderers for ModelShifter!", rendererCount());
     }
 
     @Nullable
     public ReplacedPlayerEntityRenderer getRenderer(PlayerModel model) {
-        Optional<ReplacedPlayerEntityRenderer> renderer = additionalRendererSet.stream().filter(findRenderer(model)).findFirst();
-        return renderer.orElse(null);
+        if (model == null) return null;
+        return this.getRenderer(ModelRegistry.findId(model).orElse(null));
     }
 
-    public int getRendererCount() {
-        return this.additionalRendererSet.size();
+    @Nullable
+    public ReplacedPlayerEntityRenderer getRenderer(Identifier modelIdentifier) {
+        if (modelIdentifier == null) return null;
+        return additionalRenderers.get(modelIdentifier);
+    }
+
+    public int rendererCount() {
+        return this.additionalRenderers.size();
     }
 }

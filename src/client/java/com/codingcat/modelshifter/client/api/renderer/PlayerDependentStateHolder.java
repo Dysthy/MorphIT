@@ -2,17 +2,19 @@ package com.codingcat.modelshifter.client.api.renderer;
 
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.impl.config.ConfigPlayerOverride;
+import com.codingcat.modelshifter.client.impl.config.Configuration;
+import com.codingcat.modelshifter.client.impl.config.ConfigurationLoader;
 import com.codingcat.modelshifter.client.impl.option.ModeOption;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("UnusedReturnValue")
 public class PlayerDependentStateHolder {
     @NotNull
     private ModeOption displayMode;
@@ -26,13 +28,10 @@ public class PlayerDependentStateHolder {
         this.displayMode = displayMode;
     }
 
-    public void reloadFromOverrides(Set<ConfigPlayerOverride> overrides) {
-        this.stateOverrideMap = new HashMap<>(createFromOverrides(overrides));
-    }
-
-    private Map<UUID, AdditionalRendererState> createFromOverrides(Set<ConfigPlayerOverride> overrides) {
-        return overrides.stream()
-                .collect(Collectors.toMap(ConfigPlayerOverride::player, ConfigPlayerOverride::state));
+    public PlayerDependentStateHolder reloadFromOverrides(Set<ConfigPlayerOverride> overrides) {
+        this.stateOverrideMap = new HashMap<>(overrides.stream()
+                .collect(Collectors.toMap(ConfigPlayerOverride::player, ConfigPlayerOverride::state)));
+        return this;
     }
 
     public Set<ConfigPlayerOverride> generateOverrides() {
@@ -42,23 +41,34 @@ public class PlayerDependentStateHolder {
                 .collect(Collectors.toSet());
     }
 
-    public void setDisplayMode(@NotNull ModeOption displayMode) {
+    public void writeConfig() {
+        new ConfigurationLoader().write(new Configuration()
+                .setGlobalState(this.getGlobalState())
+                .setPlayerOverrides(this.generateOverrides())
+                .setDisplayMode(this.getDisplayMode().getId()));
+    }
+
+    public PlayerDependentStateHolder setDisplayMode(@NotNull ModeOption displayMode) {
         this.displayMode = displayMode;
+        return this;
     }
 
     public @NotNull ModeOption getDisplayMode() {
         return displayMode;
     }
 
-    public void setGlobalState(boolean rendererEnabled, @Nullable PlayerModel model) {
+    public PlayerDependentStateHolder setGlobalState(boolean rendererEnabled, @Nullable PlayerModel model) {
         this.globalState.setState(rendererEnabled, model);
+        return this;
     }
 
-    public void setPlayerState(UUID uuid, boolean rendererEnabled, @Nullable PlayerModel model) {
+    public PlayerDependentStateHolder setPlayerState(UUID uuid, boolean rendererEnabled, @Nullable PlayerModel model) {
         AdditionalRendererState state = stateOverrideMap.get(uuid);
         if (hasUniqueState(uuid))
             state.setState(rendererEnabled, model);
+
         this.stateOverrideMap.put(uuid, hasUniqueState(uuid) ? state : new AdditionalRendererState(rendererEnabled, model));
+        return this;
     }
 
     public boolean isRendererStateEnabled(UUID uuid) {
@@ -70,12 +80,9 @@ public class PlayerDependentStateHolder {
         return isRendererStateEnabled(uuid);
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isRendererEnabled(PlayerEntity entity) {
         return isRendererEnabled(entity.getUuid());
-    }
-
-    public Set<UUID> getStoredPlayers() {
-        return this.stateOverrideMap.keySet();
     }
 
     @NotNull

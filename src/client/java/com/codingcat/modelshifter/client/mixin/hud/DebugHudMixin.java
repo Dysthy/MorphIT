@@ -30,7 +30,7 @@ public class DebugHudMixin {
 
         ArrayList<String> list = new ArrayList<>(cir.getReturnValue());
         PlayerDependentStateHolder stateHolder = ModelShifterClient.state;
-        AdditionalRendererManager rendererHolder = ModelShifterClient.holder;
+        AdditionalRendererManager rendererHolder = ModelShifterClient.rendererManager;
         GameProfile gameProfile = Util.getGameProfile();
         AdditionalRendererState state = stateHolder.getState(gameProfile.getId());
         Identifier modelId = null;
@@ -40,7 +40,7 @@ public class DebugHudMixin {
         }
 
         String renderInfo = state.isRendererEnabled() ? String.format("active, model: %s", modelId) : "disabled";
-        String activeRenderers = getCountString(rendererHolder.getRendererCount());
+        String activeRenderers = getCountString(rendererHolder.rendererCount());
         String totalStates = getCountString(stateHolder.getStateCount());
         String activeStates = getCountString(stateHolder.getActiveStateCount());
         list.add(String.format("[MS: SELF] Additional renderer %s", renderInfo));
