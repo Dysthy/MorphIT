@@ -4,7 +4,13 @@ import com.codingcat.modelshifter.client.render.feature.HeldItemFeatureRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.feature.*;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
+//? >=1.21.3 {
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
+import net.minecraft.client.render.item.ItemRenderer;
+//?} else {
+/*import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.client.render.item.HeldItemRenderer;
+*///?}
 import net.minecraft.util.Arm;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,27 +18,50 @@ import java.util.function.BiFunction;
 
 import static com.codingcat.modelshifter.client.api.GeoFileDefaults.*;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "rawtypes", "unchecked", "RedundantSuppression"})
 public enum FeatureRendererType {
-    HELD_ITEM_RIGHT(BONE_HELD_ITEM_RIGHT_ID, (ctx, featureCtx) -> new HeldItemFeatureRenderer<>(featureCtx, Arm.RIGHT, ctx.getItemRenderer())),
-    HELD_ITEM_LEFT(BONE_HELD_ITEM_LEFT_ID, (ctx, featureCtx) -> new HeldItemFeatureRenderer<>(featureCtx, Arm.LEFT, ctx.getItemRenderer())),
-    ELYTRA(BONE_ELYTRA_ID, (ctx, featureCtx) -> new ElytraFeatureRenderer<>(featureCtx, ctx.getModelLoader(), ctx.getEquipmentRenderer())),
-    CAPE(BONE_CAPE_ID, (ctx, featureCtx) -> new CapeFeatureRenderer(featureCtx, ctx.getModelLoader(), ctx.getEquipmentModelLoader())),
+    HELD_ITEM_RIGHT(BONE_HELD_ITEM_RIGHT_ID, (ctx, featureCtx) -> new HeldItemFeatureRenderer<>(featureCtx, Arm.RIGHT, getHeldItemRenderer(ctx))),
+    HELD_ITEM_LEFT(BONE_HELD_ITEM_LEFT_ID, (ctx, featureCtx) -> new HeldItemFeatureRenderer<>(featureCtx, Arm.LEFT, getHeldItemRenderer(ctx))),
+    ELYTRA(BONE_ELYTRA_ID, (ctx, featureCtx) -> new ElytraFeatureRenderer<>(featureCtx, ctx.getModelLoader()
+            //? >=1.21.3 {
+            , ctx.getEquipmentRenderer()
+            //?}
+    )),
+    CAPE(BONE_CAPE_ID, (ctx, featureCtx) -> new CapeFeatureRenderer(featureCtx
+            //? >=1.21.3 {
+            , ctx.getModelLoader(), ctx.getEquipmentModelLoader()
+            //?}
+    )),
     SHOULDER_PARROT(BONE_PARROT_ID, (ctx, featureCtx) -> new ShoulderParrotFeatureRenderer(featureCtx, ctx.getModelLoader())),
     TRIDENT_RIPTIDE((ctx, featureCtx) -> new TridentRiptideFeatureRenderer(featureCtx, ctx.getModelLoader()));
 
     @Nullable
     private final String assignedBone;
+    //? <1.21.3 {
+    /*private final BiFunction<EntityRendererFactory.Context, FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>,
+            FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>> initFunction;
+    *///?} else {
     private final BiFunction<EntityRendererFactory.Context, FeatureRendererContext<PlayerEntityRenderState, PlayerEntityModel>,
             FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel>> initFunction;
+    //?}
 
+    //? <1.21.3 {
+    /*FeatureRendererType(BiFunction<EntityRendererFactory.Context, FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>,
+            FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>> initFunction) {
+    *///?} else {
     FeatureRendererType(BiFunction<EntityRendererFactory.Context, FeatureRendererContext<PlayerEntityRenderState, PlayerEntityModel>,
             FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel>> initFunction) {
+    //?}
         this(null, initFunction);
     }
 
+    //? <1.21.3 {
+    /*FeatureRendererType(@Nullable String assignedBone, BiFunction<EntityRendererFactory.Context, FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>,
+            FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>> initFunction) {
+    *///?} else {
     FeatureRendererType(@Nullable String assignedBone, BiFunction<EntityRendererFactory.Context, FeatureRendererContext<PlayerEntityRenderState, PlayerEntityModel>,
             FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel>> initFunction) {
+    //?}
         this.assignedBone = assignedBone;
         this.initFunction = initFunction;
     }
@@ -41,8 +70,23 @@ public enum FeatureRendererType {
         return assignedBone;
     }
 
+    //? <1.21.3 {
+    /*public FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> create(EntityRendererFactory.Context renderFactoryContext,
+                                                                              FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> featureRendererContext) {
+    *///?} else {
     public FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel> create(EntityRendererFactory.Context renderFactoryContext,
-                                                                              FeatureRendererContext<PlayerEntityRenderState, PlayerEntityModel> featureRendererContext) {
+            FeatureRendererContext<PlayerEntityRenderState, PlayerEntityModel> featureRendererContext) {
+    //?}
         return initFunction.apply(renderFactoryContext, featureRendererContext);
     }
+
+    //? <1.21.3 {
+    /*private static HeldItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
+        return ctx.getHeldItemRenderer();
+    }
+    *///?} else {
+    private static ItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
+        return ctx.getItemRenderer();
+    }
+    //?}
 }

@@ -14,12 +14,17 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class HeldItemRendererMixin {
     // Prevents a crash caused by GameRenderer trying to render an arm with the replaced player renderer from modelshifter,
     // the vanilla player renderer will be used to perform the arm rendering instead
-    @SuppressWarnings("InvalidInjectorMethodSignature")
     @Redirect(
             method = "renderArmHoldingItem",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/EntityRenderDispatcher;getRenderer(Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/render/entity/EntityRenderer;")
     )
-    public <T extends Entity> EntityRenderer<?, ?> redirectGetArmHoldingItemRenderer(EntityRenderDispatcher instance, T entity) {
+    //? <1.21.3 {
+    /*public <T extends Entity> EntityRenderer<?>
+    *///?} else {
+    @SuppressWarnings("InvalidInjectorMethodSignature")
+    public <T extends Entity> EntityRenderer<?, ?>
+    //?}
+    redirectGetArmHoldingItemRenderer(EntityRenderDispatcher instance, T entity) {
         try {
             return Util.getNormalRendererReflect((AbstractClientPlayerEntity) entity, instance);
         } catch (ReflectiveOperationException | ClassCastException e) {

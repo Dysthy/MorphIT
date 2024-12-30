@@ -5,6 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.state.EntityRenderState;
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
+import net.minecraft.client.util.SkinTextures;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.Nullable;
@@ -53,6 +54,13 @@ public class StateEntityWrapper
     @Override
     public float getHeight() {
         return state.height;
+    }
+
+    @Override
+    @Nullable
+    public SkinTextures getSkinTextures() {
+        if (!(state instanceof PlayerEntityRenderState playerState)) return null;
+        return playerState.skinTextures;
     }
     //?}
 }

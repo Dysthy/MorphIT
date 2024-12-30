@@ -6,7 +6,6 @@ import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.api.renderer.feature.EnabledFeatureRenderer;
 import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererType;
 import com.codingcat.modelshifter.client.render.entity.ReplacedPlayerEntity;
-import com.codingcat.modelshifter.client.util.Util;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
@@ -18,12 +17,14 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.RotationAxis;
-import org.apache.commons.lang3.tuple.Pair;
+//? >=1.21.3 {
+import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
+import com.codingcat.modelshifter.client.util.Util;
 import org.jetbrains.annotations.Nullable;
+//?}
 import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
@@ -31,14 +32,22 @@ import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
 import java.util.*;
 import java.util.function.BiConsumer;
 
-@SuppressWarnings("UnstableApiUsage")
+//? <1.21.3 {
+/*@SuppressWarnings({"rawtypes", "UnstableApiUsage", "unchecked"})
+public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<AbstractClientPlayerEntity, ReplacedPlayerEntity>
+        implements FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
+    *///?} else {
+@SuppressWarnings({"UnstableApiUsage", "UnnecessaryLocalVariable"})
 public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<AbstractClientPlayerEntity, ReplacedPlayerEntity>
         implements FeatureRendererContext<PlayerEntityRenderState, PlayerEntityModel> {
+    //?}
     private final PlayerModel playerModel;
     private final PlayerEntityModel simulatedModel;
-    private final Map<String, Pair<FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel>, BiConsumer<EntityRenderStateWrapper, MatrixStack>>> featureRenderersByBone;
-    private final Map<FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel>, BiConsumer<EntityRenderStateWrapper, MatrixStack>> featureRenderers;
+    private final Map<String, ActiveFeatureRenderer> featureRenderersByBone;
+    private final Set<ActiveFeatureRenderer> featureRenderers;
+    //? >=1.21.3 {
     private PlayerEntityRenderState currentState;
+    //?}
     private VertexConsumerProvider currentBufferSource;
     private int currentPackedLight;
 
@@ -49,62 +58,105 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
         this.playerModel = model;
         this.simulatedModel = this.createModel();
         this.featureRenderersByBone = new HashMap<>();
-        this.featureRenderers = new HashMap<>();
+        this.featureRenderers = new HashSet<>();
         this.addFeatures(renderManager);
     }
 
     private void addFeatures(EntityRendererFactory.Context ctx) {
         for (EnabledFeatureRenderer renderer : getPlayerModel().getFeatureRendererStates().getEnabledRenderers()) {
             FeatureRendererType type = renderer.type();
+            //? <1.21.3 {
+            /*FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> featureRenderer = type.create(ctx, this);
+             *///?} else {
             FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel> featureRenderer = type.create(ctx, this);
+            //?}
             if (type.getAssignedBone() == null) {
-                this.featureRenderers.put(featureRenderer, renderer.renderModifierConsumer());
+                this.featureRenderers.add(new ActiveFeatureRenderer(featureRenderer, renderer.renderModifierConsumer()));
                 continue;
             }
 
-            this.featureRenderersByBone.put(type.getAssignedBone(), Pair.of(featureRenderer, renderer.renderModifierConsumer()));
+            this.featureRenderersByBone.put(type.getAssignedBone(), new ActiveFeatureRenderer(featureRenderer, renderer.renderModifierConsumer()));
         }
     }
 
+    //? <1.21.3 {
+    /*@Override
+    public void render(AbstractClientPlayerEntity e, float entityYaw, float partialTick, MatrixStack poseStack, VertexConsumerProvider bufferSource, int packedLight) {
+        *///?} else {
     @Override
     public void render(EntityRenderState entityRenderState, MatrixStack poseStack, VertexConsumerProvider bufferSource, int packedLight) {
-        if (!(entityRenderState instanceof PlayerEntityRenderState playerState)) return;
-
-        this.currentState = playerState;
+        if (!(entityRenderState instanceof PlayerEntityRenderState e)) return;
+        this.currentState = e;
+        //?}
+        //? <1.21.3 {
+        /*this.currentEntity = e;
+         *///?}
         this.currentBufferSource = bufferSource;
         this.currentPackedLight = packedLight;
-        RenderLayer type = getRenderType(animatable, playerState.skinTextures.texture(), bufferSource, partialTick);
-        defaultRender(poseStack, this.animatable, bufferSource, type, null, this.partialTick, packedLight);
+        RenderLayer type = getRenderType(animatable, EntityRenderStateWrapper.of(e).getSkinTextures().texture(), bufferSource, partialTick);
+        defaultRender(poseStack, this.animatable, bufferSource, type, null,
+                //? <1.21.3 {
+                /*entityYaw,
+                 *///?}
+                partialTick, packedLight);
+        //? <1.21.3 {
+        /*this.currentEntity = null;
+         *///?}
     }
 
     // Feature renderers have to be rendered in a specific phase during actuallyRender(), which is why the render calls are being placed in applyRotations(),
-    // which is being called at that location in the actuallyRender() method of the GeoReplacedEntityRenderer instance. Since certain values (render state, buffer source, packet light) are
+    // which is being called at that location in the actuallyRender() method of the GeoReplacedEntityRenderer instance. Since certain values (render state (>=1.21.3), buffer source, packet light) are
     // not directly available as parameters in this method, they have to be stored in helper variables to be accessed from here.
     @Override
     protected void applyRotations(ReplacedPlayerEntity animatable, MatrixStack poseStack, float ageInTicks, float rotationYaw, float partialTick, float nativeScale) {
         super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick, nativeScale);
-        for (Map.Entry<String, Pair<FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel>, BiConsumer<EntityRenderStateWrapper, MatrixStack>>> entry : this.featureRenderersByBone.entrySet()) {
+        for (Map.Entry<String, ActiveFeatureRenderer> entry : this.featureRenderersByBone.entrySet()) {
             Optional<GeoBone> bone = model.getBone(entry.getKey());
             if (bone.isEmpty()) continue;
 
             poseStack.push();
             poseStack.multiplyPositionMatrix(bone.get().getModelSpaceMatrix());
-            FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel> renderer = featureRenderersByBone.get(bone.get().getName()).getLeft();
-            this.runFeatureRenderer(poseStack, renderer, entry.getValue().getRight());
+            //? <1.21.3 {
+            /*FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> renderer = featureRenderersByBone.get(bone.get().getName()).renderer();
+             *///?} else {
+            FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel> renderer = featureRenderersByBone.get(bone.get().getName()).renderer();
+            //?}
+            this.runFeatureRenderer(poseStack, renderer, partialTick, entry.getValue().renderModifierConsumer());
         }
 
-        for (Map.Entry<FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel>, BiConsumer<EntityRenderStateWrapper, MatrixStack>> featureRenderer : this.featureRenderers.entrySet()) {
+        for (ActiveFeatureRenderer featureRenderer : this.featureRenderers) {
             poseStack.push();
-            this.runFeatureRenderer(poseStack, featureRenderer.getKey(), featureRenderer.getValue());
+            this.runFeatureRenderer(poseStack, featureRenderer.renderer(), partialTick, featureRenderer.renderModifierConsumer());
         }
     }
 
-    private void runFeatureRenderer(MatrixStack poseStack, FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel> featureRenderer, BiConsumer<EntityRenderStateWrapper, MatrixStack> renderModifierConsumer) {
+    private void runFeatureRenderer(MatrixStack poseStack,
+                                    //? <1.21.3 {
+            /*FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> featureRenderer,
+             *///?} else {
+                                    FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel> featureRenderer,
+                                    //?}
+                                    @SuppressWarnings({"unused", "RedundantSuppression"}) float tickDelta,
+                                    BiConsumer<EntityRenderStateWrapper, MatrixStack> renderModifierConsumer) {
         poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180));
         if (renderModifierConsumer != null)
+            //? <1.21.3 {
+            /*renderModifierConsumer.accept(EntityRenderStateWrapper.of(this.currentEntity), poseStack);
+             *///?} else {
             renderModifierConsumer.accept(EntityRenderStateWrapper.of(this.currentState), poseStack);
+        //?}
+        //? <1.21.3 {
+        /*featureRenderer.render(poseStack, this.currentBufferSource, this.currentPackedLight, this.currentEntity, 0, 0, tickDelta, (float) currentEntity.age + tickDelta, 0, 0);
+         *///?} else {
         featureRenderer.render(poseStack, this.currentBufferSource, this.currentPackedLight, this.currentState, currentState.yawDegrees, currentState.pitch);
+        //?}
         poseStack.pop();
+    }
+
+    //? >=1.21.3 {
+    @Override
+    public @Nullable EntityRenderState createRenderState() {
+        return new PlayerEntityRenderState();
     }
 
     @Override
@@ -116,16 +168,16 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
         } catch (ReflectiveOperationException ignore) {
         }
     }
+    //?}
 
     private PlayerEntityModel createModel() {
         ModelData modelData = PlayerEntityModel.getTexturedModelData(Dilation.NONE, false);
         ModelPart part = TexturedModelData.of(modelData, 64, 64).createModel();
-        return new PlayerEntityModel(part, false);
-    }
-
-    @Override
-    public @Nullable EntityRenderState createRenderState() {
-        return new PlayerEntityRenderState();
+        PlayerEntityModel playerEntityModel = new PlayerEntityModel(part, false);
+        //? <1.21.3 {
+        /*playerEntityModel.child = false;
+         *///?}
+        return playerEntityModel;
     }
 
     @Override
@@ -135,5 +187,15 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
 
     public PlayerModel getPlayerModel() {
         return this.playerModel;
+    }
+
+    private record ActiveFeatureRenderer(
+            //? <1.21.3 {
+            /*FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> renderer,
+             *///?} else {
+            FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel> renderer,
+            //?}
+            BiConsumer<EntityRenderStateWrapper, MatrixStack> renderModifierConsumer
+    ) {
     }
 }

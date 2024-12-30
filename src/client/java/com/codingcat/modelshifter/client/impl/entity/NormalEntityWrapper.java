@@ -2,6 +2,7 @@ package com.codingcat.modelshifter.client.impl.entity;
 
 import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.client.util.SkinTextures;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.NotNull;
@@ -38,5 +39,13 @@ public class NormalEntityWrapper implements EntityRenderStateWrapper {
     @Override
     public float getHeight() {
         return entity.getHeight();
+    }
+
+    @Override
+    @Nullable
+    public SkinTextures getSkinTextures() {
+        if (!this.isPlayer()) return null;
+        assert this.getPlayer() != null;
+        return ((AbstractClientPlayerEntity) getPlayer()).getSkinTextures();
     }
 }

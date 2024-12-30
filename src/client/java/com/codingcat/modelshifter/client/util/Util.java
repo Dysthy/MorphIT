@@ -9,7 +9,9 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
+//? >=1.21.3 {
 import net.minecraft.client.render.entity.state.EntityRenderState;
+//?}
 import net.minecraft.client.util.SkinTextures;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -44,14 +46,27 @@ public class Util {
         return Pair.of(consumer, vertexConsumer);
     }
 
-    public static <T extends PlayerEntity, S extends EntityRenderState> EntityRenderer<T, S> getNormalRendererReflect(AbstractClientPlayerEntity playerEntity, EntityRenderDispatcher dispatcher) throws ReflectiveOperationException {
+    //? <1.21.3 {
+    /*public static <T extends PlayerEntity> EntityRenderer<T>
+    *///?} else {
+    public static <T extends PlayerEntity, S extends EntityRenderState> EntityRenderer<T, S>
+    //?}
+    getNormalRendererReflect(AbstractClientPlayerEntity playerEntity, EntityRenderDispatcher dispatcher) throws ReflectiveOperationException {
         Field modelRenderersField = dispatcher.getClass().getDeclaredField("modelRenderers");
         modelRenderersField.setAccessible(true);
         @SuppressWarnings("unchecked")
+        //? <1.21.3 {
+        /*Map<SkinTextures.Model, EntityRenderer<T>> modelRenderers = (Map<SkinTextures.Model, EntityRenderer<T>>) modelRenderersField.get(dispatcher);
+        *///?} else {
         Map<SkinTextures.Model, EntityRenderer<T, S>> modelRenderers = (Map<SkinTextures.Model, EntityRenderer<T, S>>) modelRenderersField.get(dispatcher);
+        //?}
 
         SkinTextures.Model model = playerEntity.getSkinTextures().model();
+        //? <1.21.3 {
+        /*EntityRenderer<T> entityRenderer = modelRenderers.get(model);
+        *///?} else {
         EntityRenderer<T, S> entityRenderer = modelRenderers.get(model);
+        //?}
         return entityRenderer != null ? entityRenderer : modelRenderers.get(SkinTextures.Model.WIDE);
     }
 }

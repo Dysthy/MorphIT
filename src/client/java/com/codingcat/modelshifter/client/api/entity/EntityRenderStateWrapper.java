@@ -5,10 +5,12 @@ import com.codingcat.modelshifter.client.impl.entity.NormalEntityWrapper;
 import net.minecraft.client.render.entity.state.EntityRenderState;
 import com.codingcat.modelshifter.client.impl.entity.StateEntityWrapper;
 //?}
+import net.minecraft.client.util.SkinTextures;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("unused")
 public interface EntityRenderStateWrapper {
     boolean isInSneakingPose();
 
@@ -21,6 +23,8 @@ public interface EntityRenderStateWrapper {
     float getWidth();
 
     float getHeight();
+
+    SkinTextures getSkinTextures();
 
     static EntityRenderStateWrapper of(Entity entity) {
         return new NormalEntityWrapper(entity);
