@@ -29,10 +29,10 @@ public class GuiPlayerModel extends DefaultedEntityGeoModel<ReplacedPlayerEntity
     public void applyMolangQueries(ReplacedPlayerEntity animatable, double animTime) {
         DoubleSupplier lifeTimeSupplier = () -> animTime / 20d;
         //? >1.20.4 {
-        /^MathParser.setVariable(MolangQueries.LIFE_TIME, lifeTimeSupplier);
-        ^///?} else {
-        MolangParser.INSTANCE.setMemoizedValue(MolangQueries.LIFE_TIME, lifeTimeSupplier);
-        //?}
+        MathParser.setVariable(MolangQueries.LIFE_TIME, lifeTimeSupplier);
+        //?} else {
+        /^MolangParser.INSTANCE.setMemoizedValue(MolangQueries.LIFE_TIME, lifeTimeSupplier);
+        ^///?}
     }
     *///?} else {
     @Override
