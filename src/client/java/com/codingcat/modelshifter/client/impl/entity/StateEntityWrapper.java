@@ -5,9 +5,9 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.state.EntityRenderState;
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
-import net.minecraft.client.util.SkinTextures;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 //?}
@@ -58,9 +58,9 @@ public class StateEntityWrapper
 
     @Override
     @Nullable
-    public SkinTextures getSkinTextures() {
+    public Identifier getSkinTexture() {
         if (!(state instanceof PlayerEntityRenderState playerState)) return null;
-        return playerState.skinTextures;
+        return playerState.skinTextures.texture();
     }
     //?}
 }

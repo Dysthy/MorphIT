@@ -33,7 +33,7 @@ import java.util.*;
 import java.util.function.BiConsumer;
 
 //? <1.21.3 {
-/*@SuppressWarnings({"rawtypes", "UnstableApiUsage", "unchecked"})
+/*@SuppressWarnings({"rawtypes", "UnstableApiUsage", "unchecked", "RedundantSuppression"})
 public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<AbstractClientPlayerEntity, ReplacedPlayerEntity>
         implements FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
     *///?} else {
@@ -160,7 +160,7 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
                                     *///?} else {
             FeatureRenderer<PlayerEntityRenderState, PlayerEntityModel> featureRenderer,
              //?}
-                                    @SuppressWarnings({"unused", "RedundantSuppression"}) float tickDelta,
+                                    @SuppressWarnings({"unused"}) float tickDelta,
                                     BiConsumer<EntityRenderStateWrapper, MatrixStack> renderModifierConsumer) {
         poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180));
         if (renderModifierConsumer != null)
@@ -214,7 +214,7 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
     }
 
     private RenderLayer getRenderLayer(EntityRenderStateWrapper state, VertexConsumerProvider bufferSource, float partialTick) {
-        return getRenderType(animatable, state.getSkinTextures().texture(), bufferSource, partialTick);
+        return getRenderType(animatable, state.getSkinTexture(), bufferSource, partialTick);
     }
 
     private record ActiveFeatureRenderer(

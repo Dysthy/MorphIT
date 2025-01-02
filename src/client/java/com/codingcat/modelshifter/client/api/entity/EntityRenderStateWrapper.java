@@ -5,9 +5,9 @@ import com.codingcat.modelshifter.client.impl.entity.NormalEntityWrapper;
 import net.minecraft.client.render.entity.state.EntityRenderState;
 import com.codingcat.modelshifter.client.impl.entity.StateEntityWrapper;
 //?}
-import net.minecraft.client.util.SkinTextures;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
@@ -24,7 +24,7 @@ public interface EntityRenderStateWrapper {
 
     float getHeight();
 
-    SkinTextures getSkinTextures();
+    Identifier getSkinTexture();
 
     static EntityRenderStateWrapper of(Entity entity) {
         return new NormalEntityWrapper(entity);

@@ -2,9 +2,9 @@ package com.codingcat.modelshifter.client.impl.entity;
 
 import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.util.SkinTextures;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,9 +43,13 @@ public class NormalEntityWrapper implements EntityRenderStateWrapper {
 
     @Override
     @Nullable
-    public SkinTextures getSkinTextures() {
+    public Identifier getSkinTexture() {
         if (!this.isPlayer()) return null;
         assert this.getPlayer() != null;
-        return ((AbstractClientPlayerEntity) getPlayer()).getSkinTextures();
+        //? >1.20.1 {
+        return ((AbstractClientPlayerEntity) getPlayer()).getSkinTextures().texture();
+        //?} else {
+        /*return ((AbstractClientPlayerEntity) getPlayer()).getSkinTexture();
+        *///?}
     }
 }

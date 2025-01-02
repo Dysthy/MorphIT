@@ -12,7 +12,9 @@ import net.minecraft.client.render.entity.EntityRenderer;
 //? >=1.21.3 {
 import net.minecraft.client.render.entity.state.EntityRenderState;
 //?}
+//? >1.20.1 {
 import net.minecraft.client.util.SkinTextures;
+//?}
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.tuple.Pair;
@@ -55,18 +57,29 @@ public class Util {
         Field modelRenderersField = dispatcher.getClass().getDeclaredField("modelRenderers");
         modelRenderersField.setAccessible(true);
         @SuppressWarnings("unchecked")
-        //? <1.21.3 {
+        //? <=1.20.1 {
+        /*Map<String, EntityRenderer<T>> modelRenderers = (Map<String, EntityRenderer<T>>) modelRenderersField.get(dispatcher);
+        *///?} else if <1.21.3 {
         /*Map<SkinTextures.Model, EntityRenderer<T>> modelRenderers = (Map<SkinTextures.Model, EntityRenderer<T>>) modelRenderersField.get(dispatcher);
         *///?} else {
         Map<SkinTextures.Model, EntityRenderer<T, S>> modelRenderers = (Map<SkinTextures.Model, EntityRenderer<T, S>>) modelRenderersField.get(dispatcher);
         //?}
 
+        //? <=1.20.1 {
+        /*String model = playerEntity.getModel();
+        *///?} else {
         SkinTextures.Model model = playerEntity.getSkinTextures().model();
+        //?}
         //? <1.21.3 {
         /*EntityRenderer<T> entityRenderer = modelRenderers.get(model);
         *///?} else {
         EntityRenderer<T, S> entityRenderer = modelRenderers.get(model);
         //?}
-        return entityRenderer != null ? entityRenderer : modelRenderers.get(SkinTextures.Model.WIDE);
+        return entityRenderer != null ? entityRenderer :
+                //? >1.20.1 {
+                modelRenderers.get(SkinTextures.Model.WIDE);
+                //?} else {
+                /*modelRenderers.get("default");
+                *///?}
     }
 }

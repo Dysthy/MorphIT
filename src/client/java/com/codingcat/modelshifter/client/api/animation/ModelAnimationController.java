@@ -5,7 +5,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+//? <1.20.6 {
+/*import software.bernie.geckolib.core.animation.RawAnimation;
+*///?} else {
 import software.bernie.geckolib.animation.RawAnimation;
+//?}
 
 import java.util.Comparator;
 import java.util.HashSet;
