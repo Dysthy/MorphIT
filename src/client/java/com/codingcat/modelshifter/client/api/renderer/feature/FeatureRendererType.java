@@ -11,6 +11,7 @@ import net.minecraft.client.render.item.ItemRenderer;
 /*import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.item.HeldItemRenderer;
 *///?}
+import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.util.Arm;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,6 +22,8 @@ import static com.codingcat.modelshifter.client.api.GeoFileDefaults.*;
 @SuppressWarnings({"unused", "rawtypes", "unchecked", "RedundantSuppression"})
 public enum FeatureRendererType {
     HELD_ITEM_RIGHT(BONE_HELD_ITEM_RIGHT_ID, (ctx, featureCtx) -> new HeldItemFeatureRenderer<>(featureCtx, Arm.RIGHT, getHeldItemRenderer(ctx))),
+    HELD_ITEM_RIGHT_RENDER_GROUND(BONE_HELD_ITEM_RIGHT_ID, (ctx, featureCtx) -> new HeldItemFeatureRenderer<>(featureCtx, Arm.RIGHT, getHeldItemRenderer(ctx))
+            .withTransformationMode(ModelTransformationMode.GROUND)),
     HELD_ITEM_LEFT(BONE_HELD_ITEM_LEFT_ID, (ctx, featureCtx) -> new HeldItemFeatureRenderer<>(featureCtx, Arm.LEFT, getHeldItemRenderer(ctx))),
     ELYTRA(BONE_ELYTRA_ID, (ctx, featureCtx) -> new ElytraFeatureRenderer<>(featureCtx, ctx.getModelLoader()
             //? >=1.21.3 {

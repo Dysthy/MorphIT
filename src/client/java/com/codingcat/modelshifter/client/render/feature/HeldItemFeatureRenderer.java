@@ -9,6 +9,7 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.client.render.OverlayTexture;
@@ -34,6 +35,8 @@ public class HeldItemFeatureRenderer<S extends LivingEntityRenderState, M extend
     /*private final HeldItemRenderer itemRenderer;
     *///?} else {
     private final ItemRenderer itemRenderer;
+    @NotNull
+    private ModelTransformationMode transformationMode;
     //?}
     private final Arm arm;
 
@@ -45,6 +48,7 @@ public class HeldItemFeatureRenderer<S extends LivingEntityRenderState, M extend
         super(context);
         this.itemRenderer = itemRenderer;
         this.arm = arm;
+        this.transformationMode = ModelTransformationMode.THIRD_PERSON_RIGHT_HAND;
     }
 
     //? <1.21.3 {
@@ -76,13 +80,22 @@ public class HeldItemFeatureRenderer<S extends LivingEntityRenderState, M extend
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90.0f));
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f));
         //? <1.21.3 {
-        /*this.itemRenderer.renderItem(entity, stack, ModelTransformationMode.THIRD_PERSON_RIGHT_HAND, false,
+        /*this.itemRenderer.renderItem(entity, stack, this.transformationMode, false,
                 matrices, vertexConsumers, light);
         *///?} else {
-        this.itemRenderer.renderItem(stack, ModelTransformationMode.THIRD_PERSON_RIGHT_HAND, false,
+        this.itemRenderer.renderItem(stack, this.transformationMode, false,
                 matrices, vertexConsumers, light, OverlayTexture.DEFAULT_UV, model);
         //?}
         matrices.pop();
     }
+
+    //? <1.21.3 {
+    /*public HeldItemFeatureRenderer<E, M> withTransformationMode(ModelTransformationMode transformationMode) {
+    *///?} else {
+    public HeldItemFeatureRenderer<S, M> withTransformationMode(@NotNull ModelTransformationMode transformationMode) {
+        this.transformationMode = transformationMode;
+        return this;
+    }
+    //? }
 }
 
