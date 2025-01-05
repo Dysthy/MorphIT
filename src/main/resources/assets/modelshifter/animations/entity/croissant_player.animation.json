@@ -5,7 +5,7 @@
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
-				"CROISSANT": {
+				"body": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -30,7 +30,7 @@
 			"loop": true,
 			"animation_length": 1,
 			"bones": {
-				"CROISSANT": {
+				"body": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -55,7 +55,7 @@
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.1667,
 			"bones": {
-				"CROISSANT": {
+				"body": {
 					"position": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -65,7 +65,7 @@
 						}
 					}
 				},
-				"downer2": {
+				"lower0": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -83,7 +83,7 @@
 						}
 					}
 				},
-				"upper2": {
+				"upper0": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -101,7 +101,7 @@
 						}
 					}
 				},
-				"downer1": {
+				"lower1": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -148,7 +148,7 @@
 			"loop": true,
 			"animation_length": 12,
 			"bones": {
-				"CROISSANT": {
+				"body": {
 					"position": {
 						"0.0": {
 							"vector": [0, 0, 0]

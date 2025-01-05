@@ -90,6 +90,21 @@
 					]
 				},
 				{
+					"name": "cloak",
+					"parent": "body",
+					"pivot": [0, 24, 0]
+				},
+				{
+					"name": "elytra_position",
+					"parent": "cloak",
+					"pivot": [0, 24, 0]
+				},
+				{
+					"name": "cape_position",
+					"parent": "cloak",
+					"pivot": [0, 24, 0]
+				},
+				{
 					"name": "head",
 					"parent": "body",
 					"pivot": [0, 24, 0],
@@ -109,12 +124,7 @@
 					]
 				},
 				{
-					"name": "hat",
-					"parent": "head",
-					"pivot": [0, 24, 0]
-				},
-				{
-					"name": "leftarm",
+					"name": "left_arm",
 					"parent": "body",
 					"pivot": [5, 22, 0],
 					"mirror": true,
@@ -134,12 +144,12 @@
 					]
 				},
 				{
-					"name": "leftitem",
-					"parent": "leftarm",
-					"pivot": [6, 15, 1]
+					"name": "held_item_position_left",
+					"parent": "left_arm",
+					"pivot": [6, 14, -2]
 				},
 				{
-					"name": "leftleg",
+					"name": "left_leg",
 					"parent": "body",
 					"pivot": [1.9, 12, 0],
 					"mirror": true,
@@ -159,7 +169,7 @@
 					]
 				},
 				{
-					"name": "rightarm",
+					"name": "right_arm",
 					"parent": "body",
 					"pivot": [-5, 22, 0],
 					"cubes": [
@@ -178,12 +188,12 @@
 					]
 				},
 				{
-					"name": "rightitem",
-					"parent": "rightarm",
-					"pivot": [-6, 15, 1]
+					"name": "held_item_position_right",
+					"parent": "right_arm",
+					"pivot": [-6, 14, -2]
 				},
 				{
-					"name": "rightleg",
+					"name": "right_leg",
 					"parent": "body",
 					"pivot": [-1.9, 12, 0],
 					"cubes": [

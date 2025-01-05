@@ -1,6 +1,7 @@
 package com.codingcat.modelshifter.client.impl.model;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
+import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.ModelDimensions;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.api.renderer.GuiRenderInfo;
@@ -22,8 +23,10 @@ public class FrogPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
-                .add(FeatureRendererType.HELD_ITEM_RIGHT)
-                .add(FeatureRendererType.ELYTRA)
+                .add(FeatureRendererType.HELD_ITEM_LEFT, FrogPlayerModel::modifyHeldItemCloakRendering)
+                .add(FeatureRendererType.HELD_ITEM_RIGHT, FrogPlayerModel::modifyHeldItemCloakRendering)
+                .add(FeatureRendererType.ELYTRA, FrogPlayerModel::modifyHeldItemCloakRendering)
+                .add(FeatureRendererType.CAPE, FrogPlayerModel::modifyHeldItemCloakRendering)
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
     }
 
@@ -41,5 +44,9 @@ public class FrogPlayerModel extends PlayerModel {
 
     private static void modifyGuiButtonRendering(MatrixStack matrixStack) {
         matrixStack.scale(1.6f, 1.6f, 1.6f);
+    }
+
+    private static void modifyHeldItemCloakRendering(EntityRenderStateWrapper state, MatrixStack poseStack) {
+        poseStack.scale(0.6f,0.6f,0.6f);
     }
 }

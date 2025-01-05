@@ -1,6 +1,7 @@
 package com.codingcat.modelshifter.client.impl.model;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
+import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.ModelDimensions;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.api.renderer.GuiRenderInfo;
@@ -23,7 +24,8 @@ public class CrabPlayerModel extends PlayerModel {
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
                 .add(FeatureRendererType.HELD_ITEM_RIGHT)
-                .add(FeatureRendererType.ELYTRA)
+                .add(FeatureRendererType.ELYTRA, CrabPlayerModel::modifyCloakRendering)
+                .add(FeatureRendererType.CAPE, CrabPlayerModel::modifyCloakRendering)
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
     }
 
@@ -35,5 +37,9 @@ public class CrabPlayerModel extends PlayerModel {
 
     private static void modifyGuiButtonRendering(MatrixStack matrixStack) {
         matrixStack.scale(1.15f, 1.15f, 1.15f);
+    }
+
+    private static void modifyCloakRendering(EntityRenderStateWrapper state, MatrixStack poseStack) {
+        poseStack.scale(0.7f,0.7f,0.7f);
     }
 }

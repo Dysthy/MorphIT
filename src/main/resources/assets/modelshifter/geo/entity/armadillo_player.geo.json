@@ -35,6 +35,32 @@
 					}
 				},
 				{
+					"name": "held_item_position_right",
+					"parent": "body",
+					"pivot": [-4.6, 6, -4]
+				},
+				{
+					"name": "held_item_position_left",
+					"parent": "body",
+					"pivot": [4.6, 6, -4]
+				},
+				{
+					"name": "cloak",
+					"parent": "body",
+					"pivot": [-0.4, 10, -4],
+					"rotation": [90, 0, 0]
+				},
+				{
+					"name": "cape_position",
+					"parent": "cloak",
+					"pivot": [-0.4, 10, -4]
+				},
+				{
+					"name": "elytra_position",
+					"parent": "cloak",
+					"pivot": [-0.4, 10, -4]
+				},
+				{
 					"name": "tail",
 					"parent": "body",
 					"pivot": [0, 6, 5],

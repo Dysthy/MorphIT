@@ -25,6 +25,7 @@ public class ArmorStandPlayerModel extends PlayerModel {
                 .add(FeatureRendererType.HELD_ITEM_LEFT)
                 .add(FeatureRendererType.HELD_ITEM_RIGHT)
                 .add(FeatureRendererType.ELYTRA)
+                .add(FeatureRendererType.CAPE)
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
     }
 

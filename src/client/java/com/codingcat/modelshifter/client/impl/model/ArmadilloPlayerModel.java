@@ -1,6 +1,7 @@
 package com.codingcat.modelshifter.client.impl.model;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
+import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.ModelDimensions;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.api.renderer.GuiRenderInfo;
@@ -24,7 +25,8 @@ public class ArmadilloPlayerModel extends PlayerModel {
         return new FeatureRendererStates()
                 .add(FeatureRendererType.HELD_ITEM_LEFT)
                 .add(FeatureRendererType.HELD_ITEM_RIGHT)
-                .add(FeatureRendererType.ELYTRA)
+                .add(FeatureRendererType.ELYTRA, ArmadilloPlayerModel::modifyCloakRendering)
+                .add(FeatureRendererType.CAPE, ArmadilloPlayerModel::modifyCloakRendering)
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
     }
 
@@ -35,6 +37,10 @@ public class ArmadilloPlayerModel extends PlayerModel {
     }
 
     private static void modifyGuiButtonRendering(MatrixStack matrixStack) {
-        matrixStack.scale(1.3f,1.3f,1.3f);
+        matrixStack.scale(1.3f, 1.3f, 1.3f);
+    }
+
+    private static void modifyCloakRendering(EntityRenderStateWrapper stateWrapper, MatrixStack poseStack) {
+        poseStack.scale(0.8f, 0.8f, 0.8f);
     }
 }

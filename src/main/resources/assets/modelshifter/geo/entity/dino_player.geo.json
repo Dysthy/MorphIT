@@ -117,6 +117,11 @@
 					]
 				},
 				{
+					"name": "held_item_position_left",
+					"parent": "left_forearm",
+					"pivot": [5, 5.5, -15]
+				},
+				{
 					"name": "right_arm",
 					"parent": "body",
 					"pivot": [-6, 18.5, -12],
@@ -132,6 +137,11 @@
 					"cubes": [
 						{"origin": [-6.75, 5, -12.75], "size": [1.5, 7, 1.5], "uv": [80, 56]}
 					]
+				},
+				{
+					"name": "held_item_position_right",
+					"parent": "right_forearm",
+					"pivot": [-6, 5.5, -15]
 				},
 				{
 					"name": "left_leg",
@@ -233,6 +243,22 @@
 							}
 						}
 					]
+				},
+				{
+					"name": "cloak",
+					"parent": "neck_lower",
+					"pivot": [0, 21.5, -11],
+					"rotation": [90, 0, 0]
+				},
+				{
+					"name": "elytra_position",
+					"parent": "cloak",
+					"pivot": [0, 21.5, -11]
+				},
+				{
+					"name": "cape_position",
+					"parent": "cloak",
+					"pivot": [0, 21.5, -11]
 				},
 				{
 					"name": "neck_middle",

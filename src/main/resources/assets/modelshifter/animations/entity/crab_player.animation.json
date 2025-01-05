@@ -5,7 +5,7 @@
 			"loop": true,
 			"animation_length": 2.0833,
 			"bones": {
-				"leg_0_bottom": {
+				"leg_left_0_bottom": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -24,7 +24,7 @@
 						}
 					}
 				},
-				"leg_1_bottom": {
+				"leg_left_1_bottom": {
 					"rotation": {
 						"0.0417": {
 							"vector": [0, 0, 0]
@@ -43,7 +43,7 @@
 						}
 					}
 				},
-				"leg_2_bottom": {
+				"leg_left_2_bottom": {
 					"rotation": {
 						"0.0833": {
 							"vector": [0, 0, 0]
@@ -62,7 +62,7 @@
 						}
 					}
 				},
-				"leg_3_bottom": {
+				"leg_right_3_bottom": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -81,7 +81,7 @@
 						}
 					}
 				},
-				"leg_4_bottom": {
+				"leg_right_4_bottom": {
 					"rotation": {
 						"0.0417": {
 							"vector": [0, 0, 0]
@@ -100,7 +100,7 @@
 						}
 					}
 				},
-				"leg_5_bottom": {
+				"leg_right_5_bottom": {
 					"rotation": {
 						"0.0833": {
 							"vector": [0, 0, 0]
@@ -151,7 +151,7 @@
 			"loop": true,
 			"animation_length": 1.0016,
 			"bones": {
-				"leg_0_bottom": {
+				"leg_left_0_bottom": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -170,7 +170,7 @@
 						}
 					}
 				},
-				"leg_1_bottom": {
+				"leg_left_1_bottom": {
 					"rotation": {
 						"0.02": {
 							"vector": [0, 0, 0]
@@ -189,7 +189,7 @@
 						}
 					}
 				},
-				"leg_2_bottom": {
+				"leg_left_2_bottom": {
 					"rotation": {
 						"0.0401": {
 							"vector": [0, 0, 0]
@@ -208,7 +208,7 @@
 						}
 					}
 				},
-				"leg_3_bottom": {
+				"leg_right_3_bottom": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -227,7 +227,7 @@
 						}
 					}
 				},
-				"leg_4_bottom": {
+				"leg_right_4_bottom": {
 					"rotation": {
 						"0.02": {
 							"vector": [0, 0, 0]
@@ -246,7 +246,7 @@
 						}
 					}
 				},
-				"leg_5_bottom": {
+				"leg_right_5_bottom": {
 					"rotation": {
 						"0.0401": {
 							"vector": [0, 0, 0]
@@ -295,15 +295,15 @@
 		},
 		"move.sneak": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 0.5,
+			"animation_length": 0.2083,
 			"bones": {
 				"body": {
 					"position": {
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
-						"0.5": {
-							"vector": [0, -0.5, 0]
+						"0.125": {
+							"vector": [0, -1, 0]
 						}
 					}
 				},
@@ -312,7 +312,7 @@
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
-						"0.5": {
+						"0.2083": {
 							"vector": [0, -0.5, 0]
 						}
 					}
@@ -322,7 +322,7 @@
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
-						"0.5": {
+						"0.2083": {
 							"vector": [0, -0.5, 0]
 						}
 					}

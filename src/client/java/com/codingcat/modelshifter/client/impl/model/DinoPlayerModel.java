@@ -22,7 +22,10 @@ public class DinoPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
+                .add(FeatureRendererType.HELD_ITEM_LEFT)
+                .add(FeatureRendererType.HELD_ITEM_RIGHT)
                 .add(FeatureRendererType.ELYTRA)
+                .add(FeatureRendererType.CAPE)
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
     }
 

@@ -1,6 +1,7 @@
 package com.codingcat.modelshifter.client.impl.model;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
+import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.ModelDimensions;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.api.renderer.GuiRenderInfo;
@@ -25,7 +26,8 @@ public class SquarePlayerModel extends PlayerModel {
         return new FeatureRendererStates()
                 .add(FeatureRendererType.HELD_ITEM_LEFT)
                 .add(FeatureRendererType.HELD_ITEM_RIGHT)
-                .add(FeatureRendererType.ELYTRA)
+                .add(FeatureRendererType.ELYTRA, SquarePlayerModel::modifyCloakRendering)
+                .add(FeatureRendererType.CAPE, SquarePlayerModel::modifyCloakRendering)
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
     }
 
@@ -38,5 +40,9 @@ public class SquarePlayerModel extends PlayerModel {
 
     private static void modifyGuiInventoryRendering(MatrixStack matrixStack) {
         matrixStack.translate(0f,0.2f,0f);
+    }
+
+    private static void modifyCloakRendering(EntityRenderStateWrapper state, MatrixStack poseStack) {
+        poseStack.scale(1f,0.7f,1f);
     }
 }

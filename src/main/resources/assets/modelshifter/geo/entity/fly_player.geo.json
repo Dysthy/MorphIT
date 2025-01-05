@@ -27,10 +27,12 @@
 								"down": {"uv": [16, 8], "uv_size": [8, -8]}
 							}
 						}
-					],
-					"locators": {
-						"lead": [0, 4, -1]
-					}
+					]
+				},
+				{
+					"name": "held_item_position_right",
+					"parent": "body",
+					"pivot": [-3.5, 5, -5]
 				},
 				{
 					"name": "stinger",
@@ -38,7 +40,7 @@
 					"pivot": [0.5, 6, 1],
 					"cubes": [
 						{
-							"origin": [-0.5, 5, 5],
+							"origin": [0, 5, 5],
 							"size": [1, 1, 2],
 							"uv": {
 								"north": {"uv": [25, 26], "uv_size": [0, 1]},
@@ -52,7 +54,7 @@
 					]
 				},
 				{
-					"name": "rightwing_bone",
+					"name": "right_wing",
 					"parent": "body",
 					"pivot": [-1, 9, -3],
 					"rotation": [15, -15, 0],
@@ -72,7 +74,7 @@
 					]
 				},
 				{
-					"name": "leftwing_bone",
+					"name": "left_wing",
 					"parent": "body",
 					"pivot": [2, 9, -3],
 					"rotation": [15, 15, 0],
@@ -89,30 +91,6 @@
 								"down": {"uv": [24, 28], "uv_size": [1, -1]}
 							}
 						}
-					]
-				},
-				{
-					"name": "leg_front",
-					"parent": "body",
-					"pivot": [2, 2, -2],
-					"cubes": [
-						{"origin": [-3, 0, -2], "size": [7, 2, 0], "uv": [26, 1]}
-					]
-				},
-				{
-					"name": "leg_mid",
-					"parent": "body",
-					"pivot": [2, 2, 0],
-					"cubes": [
-						{"origin": [-3, 0, 0], "size": [7, 2, 0], "uv": [26, 3]}
-					]
-				},
-				{
-					"name": "leg_back",
-					"parent": "body",
-					"pivot": [2, 2, 2],
-					"cubes": [
-						{"origin": [-3, 0, 2], "size": [7, 2, 0], "uv": [26, 5]}
 					]
 				}
 			]

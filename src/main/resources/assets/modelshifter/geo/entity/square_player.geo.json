@@ -16,7 +16,32 @@
 					"pivot": [8, 0, 0]
 				},
 				{
-					"name": "section1",
+					"name": "cloak",
+					"parent": "cube",
+					"pivot": [0, 16, 7]
+				},
+				{
+					"name": "elytra_position",
+					"parent": "cloak",
+					"pivot": [0, 16, 7]
+				},
+				{
+					"name": "cape_position",
+					"parent": "cloak",
+					"pivot": [0, 16, 7]
+				},
+				{
+					"name": "held_item_position_right",
+					"parent": "cube",
+					"pivot": [-8.4, 6, -8]
+				},
+				{
+					"name": "held_item_position_left",
+					"parent": "cube",
+					"pivot": [8.4, 6, -8]
+				},
+				{
+					"name": "top",
 					"parent": "cube",
 					"pivot": [0, 10, 0],
 					"cubes": [
@@ -35,7 +60,7 @@
 					]
 				},
 				{
-					"name": "section2",
+					"name": "middle",
 					"parent": "cube",
 					"pivot": [0, 5, 0],
 					"cubes": [
@@ -54,7 +79,7 @@
 					]
 				},
 				{
-					"name": "section3",
+					"name": "bottom",
 					"parent": "cube",
 					"pivot": [0, 0, 0],
 					"cubes": [
