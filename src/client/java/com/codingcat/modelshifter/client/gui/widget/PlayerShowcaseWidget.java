@@ -2,6 +2,8 @@ package com.codingcat.modelshifter.client.gui.widget;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
+import com.codingcat.modelshifter.client.api.renderer.feature.EnabledFeatureRenderer;
+import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererType;
 import com.codingcat.modelshifter.client.api.skin.SingleAsyncSkinProvider;
 import com.codingcat.modelshifter.client.impl.Models;
 import com.codingcat.modelshifter.client.render.GuiPlayerEntityRenderer;
@@ -28,12 +30,16 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class PlayerShowcaseWidget extends TextWidget {
     private static final Identifier BACKGROUND = Identifier.of(ModelShifterClient.MOD_ID, "widget/preview_background");
     @Nullable
     private GuiPlayerEntityRenderer renderer;
+    @Nullable
+    private ModelFeaturesDrawer featuresDrawer;
     @NotNull
     private final SingleAsyncSkinProvider skinProvider;
     @NotNull
@@ -84,6 +90,7 @@ public class PlayerShowcaseWidget extends TextWidget {
         if (model == null || !ModelShifterClient.state.isRendererStateEnabled(gameProfile.getId())) return;
 
         this.renderer = new GuiPlayerEntityRenderer(model.getModelDataIdentifier(), model.getGuiRenderInfo().getShowcaseAnimation());
+        this.featuresDrawer = new ModelFeaturesDrawer(getWidth() - (getTextureX() - getX()), model);
     }
 
     //? <=1.20.1 {
@@ -108,7 +115,7 @@ public class PlayerShowcaseWidget extends TextWidget {
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
         Util.drawGuiTexture(context, BACKGROUND,
-                getX() + getWidth() - (getWidth() / 2) - 16,
+                this.getTextureX(),
                 this.getY() + 32,
                 this.getWidth(),
                 this.getHeight() - 64);
@@ -116,18 +123,27 @@ public class PlayerShowcaseWidget extends TextWidget {
 
     private void renderText(DrawContext context) {
         float textSizeMultiplier = width / 320f;
+        int rtCorner = getX() + getWidth();
+        int lbCorner = getY() + getHeight();
         renderScaledText(context,
                 getText(true),
                 0xFFFFFF,
-                getX() + getWidth() - (getWidth() / 4f),
-                getY() + getHeight() - (getHeight() / 3f),
+                rtCorner - (getWidth() / 4f),
+                lbCorner - (getHeight() / 3f),
                 2f * textSizeMultiplier, true);
         renderScaledText(context,
                 getText(false),
                 0xADADAD,
-                getX() + getWidth() - (getWidth() / 4f),
-                getY() + getHeight() - (getHeight() / 3f) + (24 * textSizeMultiplier),
+                rtCorner - (getWidth() / 4f),
+                lbCorner - (getHeight() / 3f) + (24f * textSizeMultiplier),
                 textSizeMultiplier, true);
+        if (featuresDrawer != null && ModelShifterClient.state.isRendererEnabled(gameProfile.getId()) && textMode == TextMode.MODEL)
+            featuresDrawer.draw(context, getTextureX(),
+                    (int) (lbCorner - (getHeight() / 3f) + (40f * textSizeMultiplier)));
+    }
+
+    private int getTextureX() {
+        return getX() + getWidth() - (getWidth() / 2) - 16;
     }
 
     public static void renderScaledText(DrawContext context, Text text, int color, double x, double y, float scale, boolean centered) {
@@ -225,5 +241,56 @@ public class PlayerShowcaseWidget extends TextWidget {
     public enum TextMode {
         MODEL,
         PLAYER
+    }
+
+    public static class ModelFeaturesDrawer {
+        private static final Identifier CARD_COLORED = Identifier.of(ModelShifterClient.MOD_ID, "widget/card_colored.png");
+        private static final int CARD_HEIGHT = 15;
+        private static final int CARD_SPACING_X = 6;
+        private static final int CARD_SPACING_Y = 8;
+        private static final int CARD_TEXT_SPACING = 5;
+        private final TextRenderer renderer;
+        @NotNull
+        private final List<FeatureRendererType> types;
+        private final int maxWidth;
+
+        public ModelFeaturesDrawer(int maxWidth, @NotNull PlayerModel model) {
+            this.types = model.getFeatureRendererStates()
+                    .getEnabledRenderers().stream()
+                    .map(EnabledFeatureRenderer::type)
+                    .sorted(Comparator.comparingInt(Enum::ordinal)).toList();
+            this.maxWidth = maxWidth - (CARD_SPACING_X * 4);
+            this.renderer = MinecraftClient.getInstance().textRenderer;
+        }
+
+        public void draw(DrawContext context, int posX, int posY) {
+            int x = posX + (CARD_SPACING_X * 2);
+            int y = posY;
+            for (FeatureRendererType type : types) {
+                if ((x + getCardWidth(type) + CARD_SPACING_X) > (posX + maxWidth)) {
+                    x = posX + (CARD_SPACING_X * 2);
+                    y += CARD_HEIGHT + CARD_SPACING_Y;
+                }
+
+                x += drawCard(context, x, y, type);
+                x += CARD_SPACING_X;
+            }
+        }
+
+        private int drawCard(DrawContext context, int x, int y, FeatureRendererType type) {
+            Text text = getFeatureText(type);
+            int w = getCardWidth(type);
+            Util.drawGuiTexture(context, CARD_COLORED, x, y, w, CARD_HEIGHT);
+            context.drawText(renderer, text, x + CARD_TEXT_SPACING, y + (CARD_HEIGHT / 4), 0xFFFFFF, true);
+            return w;
+        }
+
+        private int getCardWidth(FeatureRendererType type) {
+            return renderer.getWidth(getFeatureText(type)) + (CARD_TEXT_SPACING * 2);
+        }
+
+        private Text getFeatureText(FeatureRendererType type) {
+            return Text.translatable(type.getTranslationKey());
+        }
     }
 }

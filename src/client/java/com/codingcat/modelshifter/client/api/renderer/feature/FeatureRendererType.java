@@ -13,6 +13,7 @@ import net.minecraft.client.render.item.HeldItemRenderer;
 *///?}
 import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.util.Arm;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiFunction;
@@ -94,4 +95,9 @@ public enum FeatureRendererType {
         return ctx.getItemRenderer();
     }
     //?}
+
+    @NotNull
+    public String getTranslationKey() {
+        return String.format("modelshifter.text.model_feature.%s", name().toLowerCase());
+    }
 }
