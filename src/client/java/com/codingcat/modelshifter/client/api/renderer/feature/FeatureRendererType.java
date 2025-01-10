@@ -3,7 +3,12 @@ package com.codingcat.modelshifter.client.api.renderer.feature;
 import com.codingcat.modelshifter.client.render.feature.HeldItemFeatureRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.feature.*;
+
+import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
+//? >=1.21.4 {
+/*import net.minecraft.client.render.entity.model.LoadedEntityModels;
+*///?}
 //? >=1.21.3 {
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.render.item.ItemRenderer;
@@ -29,18 +34,18 @@ public enum FeatureRendererType {
     HELD_ITEM_LEFT(BONE_HELD_ITEM_LEFT_ID, (ctx, featureCtx) -> new HeldItemFeatureRenderer<>(featureCtx, Arm.LEFT, getHeldItemRenderer(ctx))),
     HELD_ITEM_LEFT_RENDER_GROUND(BONE_HELD_ITEM_LEFT_ID, (ctx, featureCtx) -> new HeldItemFeatureRenderer<>(featureCtx, Arm.LEFT, getHeldItemRenderer(ctx))
             .withTransformationMode(ModelTransformationMode.GROUND)),
-    ELYTRA(BONE_ELYTRA_ID, (ctx, featureCtx) -> new ElytraFeatureRenderer<>(featureCtx, ctx.getModelLoader()
+    ELYTRA(BONE_ELYTRA_ID, (ctx, featureCtx) -> new ElytraFeatureRenderer<>(featureCtx, getModelLoader(ctx)
             //? >=1.21.3 {
             , ctx.getEquipmentRenderer()
             //?}
     )),
     CAPE(BONE_CAPE_ID, (ctx, featureCtx) -> new CapeFeatureRenderer(featureCtx
             //? >=1.21.3 {
-            , ctx.getModelLoader(), ctx.getEquipmentModelLoader()
+            , getModelLoader(ctx), ctx.getEquipmentModelLoader()
             //?}
     )),
-    SHOULDER_PARROT(BONE_PARROT_ID, (ctx, featureCtx) -> new ShoulderParrotFeatureRenderer(featureCtx, ctx.getModelLoader())),
-    TRIDENT_RIPTIDE((ctx, featureCtx) -> new TridentRiptideFeatureRenderer(featureCtx, ctx.getModelLoader()));
+    SHOULDER_PARROT(BONE_PARROT_ID, (ctx, featureCtx) -> new ShoulderParrotFeatureRenderer(featureCtx, getModelLoader(ctx))),
+    TRIDENT_RIPTIDE((ctx, featureCtx) -> new TridentRiptideFeatureRenderer(featureCtx, getModelLoader(ctx)));
 
     @Nullable
     private final String assignedBone;
@@ -87,18 +92,33 @@ public enum FeatureRendererType {
         return initFunction.apply(renderFactoryContext, featureRendererContext);
     }
 
-    //? <1.21.3 {
-    /*private static HeldItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
-        return ctx.getHeldItemRenderer();
+    //? >=1.21.4 {
+    /*private static ItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
+        return null;
     }
-    *///?} else {
+    *///?} >=1.21.3 {
     private static ItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
         return ctx.getItemRenderer();
     }
-    //?}
+    //?} else {
+    /*
+     private static HeldItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
+        return ctx.getHeldItemRenderer();
+    }
+    *///?}
 
     @NotNull
     public String getTranslationKey() {
         return String.format("modelshifter.text.model_feature.%s", name().toLowerCase());
     }
+
+    //? >=1.21.4 {
+    /*private static LoadedEntityModels getModelLoader(EntityRendererFactory.Context context) {
+        return context.getEntityModels();
+    }
+    *///?} else {
+    private static EntityModelLoader getModelLoader(EntityRendererFactory.Context context) {
+        return context.getModelLoader();
+    }
+    //?}
 }

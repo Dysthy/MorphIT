@@ -48,11 +48,21 @@ public class SingleAsyncSkinProviderImpl implements SingleAsyncSkinProvider {
         //? >1.20.1 {
         client.getSkinProvider()
                 .fetchSkinTextures(this.profile)
-                .thenAccept(textures -> {
+                .thenAccept(in -> {
+                    //noinspection UnusedAssignment
+                    SkinTextures textures = null;
+                    //? >=1.21.4 {
+                    /*if (in.isPresent())
+                        textures = in.get();
+                    *///?} else {
+                    textures = in;
+                     //?}
+
                     //? >=1.21.3 {
                     cachedSkinTextures.set(textures);
                     //?}
-                    cachedSkin.set(textures.texture());
+                    if (textures != null)
+                        cachedSkin.set(textures.texture());
                 });
         //?} else {
         /*client.getSkinProvider().loadSkin(profile, (type, id, texture) -> {
@@ -84,7 +94,7 @@ public class SingleAsyncSkinProviderImpl implements SingleAsyncSkinProvider {
         return client.getSkinProvider().getSkinTextures(gameProfile).texture();
         //?} else {
         /*return client.getSkinProvider().loadSkin(gameProfile);
-        *///?}
+         *///?}
     }
 
     @Override
