@@ -30,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 
+import java.awt.*;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
@@ -39,7 +40,7 @@ public class PlayerShowcaseWidget extends TextWidget {
     @Nullable
     private GuiPlayerEntityRenderer renderer;
     @Nullable
-    private ModelFeaturesDrawer featuresDrawer;
+    private PlayerShowcaseWidget.ModelFeatureBadgesDrawer featureBadgesDrawer;
     @NotNull
     private final SingleAsyncSkinProvider skinProvider;
     @NotNull
@@ -90,7 +91,7 @@ public class PlayerShowcaseWidget extends TextWidget {
         if (model == null || !ModelShifterClient.state.isRendererStateEnabled(gameProfile.getId())) return;
 
         this.renderer = new GuiPlayerEntityRenderer(model.getModelDataIdentifier(), model.getGuiRenderInfo().getShowcaseAnimation());
-        this.featuresDrawer = new ModelFeaturesDrawer(getWidth() - (getTextureX() - getX()), model);
+        this.featureBadgesDrawer = new ModelFeatureBadgesDrawer(getWidth() - (getTextureX() - getX()), model);
     }
 
     //? <=1.20.1 {
@@ -137,9 +138,9 @@ public class PlayerShowcaseWidget extends TextWidget {
                 rtCorner - (getWidth() / 4f),
                 lbCorner - (getHeight() / 3f) + (24f * textSizeMultiplier),
                 textSizeMultiplier, true);
-        if (featuresDrawer != null && ModelShifterClient.state.isRendererEnabled(gameProfile.getId()) && textMode == TextMode.MODEL)
-            featuresDrawer.draw(context, getTextureX(),
-                    (int) (lbCorner - (getHeight() / 3f) + (40f * textSizeMultiplier)));
+        if (featureBadgesDrawer != null && ModelShifterClient.state.isRendererEnabled(gameProfile.getId()) && textMode == TextMode.MODEL)
+            featureBadgesDrawer.draw(context, getTextureX(),
+                    (int) (lbCorner - (getHeight() / 3f) + (40f * textSizeMultiplier)), textSizeMultiplier / 1.3f);
     }
 
     private int getTextureX() {
@@ -243,8 +244,8 @@ public class PlayerShowcaseWidget extends TextWidget {
         PLAYER
     }
 
-    public static class ModelFeaturesDrawer {
-        private static final Identifier CARD_COLORED = Identifier.of(ModelShifterClient.MOD_ID, "widget/card_colored.png");
+    public static class ModelFeatureBadgesDrawer {
+        private static final Identifier CARD_COLORED = Identifier.of(ModelShifterClient.MOD_ID, "widget/card_colored");
         private static final int CARD_HEIGHT = 15;
         private static final int CARD_SPACING_X = 6;
         private static final int CARD_SPACING_Y = 8;
@@ -253,40 +254,57 @@ public class PlayerShowcaseWidget extends TextWidget {
         @NotNull
         private final List<FeatureRendererType> types;
         private final int maxWidth;
+        private float scale;
 
-        public ModelFeaturesDrawer(int maxWidth, @NotNull PlayerModel model) {
+        public ModelFeatureBadgesDrawer(int maxWidth, @NotNull PlayerModel model) {
             this.types = model.getFeatureRendererStates()
                     .getEnabledRenderers().stream()
                     .map(EnabledFeatureRenderer::type)
                     .sorted(Comparator.comparingInt(Enum::ordinal)).toList();
-            this.maxWidth = maxWidth - (CARD_SPACING_X * 4);
+            this.maxWidth = maxWidth;
             this.renderer = MinecraftClient.getInstance().textRenderer;
         }
 
-        public void draw(DrawContext context, int posX, int posY) {
-            int x = posX + (CARD_SPACING_X * 2);
+        public void draw(DrawContext context, int posX, int posY, float scale) {
+            this.scale = scale;
+            int cardSpacingX = (int) (CARD_SPACING_X * scale);
+            int cardSpacingY = (int) (CARD_SPACING_Y * scale);
+            int maxWidth = this.maxWidth - (cardSpacingX * 4);
+            int x = posX + (cardSpacingX * 2);
             int y = posY;
             for (FeatureRendererType type : types) {
-                if ((x + getCardWidth(type) + CARD_SPACING_X) > (posX + maxWidth)) {
-                    x = posX + (CARD_SPACING_X * 2);
-                    y += CARD_HEIGHT + CARD_SPACING_Y;
+                if ((x + getCardWidth(type) + cardSpacingX) > (posX + maxWidth)) {
+                    x = posX + (cardSpacingX * 2);
+                    y += getCardHeight() + cardSpacingY;
                 }
 
                 x += drawCard(context, x, y, type);
-                x += CARD_SPACING_X;
+                x += cardSpacingX;
             }
         }
 
         private int drawCard(DrawContext context, int x, int y, FeatureRendererType type) {
             Text text = getFeatureText(type);
             int w = getCardWidth(type);
-            Util.drawGuiTexture(context, CARD_COLORED, x, y, w, CARD_HEIGHT);
-            context.drawText(renderer, text, x + CARD_TEXT_SPACING, y + (CARD_HEIGHT / 4), 0xFFFFFF, true);
+            if (type.name().endsWith("_RENDER_GROUND"))
+                type = FeatureRendererType.valueOf(type.name().replace("_RENDER_GROUND", ""));
+
+            int color = Color.HSBtoRGB(((float) type.ordinal() / FeatureRendererType.values().length) * 255, 1f, 1f);
+            Util.drawGuiTexture(context, CARD_COLORED, x, y, w, getCardHeight(), color);
+            context.getMatrices().push();
+            context.getMatrices().translate(x + CARD_TEXT_SPACING * this.scale, y + ((float) getCardHeight() / 4), 0);
+            context.getMatrices().scale(this.scale, this.scale, this.scale);
+            context.drawText(renderer, text, 0, 0, 0xFFFFFF, true);
+            context.getMatrices().pop();
             return w;
         }
 
         private int getCardWidth(FeatureRendererType type) {
-            return renderer.getWidth(getFeatureText(type)) + (CARD_TEXT_SPACING * 2);
+            return (int) (renderer.getWidth(getFeatureText(type)) * this.scale + ((CARD_TEXT_SPACING * this.scale) * 2));
+        }
+
+        private int getCardHeight() {
+            return (int) (CARD_HEIGHT * this.scale);
         }
 
         private Text getFeatureText(FeatureRendererType type) {

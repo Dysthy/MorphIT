@@ -32,12 +32,16 @@ public class Util {
     }
 
     public static void drawGuiTexture(DrawContext context, Identifier texture, int x, int y, int width, int height) {
+        Util.drawGuiTexture(context, texture, x, y, width, height, -1);
+    }
+
+    public static void drawGuiTexture(DrawContext context, Identifier texture, int x, int y, int width, int height, int color) {
         //? >=1.21.3 {
-        context.drawGuiTexture(RenderLayer::getGuiTextured, texture, x, y, width, height);
+        context.drawGuiTexture(RenderLayer::getGuiTextured, texture, x, y, width, height, color);
         //?} else if >1.20.1 {
-        /*context.drawGuiTexture(texture, x, y, width, height);
+        /*context.drawGuiTexture(texture, x, y, width, height, color);
          *///?} else {
-        /*context.drawTexture(texture.withPrefixedPath("textures/gui/sprites/").withSuffixedPath(".png"), x, y, 0, 0, width, height, width, height);
+        /*context.drawTexture(texture.withPrefixedPath("textures/gui/sprites/").withSuffixedPath(".png"), x, y, 0, 0, width, height, width, height, color);
          *///?}
     }
 
