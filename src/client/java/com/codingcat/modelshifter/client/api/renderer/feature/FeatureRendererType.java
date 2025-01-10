@@ -7,11 +7,12 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 //? >=1.21.3 {
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.item.ModelTransformationMode;
 //?} else {
 /*import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.item.HeldItemRenderer;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 *///?}
-import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.util.Arm;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

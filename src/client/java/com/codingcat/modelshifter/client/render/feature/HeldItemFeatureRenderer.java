@@ -5,11 +5,11 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModel;
+import org.jetbrains.annotations.NotNull;
 //? >=1.21.3 {
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.client.render.OverlayTexture;
@@ -27,24 +27,24 @@ import net.minecraft.util.math.RotationAxis;
 //? <1.21.3 {
 /*public class HeldItemFeatureRenderer<E extends AbstractClientPlayerEntity, M extends EntityModel<E>>
         extends FeatureRenderer<E, M> {
-*///?} else {
+    *///?} else {
 public class HeldItemFeatureRenderer<S extends LivingEntityRenderState, M extends EntityModel<S>>
         extends FeatureRenderer<S, M> {
 //?}
+    @NotNull
+    private ModelTransformationMode transformationMode;
     //? <1.21.3 {
     /*private final HeldItemRenderer itemRenderer;
     *///?} else {
     private final ItemRenderer itemRenderer;
-    @NotNull
-    private ModelTransformationMode transformationMode;
-    //?}
+     //?}
     private final Arm arm;
 
     //? <1.21.3 {
     /*public HeldItemFeatureRenderer(FeatureRendererContext<E, M> context, Arm arm, HeldItemRenderer itemRenderer) {
-    *///?} else {
-    public HeldItemFeatureRenderer(FeatureRendererContext<S, M> context, Arm arm, ItemRenderer itemRenderer) {
-    //?}
+        *///?} else {
+        public HeldItemFeatureRenderer(FeatureRendererContext<S, M> context, Arm arm, ItemRenderer itemRenderer) {
+         //?}
         super(context);
         this.itemRenderer = itemRenderer;
         this.arm = arm;
@@ -71,7 +71,7 @@ public class HeldItemFeatureRenderer<S extends LivingEntityRenderState, M extend
     //? <1.21.3 {
     /*protected void renderItem(ItemStack stack, LivingEntity entity, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         if (stack.isEmpty()) return;
-    *///?} else {
+        *///?} else {
     protected void renderItem(@Nullable BakedModel model, ItemStack stack, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         if (model == null || stack.isEmpty()) return;
     //?}
@@ -91,11 +91,11 @@ public class HeldItemFeatureRenderer<S extends LivingEntityRenderState, M extend
 
     //? <1.21.3 {
     /*public HeldItemFeatureRenderer<E, M> withTransformationMode(ModelTransformationMode transformationMode) {
-    *///?} else {
-    public HeldItemFeatureRenderer<S, M> withTransformationMode(@NotNull ModelTransformationMode transformationMode) {
+        *///?} else {
+        public HeldItemFeatureRenderer<S, M> withTransformationMode(@NotNull ModelTransformationMode transformationMode) {
+         //?}
         this.transformationMode = transformationMode;
         return this;
     }
-    //? }
 }
 
