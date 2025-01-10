@@ -87,10 +87,10 @@ public class PlayerOverridesListWidget extends AlwaysSelectedEntryListWidget<Pla
 
     private boolean scrollbarVisible() {
         //? >=1.21.4 {
-        /*return overflows();
-        *///?} else if >1.20.4 {
-        return isScrollbarVisible();
-         //?} else {
+        return overflows();
+        //?} else if >1.20.4 {
+        /*return isScrollbarVisible();
+         *///?} else {
         /*return getMaxScroll() > 0;
         *///?}
     }

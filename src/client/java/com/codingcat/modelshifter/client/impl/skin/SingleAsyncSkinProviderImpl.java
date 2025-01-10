@@ -49,14 +49,14 @@ public class SingleAsyncSkinProviderImpl implements SingleAsyncSkinProvider {
         client.getSkinProvider()
                 .fetchSkinTextures(this.profile)
                 .thenAccept(in -> {
-                    //noinspection UnusedAssignment
+                    @SuppressWarnings({"UnusedAssignment", "RedundantSuppression"})
                     SkinTextures textures = null;
                     //? >=1.21.4 {
-                    /*if (in.isPresent())
+                    if (in.isPresent())
                         textures = in.get();
-                    *///?} else {
-                    textures = in;
-                     //?}
+                    //?} else {
+                    /*textures = in;
+                     *///?}
 
                     //? >=1.21.3 {
                     cachedSkinTextures.set(textures);

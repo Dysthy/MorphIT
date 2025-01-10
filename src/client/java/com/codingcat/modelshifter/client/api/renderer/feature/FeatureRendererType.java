@@ -3,11 +3,11 @@ package com.codingcat.modelshifter.client.api.renderer.feature;
 import com.codingcat.modelshifter.client.render.feature.HeldItemFeatureRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.feature.*;
-
-import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 //? >=1.21.4 {
-/*import net.minecraft.client.render.entity.model.LoadedEntityModels;
+import net.minecraft.client.render.entity.model.LoadedEntityModels;
+//?} else {
+/*import net.minecraft.client.render.entity.model.EntityModelLoader;
 *///?}
 //? >=1.21.3 {
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
@@ -93,14 +93,14 @@ public enum FeatureRendererType {
     }
 
     //? >=1.21.4 {
-    /*private static ItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
+    private static ItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
         return null;
     }
-    *///?} >=1.21.3 {
-    private static ItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
+    //?} >=1.21.3 {
+    /*private static ItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
         return ctx.getItemRenderer();
     }
-    //?} else {
+    *///?} else {
     /*
      private static HeldItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
         return ctx.getHeldItemRenderer();
@@ -113,12 +113,12 @@ public enum FeatureRendererType {
     }
 
     //? >=1.21.4 {
-    /*private static LoadedEntityModels getModelLoader(EntityRendererFactory.Context context) {
+    private static LoadedEntityModels getModelLoader(EntityRendererFactory.Context context) {
         return context.getEntityModels();
     }
-    *///?} else {
-    private static EntityModelLoader getModelLoader(EntityRendererFactory.Context context) {
+    //?} else {
+    /*private static EntityModelLoader getModelLoader(EntityRendererFactory.Context context) {
         return context.getModelLoader();
     }
-    //?}
+    *///?}
 }

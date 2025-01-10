@@ -7,14 +7,14 @@ import net.minecraft.client.render.entity.model.EntityModel;
 
 import org.jetbrains.annotations.NotNull;
 //? >=1.21.4 {
-/*import java.lang.reflect.Field;
+import java.lang.reflect.Field;
 import net.minecraft.client.render.entity.state.ArmedEntityRenderState;
 import net.minecraft.client.render.item.ItemRenderState;
-*///?} else if >=1.21.3 {
-import net.minecraft.client.render.model.BakedModel;
+//?} else if >=1.21.3 {
+/*import net.minecraft.client.render.model.BakedModel;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.item.ItemStack;
-//?}
+*///?}
 //? >=1.21.3 {
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.render.item.ItemRenderer;
@@ -42,7 +42,7 @@ public class HeldItemFeatureRenderer<S extends LivingEntityRenderState, M extend
     //? <1.21.3 {
     /*private final HeldItemRenderer itemRenderer;
     *///?} else {
-    @SuppressWarnings({"FieldCanBeLocal", "unused", "RedundantSupression"})
+    @SuppressWarnings({"FieldCanBeLocal", "unused", "RedundantSuppression"})
     private final ItemRenderer itemRenderer;
      //?}
     private final Arm arm;
@@ -71,7 +71,7 @@ public class HeldItemFeatureRenderer<S extends LivingEntityRenderState, M extend
     @Override
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, S state, float f, float g) {
         //? >=1.21.4 {
-        /*ArmedEntityRenderState armedState = (ArmedEntityRenderState) state;
+        ArmedEntityRenderState armedState = (ArmedEntityRenderState) state;
         try {
             Field transformationModeField = ItemRenderState.class.getDeclaredField("modelTransformationMode");
             transformationModeField.setAccessible(true);
@@ -79,10 +79,10 @@ public class HeldItemFeatureRenderer<S extends LivingEntityRenderState, M extend
             transformationModeField.set(armedState.rightHandItemState, this.transformationMode);
             this.renderItem(arm == Arm.LEFT ? armedState.leftHandItemState : ((ArmedEntityRenderState) state).rightHandItemState, matrixStack, vertexConsumerProvider, i);
         } catch (ReflectiveOperationException ignored) {}
-        *///?} else if >=1.21.3 {
-        this.renderItem(arm == Arm.LEFT ? state.leftHandItemModel : state.rightHandItemModel,
+        //?} else if >=1.21.3 {
+        /*this.renderItem(arm == Arm.LEFT ? state.leftHandItemModel : state.rightHandItemModel,
                 arm == Arm.LEFT ? state.leftHandStack : state.rightHandStack, matrixStack, vertexConsumerProvider, i);
-        //?} else {
+        *///?} else {
         /*this.renderItem(arm == Arm.LEFT ? state.leftHandItemModel : state.rightHandItemModel,
                 arm == Arm.LEFT ? state.leftHandStack : state.rightHandStack, matrixStack, vertexConsumerProvider, i);
         *///?}
@@ -90,12 +90,12 @@ public class HeldItemFeatureRenderer<S extends LivingEntityRenderState, M extend
     //?}
 
     //? >=1.21.4 {
-    /*protected void renderItem(ItemRenderState itemState, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+    protected void renderItem(ItemRenderState itemState, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         if (itemState.isEmpty()) return;
-    *///?} else if >=1.21.3 {
-    protected void renderItem(@Nullable BakedModel model, ItemStack stack, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+    //?} else if >=1.21.3 {
+    /*protected void renderItem(@Nullable BakedModel model, ItemStack stack, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         if (model == null || stack.isEmpty()) return;
-    //?} else {
+    *///?} else {
     /*protected void renderItem(ItemStack stack, LivingEntity entity, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         if (stack.isEmpty()) return;
     *///?}
@@ -104,11 +104,11 @@ public class HeldItemFeatureRenderer<S extends LivingEntityRenderState, M extend
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90.0f));
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f));
         //? >=1.21.4 {
-        /*itemState.render(matrices, vertexConsumers, light, OverlayTexture.DEFAULT_UV);
-        *///?} else if >=1.21.3 {
-        this.itemRenderer.renderItem(stack, this.transformationMode, false,
+        itemState.render(matrices, vertexConsumers, light, OverlayTexture.DEFAULT_UV);
+        //?} else if >=1.21.3 {
+        /*this.itemRenderer.renderItem(stack, this.transformationMode, false,
                 matrices, vertexConsumers, light, OverlayTexture.DEFAULT_UV, model);
-        //?} else {
+        *///?} else {
         /*this.itemRenderer.renderItem(entity, stack, this.transformationMode, false,
                 matrices, vertexConsumers, light);
         *///?}
