@@ -35,9 +35,21 @@
   "modelshifter.text.made_by": "Model gemaakt door %s",
   "modelshifter.text.no_model_active": "Geen model actief",
   "modelshifter.text.model_info": "%s nu actief",
+  "modelshifter.text.model_feature.held_item_right": "Rechterhand item",
+  "modelshifter.text.model_feature.held_item_right_render_ground": "Rechterhand item",
+  "modelshifter.text.model_feature.held_item_left": "Linkerhand item",
+  "modelshifter.text.model_feature.held_item_left_render_ground": "Linkerhand item",
+  "modelshifter.text.model_feature.elytra": "Elytra",
+  "modelshifter.text.model_feature.cape": "Omhang",
+  "modelshifter.text.model_feature.shoulder_parrot": "Zittende papegaaien",
+  "modelshifter.text.model_feature.trident_riptide": "Zuigeffect",
   "modelshifter.text.enter_player_name": "Voer de naam van een speler in...",
   "modelshifter.text.loading": "Laden...",
   "modelshifter.text.no_players": "Nog geen spelers",
   "modelshifter.error.player.not_found": "Speler kan niet gevonden worden!",
-  "modelshifter.error.player.other": "Fout, probeer het later opnieuw!"
+  "modelshifter.error.player.other": "Fout, probeer het later opnieuw!",
+
+  "modelshifter.command.model.success": "Het model is gewijzigd naar %s",
+  "modelshifter.command.model.success.disabled": "Het model is uitgeschakeld",
+  "modelshifter.command.model.error.not_found": "Model met ID %s kon niet worden gevonden"
 }

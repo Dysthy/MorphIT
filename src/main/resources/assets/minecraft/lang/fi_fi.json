@@ -35,9 +35,21 @@
   "modelshifter.text.made_by": "Malli luotu käyttäjän %s toimesta",
   "modelshifter.text.no_model_active": "Ei aktiivista mallia",
   "modelshifter.text.model_info": "Käytössä malli %s",
+  "modelshifter.text.model_feature.held_item_right": "Oikean käden tuote",
+  "modelshifter.text.model_feature.held_item_right_render_ground": "Oikean käden tuote",
+  "modelshifter.text.model_feature.held_item_left": "Vasemman käden tuote",
+  "modelshifter.text.model_feature.held_item_left_render_ground": "Vasemman käden tuote",
+  "modelshifter.text.model_feature.elytra": "Elytra",
+  "modelshifter.text.model_feature.cape": "Viitta",
+  "modelshifter.text.model_feature.shoulder_parrot": "Istuvat papukaijat",
+  "modelshifter.text.model_feature.trident_riptide": "Riptide vaikutus",
   "modelshifter.text.enter_player_name": "Syötä pelaajan nimi…",
   "modelshifter.text.loading": "Ladataan...",
   "modelshifter.text.no_players": "Ei pelaajia vielä",
   "modelshifter.error.player.not_found": "Pelaajaa ei löytynyt!",
-  "modelshifter.error.player.other": "Virhe, yritä myöhemmin uudelleen!"
+  "modelshifter.error.player.other": "Virhe, yritä myöhemmin uudelleen!",
+
+  "modelshifter.command.model.success": "Malliksi on vaihdettu %s",
+  "modelshifter.command.model.success.disabled": "Malli on poistettu käytöstä",
+  "modelshifter.command.model.error.not_found": "Mallia, jonka tunnus on %s, ei löytynyt"
 }

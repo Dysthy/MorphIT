@@ -35,9 +35,21 @@
   "modelshifter.text.made_by": "Model stworzony przez %s",
   "modelshifter.text.no_model_active": "Żaden model nie jest aktywny",
   "modelshifter.text.model_info": "Korzystanie z modelu %s",
+  "modelshifter.text.model_feature.held_item_right": "Element po prawej stronie",
+  "modelshifter.text.model_feature.held_item_right_render_ground": "Element po prawej stronie",
+  "modelshifter.text.model_feature.held_item_left": "Przedmiot po lewej stronie",
+  "modelshifter.text.model_feature.held_item_left_render_ground": "Przedmiot po lewej stronie",
+  "modelshifter.text.model_feature.elytra": "Elytra",
+  "modelshifter.text.model_feature.cape": "Płaszcz",
+  "modelshifter.text.model_feature.shoulder_parrot": "Siedzące papugi",
+  "modelshifter.text.model_feature.trident_riptide": "Efekt ssania",
   "modelshifter.text.enter_player_name": "Wpisz nazwe gracza...",
   "modelshifter.text.loading": "Ładowanie...",
   "modelshifter.text.no_players": "Nie ma jeszcze grachy",
   "modelshifter.error.player.not_found": "Nie znaleziono gracza!",
-  "modelshifter.error.player.other": "Bład, spróbuj ponownie pózniej!"
+  "modelshifter.error.player.other": "Bład, spróbuj ponownie pózniej!",
+
+  "modelshifter.command.model.success": "Model został zmieniony na %s",
+  "modelshifter.command.model.success.disabled": "Model został wyłączony",
+  "modelshifter.command.model.error.not_found": "Nie znaleziono modelu o identyfikatorze %s"
 }

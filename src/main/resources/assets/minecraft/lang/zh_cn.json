@@ -35,9 +35,21 @@
   "modelshifter.text.made_by": "模型作者 %s",
   "modelshifter.text.no_model_active": "无可用模型",
   "modelshifter.text.model_info": "正使用模型 %s",
+  "modelshifter.text.model_feature.held_item_right": "右手物品",
+  "modelshifter.text.model_feature.held_item_right_render_ground": "右手物品",
+  "modelshifter.text.model_feature.held_item_left": "左手物品",
+  "modelshifter.text.model_feature.held_item_left_render_ground": "左手物品",
+  "modelshifter.text.model_feature.elytra": "鞘翅",
+  "modelshifter.text.model_feature.cape": "披风",
+  "modelshifter.text.model_feature.shoulder_parrot": "坐着的鹦鹉",
+  "modelshifter.text.model_feature.trident_riptide": "激流效应",
   "modelshifter.text.enter_player_name": "输入玩家名称...",
   "modelshifter.text.loading": "加载中",
   "modelshifter.text.no_players": "暂无玩家",
   "modelshifter.error.player.not_found": "无法找到当前玩家!",
-  "modelshifter.error.player.other": "发生错误， 请稍后再尝试!"
+  "modelshifter.error.player.other": "发生错误， 请稍后再尝试!",
+
+  "modelshifter.command.model.success": "模型已更改为 %s",
+  "modelshifter.command.model.success.disabled": "该模型已被禁用",
+  "modelshifter.command.model.error.not_found": "无法找到 ID 为 %s 的模型"
 }

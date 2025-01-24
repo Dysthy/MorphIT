@@ -35,9 +35,21 @@
   "modelshifter.text.made_by": "Model vytvořil %s",
   "modelshifter.text.no_model_active": "Žádný model není aktivní",
   "modelshifter.text.model_info": "Používání modelu: %s",
+  "modelshifter.text.model_feature.held_item_right": "Položka pravé ruky",
+  "modelshifter.text.model_feature.held_item_right_render_ground": "Položka pravé ruky",
+  "modelshifter.text.model_feature.held_item_left": "Položka levé ruky",
+  "modelshifter.text.model_feature.held_item_left_render_ground": "Položka levé ruky",
+  "modelshifter.text.model_feature.elytra": "Elytra",
+  "modelshifter.text.model_feature.cape": "Pelerína",
+  "modelshifter.text.model_feature.shoulder_parrot": "Sedící papoušci",
+  "modelshifter.text.model_feature.trident_riptide": "Riptidový efekt",
   "modelshifter.text.enter_player_name": "Zadejte jméno hráče...",
   "modelshifter.text.loading": "Načítání...",
   "modelshifter.text.no_players": "Zatím žádní hráči",
   "modelshifter.error.player.not_found": "Nelze najít hráče!",
-  "modelshifter.error.player.other": "Chyba, prosím zkuste to znovu později!"
+  "modelshifter.error.player.other": "Chyba, prosím zkuste to znovu později!",
+
+  "modelshifter.command.model.success": "Model byl změněn na %s",
+  "modelshifter.command.model.success.disabled": "Model byl deaktivován",
+  "modelshifter.command.model.error.not_found": "Model s ID %s nebyl nalezen"
 }

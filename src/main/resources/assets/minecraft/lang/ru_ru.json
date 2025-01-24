@@ -35,9 +35,21 @@
   "modelshifter.text.made_by": "Модель созданая %s",
   "modelshifter.text.no_model_active": "Нету активной модели",
   "modelshifter.text.model_info": "Использовать модель %s",
+  "modelshifter.text.model_feature.held_item_right": "Предмет правой руки",
+  "modelshifter.text.model_feature.held_item_right_render_ground": "Предмет правой руки",
+  "modelshifter.text.model_feature.held_item_left": "Левый предмет",
+  "modelshifter.text.model_feature.held_item_left_render_ground": "Левый предмет",
+  "modelshifter.text.model_feature.elytra": "Elytra",
+  "modelshifter.text.model_feature.cape": "Плащ",
+  "modelshifter.text.model_feature.shoulder_parrot": "Сидящие попугаи",
+  "modelshifter.text.model_feature.trident_riptide": "Эффект риптида",
   "modelshifter.text.enter_player_name": "Введите имя игрока... ",
   "modelshifter.text.loading": "Загрузка...",
   "modelshifter.text.no_players": "На данный момент нету игрока",
   "modelshifter.error.player.not_found": "Игрок не найден",
-  "modelshifter.error.player.other": "Ошибка, попробуйте позже!"
+  "modelshifter.error.player.other": "Ошибка, попробуйте позже!",
+
+  "modelshifter.command.model.success": "Модель была изменена на %s",
+  "modelshifter.command.model.success.disabled": "Модель была отключена.",
+  "modelshifter.command.model.error.not_found": "Модель с идентификатором %s не найдена"
 }

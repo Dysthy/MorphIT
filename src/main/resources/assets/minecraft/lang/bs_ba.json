@@ -35,9 +35,21 @@
   "modelshifter.text.made_by": "Model kreiran od strane %s",
   "modelshifter.text.no_model_active": "Nijedan model nije aktiviran",
   "modelshifter.text.model_info": "Koristite model: %s",
+  "modelshifter.text.model_feature.held_item_right": "Desna ruka",
+  "modelshifter.text.model_feature.held_item_right_render_ground": "Desna ruka",
+  "modelshifter.text.model_feature.held_item_left": "Lijeva ruka",
+  "modelshifter.text.model_feature.held_item_left_render_ground": "Lijeva ruka",
+  "modelshifter.text.model_feature.elytra": "Elytra",
+  "modelshifter.text.model_feature.cape": "Cape",
+  "modelshifter.text.model_feature.shoulder_parrot": "Sedeći papagaji",
+  "modelshifter.text.model_feature.trident_riptide": "Efekat usisavanja",
   "modelshifter.text.enter_player_name": "Upišite ime igrača...",
   "modelshifter.text.loading": "Očitavanje...",
   "modelshifter.text.no_players": "Trenutno nema igrača ",
   "modelshifter.error.player.not_found": "Igrač ne može biti pronađen!",
-  "modelshifter.error.player.other": "Greška, pokušajte ponovo kasnije"
+  "modelshifter.error.player.other": "Greška, pokušajte ponovo kasnije",
+
+  "modelshifter.command.model.success": "Model je promijenjen u %s",
+  "modelshifter.command.model.success.disabled": "Model je onemogućen",
+  "modelshifter.command.model.error.not_found": "Model sa ID-om %s nije pronađen"
 }

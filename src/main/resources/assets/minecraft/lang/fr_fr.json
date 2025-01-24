@@ -35,9 +35,21 @@
   "modelshifter.text.made_by": "Modèle créé par %s",
   "modelshifter.text.no_model_active": "Pas de modèle actif",
   "modelshifter.text.model_info": "Utilise le modèle %s",
+  "modelshifter.text.model_feature.held_item_right": "Article de droite",
+  "modelshifter.text.model_feature.held_item_right_render_ground": "Article de droite",
+  "modelshifter.text.model_feature.held_item_left": "Article de gauche",
+  "modelshifter.text.model_feature.held_item_left_render_ground": "Article de gauche",
+  "modelshifter.text.model_feature.elytra": "Elytra",
+  "modelshifter.text.model_feature.cape": "Manteau",
+  "modelshifter.text.model_feature.shoulder_parrot": "Perroquets assis",
+  "modelshifter.text.model_feature.trident_riptide": "Effet de marée",
   "modelshifter.text.enter_player_name": "Entrez le nom d’un joueur... ",
   "modelshifter.text.loading": "Chargement...",
   "modelshifter.text.no_players": "Aucun joueur pour le moment",
   "modelshifter.error.player.not_found": "Joueur introuvable",
-  "modelshifter.error.player.other": "Erreur, veillez essayer plus tard!"
+  "modelshifter.error.player.other": "Erreur, veillez essayer plus tard!",
+
+  "modelshifter.command.model.success": "Le modèle a été changé en %s",
+  "modelshifter.command.model.success.disabled": "Le modèle a été désactivé",
+  "modelshifter.command.model.error.not_found": "Le modèle avec l'ID %s n'a pas pu être trouvé"
 }
