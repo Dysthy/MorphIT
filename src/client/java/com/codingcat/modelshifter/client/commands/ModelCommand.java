@@ -17,8 +17,8 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.arg
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
 public class ModelCommand implements ModCommand<FabricClientCommandSource> {
-    private static final Function<Text, Text> SUCCESS_MODEL_CHANGED = model -> Text.translatable("modelshifter.commmand.model.success", model);
-    private static final Text SUCCESS_MODEL_DISABLED = Text.translatable("modelshifter.commmand.model.success.disabled");
+    private static final Function<Text, Text> SUCCESS_MODEL_CHANGED = model -> Text.translatable("modelshifter.command.model.success", model);
+    private static final Text SUCCESS_MODEL_DISABLED = Text.translatable("modelshifter.command.model.success.disabled");
 
     @Override
     public void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {

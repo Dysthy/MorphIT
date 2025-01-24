@@ -41,7 +41,7 @@
   "modelshifter.error.player.not_found": "Spieler nicht gefunden!",
   "modelshifter.error.player.other": "Fehler aufgetreten, bitte warte etwas.",
 
-  "modelshifter.commmand.model.success": "Das Modell wurde auf %s geändert",
-  "modelshifter.commmand.model.success.disabled": "Das Modell wurde deaktiviert",
-  "modelshifter.commmand.model.error.not_found": "Konnte kein Modell mit der ID %s finden"
+  "modelshifter.command.model.success": "Das Modell wurde auf %s geändert",
+  "modelshifter.command.model.success.disabled": "Das Modell wurde deaktiviert",
+  "modelshifter.command.model.error.not_found": "Konnte kein Modell mit der ID %s finden"
 }
