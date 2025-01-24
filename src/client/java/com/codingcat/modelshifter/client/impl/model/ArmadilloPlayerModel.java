@@ -17,7 +17,7 @@ import java.util.Set;
 public class ArmadilloPlayerModel extends PlayerModel {
     public ArmadilloPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "armadillo_player"), Set.of(Creators.BUG),
-                new ModelDimensions(0.8f, 0.8f, -1.2f));
+                new ModelDimensions(0.8f, 0.8f, -1.2f, false));
     }
 
     @Override

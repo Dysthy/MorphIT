@@ -17,7 +17,7 @@ import java.util.Set;
 public class FrogPlayerModel extends PlayerModel {
     public FrogPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "frog_player"), Set.of(Creators.BUG),
-                new ModelDimensions(0.5f, 0.5f, -1.2f));
+                new ModelDimensions(0.5f, 0.5f, -1.2f, false));
     }
 
     @Override

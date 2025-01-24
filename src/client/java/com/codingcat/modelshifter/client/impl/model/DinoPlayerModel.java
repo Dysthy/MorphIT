@@ -16,7 +16,7 @@ import java.util.Set;
 public class DinoPlayerModel extends PlayerModel {
     public DinoPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "dino_player"), Set.of(Creators.DOMPLANTO),
-                new ModelDimensions(2f, 1.8f));
+                new ModelDimensions(2f, 1.8f, false));
     }
 
     @Override

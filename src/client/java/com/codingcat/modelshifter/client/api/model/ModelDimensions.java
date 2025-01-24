@@ -3,9 +3,10 @@ package com.codingcat.modelshifter.client.api.model;
 public record ModelDimensions(
         float width,
         float height,
-        float labelOffset
+        float labelOffset,
+        boolean isStandingModel
 ) {
-    public ModelDimensions(float width, float height) {
-        this(width, height, 0f);
+    public ModelDimensions(float width, float height, boolean isStandingModel) {
+        this(width, height, 0f, isStandingModel);
     }
 }

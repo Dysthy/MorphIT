@@ -20,7 +20,7 @@ import java.util.Set;
 public class WitherPlayerModel extends PlayerModel {
     public WitherPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "wither_player"), Set.of(Creators.BUG),
-                new ModelDimensions(1.5f, 1.8f));
+                new ModelDimensions(1.5f, 1.8f, true));
     }
 
     @Override

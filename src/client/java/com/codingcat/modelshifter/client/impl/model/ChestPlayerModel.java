@@ -16,7 +16,7 @@ import java.util.Set;
 public class ChestPlayerModel extends PlayerModel {
     public ChestPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "chest_player"), Set.of(Creators.BUG),
-                new ModelDimensions(1f, 1f, -0.8f));
+                new ModelDimensions(1f, 1f, -0.8f,true));
     }
 
     @Override

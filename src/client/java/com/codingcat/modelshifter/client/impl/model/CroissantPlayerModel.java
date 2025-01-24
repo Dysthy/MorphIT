@@ -18,7 +18,7 @@ import java.util.Set;
 public class CroissantPlayerModel extends PlayerModel {
     public CroissantPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "croissant_player"), Set.of(Creators.BUG),
-                new ModelDimensions(0.6f, 1.5f, -0.5f));
+                new ModelDimensions(0.6f, 1.5f, -0.5f, true));
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.Set;
 public class BabyPlayerModel extends PlayerModel {
     public BabyPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "baby_player"), Set.of(Creators.DOMPLANTO),
-                new ModelDimensions(0.5f, 1.2f, -0.6f));
+                new ModelDimensions(0.5f, 1.2f, -0.6f, true));
     }
 
     @Override

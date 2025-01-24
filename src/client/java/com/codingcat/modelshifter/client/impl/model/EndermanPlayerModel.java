@@ -16,7 +16,7 @@ import java.util.Set;
 public class EndermanPlayerModel extends PlayerModel {
     public EndermanPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "enderman_player"), Set.of(Creators.BUG),
-                new ModelDimensions(0.7f, 3.2f, 1.3f));
+                new ModelDimensions(0.7f, 3.2f, 1.3f, true));
     }
 
     @Override

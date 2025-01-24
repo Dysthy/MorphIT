@@ -17,7 +17,7 @@ import java.util.Set;
 public class CrabPlayerModel extends PlayerModel {
     public CrabPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "crab_player"), Set.of(Creators.BUG),
-                new ModelDimensions(0.7f, 0.7f, -1.2f));
+                new ModelDimensions(0.7f, 0.7f, -1.2f, false));
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.Set;
 public class FlyPlayerModel extends PlayerModel {
     public FlyPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "fly_player"), Set.of(Creators.BUG),
-                new ModelDimensions(0.5f, 0.7f));
+                new ModelDimensions(0.5f, 0.7f, false));
     }
 
     @Override

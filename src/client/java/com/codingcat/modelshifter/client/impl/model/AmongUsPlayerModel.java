@@ -14,7 +14,7 @@ import java.util.Set;
 public class AmongUsPlayerModel extends PlayerModel {
     public AmongUsPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "among_us_player"), Set.of(Creators.EGBERT),
-                new ModelDimensions(0.7f, 1.6f, -0.4f));
+                new ModelDimensions(0.7f, 1.6f, -0.4f, true));
     }
 
     @Override

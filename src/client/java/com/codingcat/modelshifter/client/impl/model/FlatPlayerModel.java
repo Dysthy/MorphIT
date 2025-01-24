@@ -16,7 +16,7 @@ import java.util.Set;
 public class FlatPlayerModel extends PlayerModel {
     public FlatPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "2d_player"), Set.of(Creators.BUG),
-                new ModelDimensions(0.6f, 2f));
+                new ModelDimensions(0.6f, 2f, true));
     }
 
     @Override

@@ -18,7 +18,7 @@ import java.util.Set;
 public class SquarePlayerModel extends PlayerModel {
     public SquarePlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "square_player"), Set.of(Creators.BUG),
-                new ModelDimensions(1f, 1f, -0.8f));
+                new ModelDimensions(1f, 1f, -0.8f, true));
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.Set;
 public class CreakingPlayerModel extends PlayerModel {
     public CreakingPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "creaking_player"), Set.of(Creators.BUG),
-                new ModelDimensions(0.8f, 2.8f, 0.9f));
+                new ModelDimensions(0.8f, 2.8f, 0.9f, true));
     }
 
     @Override
