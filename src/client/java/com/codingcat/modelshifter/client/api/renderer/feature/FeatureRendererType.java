@@ -101,8 +101,8 @@ public enum FeatureRendererType {
         return ctx.getItemRenderer();
     }
     *///?} else {
-    /*
-     private static HeldItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
+    
+     /*private static HeldItemRenderer getHeldItemRenderer(EntityRendererFactory.Context ctx) {
         return ctx.getHeldItemRenderer();
     }
     *///?}

@@ -5,6 +5,7 @@ import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModel;
 
+import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 //? >=1.21.4 {
 import java.lang.reflect.Field;
