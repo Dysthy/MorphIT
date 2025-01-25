@@ -75,6 +75,7 @@ public class Util {
     public static <T extends PlayerEntity, S extends EntityRenderState> EntityRenderer<T, S>
     //?}
     getNormalRendererReflect(AbstractClientPlayerEntity playerEntity, EntityRenderDispatcher dispatcher) throws ReflectiveOperationException {
+        //noinspection ExtractMethodRecommender
         Field modelRenderersField = dispatcher.getClass().getDeclaredField("modelRenderers");
         modelRenderersField.setAccessible(true);
         @SuppressWarnings("unchecked")
