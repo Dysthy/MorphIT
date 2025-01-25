@@ -24,10 +24,32 @@ public interface EntityRenderStateWrapper {
 
     float getHeight();
 
+    float leaningPitch();
+
+    float pitch();
+
+    boolean isGliding();
+
+    boolean usingRiptide();
+
+    boolean touchingWater();
+
+    boolean isSwimming();
+
+    boolean applyFlyingRotation();
+
+    float flyingRotation();
+
+    float getGlidingProgress();
+
     Identifier getSkinTexture();
 
     static EntityRenderStateWrapper of(Entity entity) {
-        return new NormalEntityWrapper(entity);
+        return new NormalEntityWrapper(entity, -1);
+    }
+
+    static EntityRenderStateWrapper of(Entity entity, float tickDelta) {
+        return new NormalEntityWrapper(entity, tickDelta);
     }
 
     //? >=1.21.3 {

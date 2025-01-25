@@ -57,6 +57,57 @@ public class StateEntityWrapper
     }
 
     @Override
+    public float leaningPitch() {
+        return verifyPlayerState().leaningPitch;
+    }
+
+    @Override
+    public float pitch() {
+        return verifyPlayerState().pitch;
+    }
+
+    @Override
+    public boolean isGliding() {
+        return verifyPlayerState().isGliding;
+    }
+
+    @Override
+    public boolean usingRiptide() {
+        return verifyPlayerState().usingRiptide;
+    }
+
+    @Override
+    public boolean touchingWater() {
+        return verifyPlayerState().touchingWater;
+    }
+
+    @Override
+    public boolean isSwimming() {
+        return verifyPlayerState().isSwimming;
+    }
+
+    @Override
+    public boolean applyFlyingRotation() {
+        return verifyPlayerState().applyFlyingRotation;
+    }
+
+    @Override
+    public float flyingRotation() {
+        return verifyPlayerState().flyingRotation;
+    }
+
+    @Override
+    public float getGlidingProgress() {
+        return verifyPlayerState().getGlidingProgress();
+    }
+
+    private PlayerEntityRenderState verifyPlayerState() {
+        if (!(this.state instanceof PlayerEntityRenderState playerState))
+            throw new IllegalArgumentException("Player state method called on wrapper of non-player state");
+        return playerState;
+    }
+
+    @Override
     @Nullable
     public Identifier getSkinTexture() {
         if (!(state instanceof PlayerEntityRenderState playerState)) return null;
