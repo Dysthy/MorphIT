@@ -16,7 +16,7 @@ import java.util.Set;
 public class GhastPlayerModel extends PlayerModel {
     public GhastPlayerModel() {
         super(Identifier.of(ModelShifterClient.MOD_ID, "ghast_player"), Set.of(Creators.BUG),
-                new ModelDimensions(1.3f, 1.7f, 0.2f, true));
+                new ModelDimensions(1.3f, 1.7f, 0.2f, false));
     }
 
     @Override
