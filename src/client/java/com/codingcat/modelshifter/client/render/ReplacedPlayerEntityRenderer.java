@@ -123,7 +123,11 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
         //? <=1.20.6 {
         /*float partialTick = this.currentPartialTick;
          *///?}
+        //? >=1.21.3 {
         EntityRenderStateWrapper state = EntityRenderStateWrapper.of(this.currentState);
+        //?} else {
+        /*EntityRenderStateWrapper state = EntityRenderStateWrapper.of(this.currentEntity, partialTick);
+        *///?}
         super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick, nativeScale);
         this.setupTransforms(state, poseStack);
         for (Map.Entry<String, ActiveFeatureRenderer> entry : this.featureRenderersByBone.entrySet()) {

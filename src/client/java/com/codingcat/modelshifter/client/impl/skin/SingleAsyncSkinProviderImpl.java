@@ -7,7 +7,7 @@ import com.mojang.authlib.GameProfile;
  *///?}
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.DefaultSkinHelper;
-//? >=1.21.3 {
+//? >1.20.1 {
 import net.minecraft.client.util.SkinTextures;
 //?}
 import net.minecraft.util.Identifier;

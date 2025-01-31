@@ -50,9 +50,7 @@ public class Util {
         //? >=1.21.3 {
         context.drawGuiTexture(RenderLayer::getGuiTextured, texture, x, y, width, height, color);
         //?} else if >1.20.1 {
-        /*
-
-        context.setShaderColor(r, g, b, a);
+        /*context.setShaderColor(r, g, b, a);
         context.drawGuiTexture(texture, x, y, width, height);
         context.setShaderColor(prevColor[0], prevColor[1], prevColor[2], prevColor[3]);
         *///?} else {

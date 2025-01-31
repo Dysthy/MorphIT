@@ -64,7 +64,11 @@ public class NormalEntityWrapper implements EntityRenderStateWrapper {
 
     @Override
     public boolean isGliding() {
+        //? >1.21.1 {
         return verifyPlayer().isGliding();
+        //?} else {
+        /*return verifyPlayer().isFallFlying();
+        *///?}
     }
 
     @Override
@@ -100,7 +104,11 @@ public class NormalEntityWrapper implements EntityRenderStateWrapper {
 
     @Override
     public float getGlidingProgress() {
+        //? >1.21.1 {
         float glidingTicks = verifyPlayer().getGlidingTicks() + tickDelta;
+        //?} else {
+        /*float glidingTicks = verifyPlayer().getFallFlyingTicks() + tickDelta;
+        *///?}
         return MathHelper.clamp(glidingTicks * glidingTicks / 100.0f, 0.0f, 1.0f);
     }
 
