@@ -157,8 +157,9 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
         float leaningPitch = state.leaningPitch();
         float pitch = state.pitch();
         if (state.isGliding()) {
+            float rotation = playerModel.getDimensions().isStandingModel() ? -90f : 0f;
             if (!state.usingRiptide())
-                poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(state.getGlidingProgress() * (-90.0f - pitch)));
+                poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(state.getGlidingProgress() * (rotation - pitch)));
             if (state.applyFlyingRotation())
                 poseStack.multiply(RotationAxis.POSITIVE_Y.rotation(state.flyingRotation()));
         } else if (leaningPitch > 0.0f) {
