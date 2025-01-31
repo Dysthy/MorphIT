@@ -49,9 +49,6 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
     //? >=1.21.3 {
     private PlayerEntityRenderState currentState;
     //?}
-    //? <=1.20.6 {
-    /*private float currentPartialTick;
-     *///?}
     private VertexConsumerProvider currentBufferSource;
     private int currentPackedLight;
 
@@ -95,9 +92,6 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
         //? <1.21.3 {
         /*this.currentEntity = e;
          *///?}
-        //? <=1.20.6 {
-        /*this.currentPartialTick = partialTick;
-         *///?}
         this.currentBufferSource = bufferSource;
         this.currentPackedLight = packedLight;
         RenderLayer type = getRenderLayer(EntityRenderStateWrapper.of(e), bufferSource, partialTick);
@@ -115,20 +109,21 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
     // which is being called at that location in the actuallyRender() method of the GeoReplacedEntityRenderer instance. Since certain values (render state (>=1.21.3), buffer source, packet light) are
     // not directly available as parameters in this method, they have to be stored in helper variables to be accessed from here.
     @Override
-    protected void applyRotations(ReplacedPlayerEntity animatable, MatrixStack poseStack, float ageInTicks, float rotationYaw,
+    protected void applyRotations(ReplacedPlayerEntity animatable, MatrixStack poseStack, float ageInTicks, float rotationYaw, float partialTick
                                   //? >1.20.6 {
-                                  float partialTick,
+            , float nativeScale
                                   //?}
-                                  float nativeScale) {
-        //? <=1.20.6 {
-        /*float partialTick = this.currentPartialTick;
-         *///?}
+    ) {
         //? >=1.21.3 {
         EntityRenderStateWrapper state = EntityRenderStateWrapper.of(this.currentState);
         //?} else {
         /*EntityRenderStateWrapper state = EntityRenderStateWrapper.of(this.currentEntity, partialTick);
-        *///?}
+         *///?}
+        //? >1.20.6 {
         super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick, nativeScale);
+        //?} else {
+        /*super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick);
+         *///?}
         this.setupTransforms(state, poseStack);
         for (Map.Entry<String, ActiveFeatureRenderer> entry : this.featureRenderersByBone.entrySet()) {
             Optional<GeoBone> bone = model.getBone(entry.getKey());
@@ -151,7 +146,7 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
 
         // Prevents the currentLayer of the VertexConsumerProvider from changing to a layer used by the feature renderers
         //? <=1.20.6 {
-        /*RenderLayer layer = getRenderLayer(state, currentBufferSource, currentPartialTick);
+        /*RenderLayer layer = getRenderLayer(state, currentBufferSource, partialTick);
         if (layer != null)
             this.currentBufferSource.getBuffer(layer);
         *///?}

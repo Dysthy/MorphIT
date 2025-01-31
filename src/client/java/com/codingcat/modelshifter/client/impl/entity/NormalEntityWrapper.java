@@ -106,8 +106,10 @@ public class NormalEntityWrapper implements EntityRenderStateWrapper {
     public float getGlidingProgress() {
         //? >1.21.1 {
         float glidingTicks = verifyPlayer().getGlidingTicks() + tickDelta;
-        //?} else {
+        //?} else if >1.20.4 {
         /*float glidingTicks = verifyPlayer().getFallFlyingTicks() + tickDelta;
+        *///?} else {
+        /*float glidingTicks = verifyPlayer().getRoll() + tickDelta;
         *///?}
         return MathHelper.clamp(glidingTicks * glidingTicks / 100.0f, 0.0f, 1.0f);
     }
