@@ -102,4 +102,12 @@ public class Util {
         /*modelRenderers.get("default");
          *///?}
     }
+
+    public static Class<?> getCallingClass(int offset) {
+        try {
+            return Class.forName(Thread.currentThread().getStackTrace()[offset + 3].getClassName());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Failed to identify calling class", e);
+        }
+    }
 }

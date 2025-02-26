@@ -53,9 +53,9 @@ public abstract class AbstractCustomGameOptionsScreen extends GameOptionsScreen 
     protected void initTabNavigation() {
         super.initTabNavigation();
         //? >1.20.4 {
-        /^if (this.listWidget != null)
+        if (this.listWidget != null)
             this.listWidget.position(this.width, this.layout);
-        ^///?}
+        //?}
     }
     *///?}
 

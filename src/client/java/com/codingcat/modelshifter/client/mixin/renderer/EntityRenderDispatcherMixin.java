@@ -5,6 +5,7 @@ import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.ModelDimensions;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.render.ReplacedPlayerEntityRenderer;
+import com.codingcat.modelshifter.client.util.Util;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -12,6 +13,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 //? >=1.21.3 {
 import net.minecraft.client.render.entity.state.EntityRenderState;
 //?}
+import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.resource.ResourceManager;
@@ -38,6 +40,7 @@ public class EntityRenderDispatcherMixin {
             at = @At("HEAD"),
             cancellable = true)
     public void injectGetRenderer(Entity entity, CallbackInfoReturnable<ReplacedPlayerEntityRenderer> cir) {
+        if (Util.getCallingClass(1) == HeldItemRenderer.class) return;
         EntityRenderStateWrapper state = EntityRenderStateWrapper.of(entity);
         if (!state.isPlayer() || !ModelShifterClient.state.isRendererEnabled(Objects.requireNonNull(state.getPlayer()))) return;
 

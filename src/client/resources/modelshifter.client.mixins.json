@@ -7,7 +7,6 @@
     "hud.DebugHudMixin",
     "renderer.EntityRenderDispatcherMixin",
     "renderer.EntityRendererMixin",
-    "renderer.HeldItemRendererMixin",
     "screen.InventoryScreenMixin",
     "screen.OptionsScreenMixin"
   ],
