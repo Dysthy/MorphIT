@@ -61,7 +61,7 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
         this.simulatedModel = this.createModel();
         this.featureRenderersByBone = new HashMap<>();
         this.featureRenderers = new HashSet<>();
-        this.addRenderLayer(new SillyHatRenderLayer(this));
+        this.addRenderLayer(new SillyHatRenderLayer(this, this.playerModel));
         this.addFeatures(renderManager);
     }
 

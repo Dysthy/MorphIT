@@ -8,9 +8,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class FeatureRendererStates {
     private final Set<EnabledFeatureRenderer> enabledRenderers;
+    private Consumer<MatrixStack> sillyHatRenderModifier;
 
     public FeatureRendererStates() {
         this.enabledRenderers = new HashSet<>();
@@ -25,26 +27,17 @@ public class FeatureRendererStates {
         return this.add(type, null);
     }
 
-    @Nullable
-    public EnabledFeatureRenderer getFeatureRenderer(FeatureRendererType type) {
-        return this.enabledRenderers.stream()
-                .filter(renderer -> renderer.type().equals(type))
-                .findFirst()
-                .orElse(null);
+    public FeatureRendererStates setSillyHatRenderModifier(@Nullable Consumer<MatrixStack> sillyHatRenderModifier) {
+        this.sillyHatRenderModifier = sillyHatRenderModifier;
+        return this;
     }
 
     public Set<EnabledFeatureRenderer> getEnabledRenderers() {
         return this.enabledRenderers;
     }
 
-    public boolean isRendererEnabled(FeatureRendererType type) {
-        return getFeatureRenderer(type) != null;
-    }
-
-    public void modifyRendering(FeatureRendererType type, EntityRenderStateWrapper renderState, MatrixStack matrixStack) {
-        EnabledFeatureRenderer renderer = getFeatureRenderer(type);
-        if (renderer == null || renderer.renderModifierConsumer() == null) return;
-
-        renderer.renderModifierConsumer().accept(renderState, matrixStack);
+    public void applySillyHatRenderModifier(MatrixStack poseStack) {
+        if (this.sillyHatRenderModifier != null)
+            this.sillyHatRenderModifier.accept(poseStack);
     }
 }

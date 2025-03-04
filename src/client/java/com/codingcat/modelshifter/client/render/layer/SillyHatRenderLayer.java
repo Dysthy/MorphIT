@@ -2,6 +2,7 @@ package com.codingcat.modelshifter.client.render.layer;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
 import com.codingcat.modelshifter.client.api.GeoFileDefaults;
+import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.render.animatable.ReplacedPlayerEntity;
 import com.codingcat.modelshifter.client.render.animatable.SillyHatAnimatable;
 import net.minecraft.client.render.RenderLayer;
@@ -20,8 +21,11 @@ public class SillyHatRenderLayer extends GeoRenderLayer<ReplacedPlayerEntity> {
     private final static Identifier SILLY_HAT_TEXTURE = SILLY_HAT_ID.withPrefixedPath("textures/entity/").withSuffixedPath(".png");
     private final SillyHatAnimatable sillyHatAnimatable = new SillyHatAnimatable();
     private final GeoObjectRenderer<SillyHatAnimatable> renderer;
-    public SillyHatRenderLayer(GeoRenderer<ReplacedPlayerEntity> entityRendererIn) {
+    private final PlayerModel model;
+
+    public SillyHatRenderLayer(GeoRenderer<ReplacedPlayerEntity> entityRendererIn, PlayerModel model) {
         super(entityRendererIn);
+        this.model = model;
         this.renderer = new GeoObjectRenderer<>(new DefaultedEntityGeoModel<>(SILLY_HAT_ID, false));
     }
 
@@ -34,6 +38,7 @@ public class SillyHatRenderLayer extends GeoRenderLayer<ReplacedPlayerEntity> {
         //Undo the model translation from GeoObjectRenderer#preRender
         poseStack.translate(-0.5f, -0.51f, -0.5f);
         poseStack.multiplyPositionMatrix(bone.getModelSpaceMatrix());
+        this.model.getFeatureRendererStates().applySillyHatRenderModifier(poseStack);
         RenderLayer sillyHatRenderType = this.renderer.getRenderType(sillyHatAnimatable, SILLY_HAT_TEXTURE, bufferSource, partialTick);
         this.renderer.render(poseStack, sillyHatAnimatable, bufferSource, sillyHatRenderType, null, packedLight, partialTick);
         poseStack.pop();
