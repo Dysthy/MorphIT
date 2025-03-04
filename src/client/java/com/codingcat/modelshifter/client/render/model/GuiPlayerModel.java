@@ -1,7 +1,7 @@
 package com.codingcat.modelshifter.client.render.model;
 
 import com.codingcat.modelshifter.client.ModelShifterClient;
-import com.codingcat.modelshifter.client.render.entity.ReplacedPlayerEntity;
+import com.codingcat.modelshifter.client.render.animatable.ReplacedPlayerEntity;
 import net.minecraft.util.Identifier;
 //? >=1.21 {
 import software.bernie.geckolib.animation.AnimationState;

@@ -1,6 +1,6 @@
 package com.codingcat.modelshifter.client.render;
 
-import com.codingcat.modelshifter.client.render.entity.ReplacedPlayerEntity;
+import com.codingcat.modelshifter.client.render.animatable.ReplacedPlayerEntity;
 import com.codingcat.modelshifter.client.render.model.GuiPlayerModel;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;

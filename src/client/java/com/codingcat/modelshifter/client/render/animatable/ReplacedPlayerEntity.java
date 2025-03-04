@@ -1,4 +1,4 @@
-package com.codingcat.modelshifter.client.render.entity;
+package com.codingcat.modelshifter.client.render.animatable;
 
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.EntityType;

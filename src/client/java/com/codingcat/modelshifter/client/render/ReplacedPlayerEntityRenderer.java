@@ -5,7 +5,8 @@ import com.codingcat.modelshifter.client.api.entity.EntityRenderStateWrapper;
 import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.api.renderer.feature.EnabledFeatureRenderer;
 import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererType;
-import com.codingcat.modelshifter.client.render.entity.ReplacedPlayerEntity;
+import com.codingcat.modelshifter.client.render.animatable.ReplacedPlayerEntity;
+import com.codingcat.modelshifter.client.render.layer.SillyHatRenderLayer;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
@@ -60,6 +61,7 @@ public class ReplacedPlayerEntityRenderer extends GeoReplacedEntityRenderer<Abst
         this.simulatedModel = this.createModel();
         this.featureRenderersByBone = new HashMap<>();
         this.featureRenderers = new HashSet<>();
+        this.addRenderLayer(new SillyHatRenderLayer(this));
         this.addFeatures(renderManager);
     }
 

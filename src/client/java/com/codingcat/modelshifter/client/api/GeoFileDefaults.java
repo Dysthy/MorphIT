@@ -7,6 +7,7 @@ public class GeoFileDefaults {
     public static final String BONE_ELYTRA_ID = "elytra_position";
     public static final String BONE_CAPE_ID = "cape_position";
     public static final String BONE_PARROT_ID = "parrot_position";
+    public static final String BONE_SILLY_HAT_ID = "hat_position";
 
     // Model animation IDs
     public static final String ANIMATION_IDLE = "misc.idle";
