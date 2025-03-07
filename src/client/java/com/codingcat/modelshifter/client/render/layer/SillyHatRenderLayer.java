@@ -15,6 +15,7 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoObjectRenderer;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
+import software.bernie.geckolib.util.RenderUtil;
 
 public class SillyHatRenderLayer extends GeoRenderLayer<ReplacedPlayerEntity> {
     private final static Identifier SILLY_HAT_ID = Identifier.of(ModelShifterClient.MOD_ID, "the_silly_hat");
@@ -37,7 +38,7 @@ public class SillyHatRenderLayer extends GeoRenderLayer<ReplacedPlayerEntity> {
         poseStack.push();
         //Undo the model translation from GeoObjectRenderer#preRender
         poseStack.translate(-0.5f, -0.51f, -0.5f);
-        poseStack.multiplyPositionMatrix(bone.getModelSpaceMatrix());
+        RenderUtil.translateAndRotateMatrixForBone(poseStack, bone);
         this.model.getFeatureRendererStates().applySillyHatRenderModifier(poseStack);
         RenderLayer sillyHatRenderType = this.renderer.getRenderType(sillyHatAnimatable, SILLY_HAT_TEXTURE, bufferSource, partialTick);
         this.renderer.render(poseStack, sillyHatAnimatable, bufferSource, sillyHatRenderType, null, packedLight, partialTick);
