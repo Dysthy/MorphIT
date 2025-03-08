@@ -17,6 +17,7 @@
   "modelshifter.model.crab": "Crab",
   "modelshifter.model.fly": "Fly",
   "modelshifter.model.endermite": "Endermite",
+  "modelshifter.model.axolotl": "Axolotl",
 
   "modelshifter.button.open_screen": "ModelShifter",
   "modelshifter.button.player_overrides": "Settings for specific players",
