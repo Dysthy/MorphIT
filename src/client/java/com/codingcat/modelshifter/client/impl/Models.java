@@ -29,6 +29,7 @@ public class Models {
         register(14, "creaking", new CreakingPlayerModel());
         register(15, "crab", new CrabPlayerModel());
         register(16, "fly", new FlyPlayerModel());
+        register(17, "endermite", new EndermitePlayerModel());
     }
 
     private static void register(int ordinal, String id, PlayerModel playerModel) {
