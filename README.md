@@ -16,21 +16,33 @@ Ever wanted to play a minigame with everyone being a cat? Well, now it's possibl
 - Among Us
 
 **Made by *bug_finder*:**
-- Enderman
-- Flat player
-- Armor Stand
-- Frog
+- Armadillo
+- Chest
+- Creaking
+- Crab
 - Croissant
+- Enderman
+- Fly
+- Flat player
+- Frog
+- Ghast
 - Square
-- [Wither](https://sketchfab.com/3d-models/wither-playerskin-2ad3cadc2f194134948d8b09e9004617)
-- [Ghast](https://sketchfab.com/3d-models/ghast-playermodel-528350e1fe6e4ac29b85c97df2661ac8)
-- [Chest](https://sketchfab.com/3d-models/chest-playerskin-d4316caeea3347a39fea9775423191b6)
-- [Armadillo](https://sketchfab.com/3d-models/armadillo-playerskin-8d895973005f40fd88073649e89215a3)
+- Wither
+
+**Made by *Domplanto*:**
+- Dinosaur
+- Baby
 
 # Installation
 ModelShifter is compatible with **Fabric**, on versions 1.20.6 up to 1.21.1 and can be installed through the Modrinth app, as well as through other launchers with Modrinth support.
 
 The mod requires [**GeckoLib**](https://modrinth.com/mod/geckolib) to work, which will automatically be added to your mods if you install ModelShifter through the modrinth app.
+
+# Video
+<details>
+<summary>Watch on YouTube</summary>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/vvEL9Lems4o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</details>
 
 # Support / Credits
 [<img src="https://codingcat2468.github.io/assets/images/membercat_studios.png" height="60" width="200"/>](https://membercat.com)
@@ -41,7 +53,13 @@ This mod is part of **Membercat Studios** by KasaiSora and has been created by:
 - **bug_finder**: Model & animation creator
 
 Also thanks to the following people for helping out with the mod:
-- **Azy**: Translator
-- **Ynntro**: Translator
+- **Domplanto**: Model & animation creator
+- **Azy**: Translator (Bosnian)
+- **Ynntro**: Translator (French and Russian)
+- **Mazurex**: Translator (Polish)
+- **KasaiSora**: Translator (Dutch)
+- **Random_Chad**: Translator (Chinese and Japanese)
+- **Vaiskiainen**: Translator (Finnish)
+- **dec123**: Translator (Czech and Slovakian)
 
 To report any issues, receive support or tell us your feedback, join our [Discord Server](https://dc.kasai.gg/) or create an issue on [GitHub](https://github.com/codingcat2468/ModelShifter/issues) if you discover any bugs.
