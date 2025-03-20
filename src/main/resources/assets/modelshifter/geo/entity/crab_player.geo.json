@@ -30,6 +30,11 @@
 					]
 				},
 				{
+					"name": "hat_position",
+					"parent": "body",
+					"pivot": [0, 6, -4]
+				},
+				{
 					"name": "cloak",
 					"parent": "body",
 					"pivot": [0, 8, -4],
@@ -282,8 +287,8 @@
 				{
 					"name": "held_item_position_right",
 					"parent": "big_claw_top",
-					"pivot": [-1.5, 4, -5.5],
-					"rotation": [172.5, 72.5, 180]
+					"pivot": [-1.5, 5, -5.5],
+					"rotation": [0, 107.5, 0]
 				}
 			]
 		}

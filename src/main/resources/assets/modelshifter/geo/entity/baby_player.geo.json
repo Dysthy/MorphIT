@@ -77,6 +77,11 @@
 					]
 				},
 				{
+					"name": "hat_position",
+					"parent": "head",
+					"pivot": [0, 16.3, -2.65]
+				},
+				{
 					"name": "left_leg",
 					"parent": "base",
 					"pivot": [1.275, 4.8, 0.0125],

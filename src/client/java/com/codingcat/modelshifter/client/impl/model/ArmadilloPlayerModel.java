@@ -23,6 +23,7 @@ public class ArmadilloPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
+                .setSillyHatRenderModifier(ArmadilloPlayerModel::modifySillyHatRendering)
                 .add(FeatureRendererType.HELD_ITEM_LEFT)
                 .add(FeatureRendererType.HELD_ITEM_RIGHT)
                 .add(FeatureRendererType.ELYTRA, ArmadilloPlayerModel::modifyCloakRendering)
@@ -42,5 +43,9 @@ public class ArmadilloPlayerModel extends PlayerModel {
 
     private static void modifyCloakRendering(EntityRenderStateWrapper stateWrapper, MatrixStack poseStack) {
         poseStack.scale(0.8f, 0.8f, 0.8f);
+    }
+
+    private static void modifySillyHatRendering(MatrixStack poseStack) {
+        poseStack.scale(0.32f, 0.32f, 0.32f);
     }
 }

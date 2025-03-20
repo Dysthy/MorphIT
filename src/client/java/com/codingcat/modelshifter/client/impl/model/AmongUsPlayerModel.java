@@ -6,6 +6,7 @@ import com.codingcat.modelshifter.client.api.model.PlayerModel;
 import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererStates;
 import com.codingcat.modelshifter.client.api.renderer.feature.FeatureRendererType;
 import com.codingcat.modelshifter.client.impl.Creators;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,10 +21,15 @@ public class AmongUsPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
+                .setSillyHatRenderModifier(AmongUsPlayerModel::modifySillyHatRendering)
                 .add(FeatureRendererType.HELD_ITEM_LEFT)
                 .add(FeatureRendererType.HELD_ITEM_RIGHT)
                 .add(FeatureRendererType.ELYTRA)
                 .add(FeatureRendererType.CAPE)
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
+    }
+
+    private static void modifySillyHatRendering(MatrixStack poseStack) {
+        poseStack.scale(1.2f, 1.2f, 1.2f);
     }
 }

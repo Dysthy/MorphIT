@@ -53,6 +53,11 @@
 					"pivot": [-5.4, 13, -6]
 				},
 				{
+					"name": "hat_position",
+					"parent": "body",
+					"pivot": [0, 20, -5]
+				},
+				{
 					"name": "cloak",
 					"parent": "body",
 					"pivot": [0, 24, 1]

@@ -22,6 +22,7 @@ public class CreakingPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
+                .setSillyHatRenderModifier(CreakingPlayerModel::modifySillyHatRendering)
                 .add(FeatureRendererType.HELD_ITEM_LEFT)
                 .add(FeatureRendererType.HELD_ITEM_RIGHT)
                 .add(FeatureRendererType.ELYTRA)
@@ -43,5 +44,9 @@ public class CreakingPlayerModel extends PlayerModel {
 
     private static void modifyGuiShowcaseInventoryRendering(MatrixStack matrixStack) {
         matrixStack.scale(0.7f, 0.7f, 0.7f);
+    }
+
+    private static void modifySillyHatRendering(MatrixStack matrixStack) {
+        matrixStack.scale(0.8f, 0.8f, 0.8f);
     }
 }

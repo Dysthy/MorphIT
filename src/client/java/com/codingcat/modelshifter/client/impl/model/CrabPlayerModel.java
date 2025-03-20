@@ -23,6 +23,7 @@ public class CrabPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
+                .setSillyHatRenderModifier(CrabPlayerModel::modifySillyHatRendering)
                 .add(FeatureRendererType.HELD_ITEM_RIGHT)
                 .add(FeatureRendererType.ELYTRA, CrabPlayerModel::modifyCloakRendering)
                 .add(FeatureRendererType.CAPE, CrabPlayerModel::modifyCloakRendering)
@@ -41,5 +42,9 @@ public class CrabPlayerModel extends PlayerModel {
 
     private static void modifyCloakRendering(EntityRenderStateWrapper state, MatrixStack poseStack) {
         poseStack.scale(0.7f,0.7f,0.7f);
+    }
+
+    private static void modifySillyHatRendering(MatrixStack poseStack) {
+        poseStack.scale(1.5f, 1.2f, 1.5f);
     }
 }

@@ -22,6 +22,7 @@ public class ArmorStandPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
+                .setSillyHatRenderModifier(ArmorStandPlayerModel::modifySillyHatRendering)
                 .add(FeatureRendererType.HELD_ITEM_LEFT)
                 .add(FeatureRendererType.HELD_ITEM_RIGHT)
                 .add(FeatureRendererType.ELYTRA)
@@ -37,10 +38,14 @@ public class ArmorStandPlayerModel extends PlayerModel {
     }
 
     private static void modifyGuiButtonRendering(MatrixStack matrixStack) {
-        matrixStack.scale(0.9f,0.9f,0.9f);
+        matrixStack.scale(0.9f, 0.9f, 0.9f);
     }
 
     private static void modifyGuiShowcaseRendering(MatrixStack matrixStack) {
-        matrixStack.scale(0.9f,0.9f,0.9f);
+        matrixStack.scale(0.9f, 0.9f, 0.9f);
+    }
+
+    private static void modifySillyHatRendering(MatrixStack poseStack) {
+        poseStack.scale(0.5f, 0.5f, 0.5f);
     }
 }

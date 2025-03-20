@@ -124,6 +124,11 @@
 					]
 				},
 				{
+					"name": "hat_position",
+					"parent": "head",
+					"pivot": [0, 29, -2]
+				},
+				{
 					"name": "left_arm",
 					"parent": "body",
 					"pivot": [5, 22, 0],

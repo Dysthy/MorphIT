@@ -36,10 +36,10 @@ public class SillyHatRenderLayer extends GeoRenderLayer<ReplacedPlayerEntity> {
         if (!bone.getName().equals(GeoFileDefaults.BONE_SILLY_HAT_ID)) return;
 
         poseStack.push();
-        //Undo the model translation from GeoObjectRenderer#preRender
-        poseStack.translate(-0.5f, -0.51f, -0.5f);
         RenderUtil.translateAndRotateMatrixForBone(poseStack, bone);
         this.model.getFeatureRendererStates().applySillyHatRenderModifier(poseStack);
+        //Undo the model translation from GeoObjectRenderer#preRender
+        poseStack.translate(-0.5f, -0.51f, -0.5f);
         RenderLayer sillyHatRenderType = this.renderer.getRenderType(sillyHatAnimatable, SILLY_HAT_TEXTURE, bufferSource, partialTick);
         this.renderer.render(poseStack, sillyHatAnimatable, bufferSource, sillyHatRenderType, null, packedLight, partialTick);
         poseStack.pop();

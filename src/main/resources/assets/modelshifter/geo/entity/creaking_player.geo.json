@@ -60,6 +60,11 @@
 					]
 				},
 				{
+					"name": "hat_position",
+					"parent": "body",
+					"pivot": [-3.5, 41, -2]
+				},
+				{
 					"name": "cloak",
 					"parent": "body",
 					"pivot": [-0.5, 28.6, 1]

@@ -22,6 +22,7 @@ public class CatPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
+                .setSillyHatRenderModifier(CatPlayerModel::modifySillyHatRendering)
                 .add(FeatureRendererType.HELD_ITEM_RIGHT_RENDER_GROUND)
                 .add(FeatureRendererType.ELYTRA, CatPlayerModel::modifyElytraRendering)
                 .add(FeatureRendererType.TRIDENT_RIPTIDE);
@@ -29,5 +30,9 @@ public class CatPlayerModel extends PlayerModel {
 
     private static void modifyElytraRendering(EntityRenderStateWrapper state, MatrixStack poseStack) {
         poseStack.scale(0.6f, 0.6f, 0.6f);
+    }
+
+    private static void modifySillyHatRendering(MatrixStack poseStack) {
+        poseStack.scale(0.7f, 0.7f, 0.7f);
     }
 }

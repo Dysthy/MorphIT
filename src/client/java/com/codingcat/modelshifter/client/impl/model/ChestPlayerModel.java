@@ -22,6 +22,7 @@ public class ChestPlayerModel extends PlayerModel {
     @Override
     protected @NotNull FeatureRendererStates createFeatureRendererStates() {
         return new FeatureRendererStates()
+                .setSillyHatRenderModifier(ChestPlayerModel::modifySillyHatRendering)
                 .add(FeatureRendererType.HELD_ITEM_LEFT_RENDER_GROUND)
                 .add(FeatureRendererType.HELD_ITEM_RIGHT)
                 .add(FeatureRendererType.ELYTRA, ChestPlayerModel::modifyCloakRendering)
@@ -31,5 +32,9 @@ public class ChestPlayerModel extends PlayerModel {
 
     private static void modifyCloakRendering(EntityRenderStateWrapper state, MatrixStack poseStack) {
         poseStack.scale(1f,0.8f,1f);
+    }
+
+    private static void modifySillyHatRendering(MatrixStack poseStack) {
+        poseStack.scale(1.65f, 1.65f, 1.65f);
     }
 }
