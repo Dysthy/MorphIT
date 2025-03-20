@@ -18,16 +18,19 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class ModelIdentifierArgumentType implements ArgumentType<Optional<Identifier>> {
-    private static final DynamicCommandExceptionType MODEL_NOT_FOUND_EXCEPTION = new DynamicCommandExceptionType(id -> Text.translatable("modelshifter.commmand.model.error.not_found", id));
+    private static final DynamicCommandExceptionType MODEL_NOT_FOUND_EXCEPTION = new DynamicCommandExceptionType(id -> Text.translatable("modelshifter.command.model.error.not_found", id));
     private static final String DISABLE_ARGUMENT = "disable";
 
     @Override
     public Optional<Identifier> parse(StringReader reader) throws CommandSyntaxException {
         int cursor = reader.getCursor();
         if (reader.readString().equals(DISABLE_ARGUMENT)) return Optional.empty();
-
         reader.setCursor(cursor);
-        return Optional.of(Identifier.fromCommandInput(reader));
+        Identifier id = Identifier.fromCommandInput(reader);
+        if (ModelRegistry.get(id).isEmpty())
+            throw MODEL_NOT_FOUND_EXCEPTION.createWithContext(reader, id);
+
+        return Optional.of(id);
     }
 
     public static ModelIdentifierArgumentType modelIdentifier() {
