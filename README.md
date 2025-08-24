@@ -33,7 +33,7 @@ Since MorphIT comes without pre-bundled models, you’ll need to provide your ow
 ## 🙌 Credits
 MorphIT is a fork of **ModelShifter** by [Membercat Studios](https://membercat.com).  
 Original credits go to:  
-- **codingcat**: Developer of ModelShifter
-
+- **codingcat**
+- **Domplanto**
 MorphIT has been adapted and maintained by:  
 - **Dysthy**
