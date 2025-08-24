@@ -5,6 +5,9 @@
 ## MorphIT
 
 **MorphIT** **(based on ModelShifter)** lets you change player appearances with custom models, fully client-side but synchronized via a Paper plugin. Transform yourself and others into any custom model from a resource pack.
+
+[![github](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/github_vector.svg)](https://github.com/Dysthy/MorphIT)
+[![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/morphit)
 </div>
 
 ## ⚙️ Features
