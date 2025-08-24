@@ -33,4 +33,4 @@ Original credits go to:
 - **codingcat**: Developer of ModelShifter
 
 MorphIT has been adapted and maintained by:  
-- **[Dysthy]**
+- **Dysthy**
