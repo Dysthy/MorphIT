@@ -1,4 +1,5 @@
-![Morphit logo](https://cdn.modrinth.com/data/JQ2QjaSV/0c2cace62ca827dba0f9c796d4fc630276bb2f98_96.webp)
+<img src="https://cdn.modrinth.com/data/JQ2QjaSV/0c2cace62ca827dba0f9c796d4fc630276bb2f98_96.webp" height="200" alt="Morphit" align="right">
+
 
 **ModelShifter** allows you to change the appearance of players completely client-side, while using the power of mods to add way more cool details than a simple resource pack ever could! Change yourself and others into **cats**, **ghasts** and many more pre-defined models.
 
