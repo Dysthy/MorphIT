@@ -4,11 +4,10 @@
 
 ## MorphIT
 
-**ModelShifter** allows you to change the appearance of players completely client-side, while using the power of mods to add way more cool details than a simple resource pack ever could! Change yourself and others into **cats**, **ghasts** and many more pre-defined models.
+**MorphIT** **(based on ModelShifter)** lets you change player appearances with custom models, fully client-side but synchronized via a Paper plugin. Transform yourself and others into any custom model from a resource pack.
+</div>
 
-Ever wanted to play a minigame with everyone being a cat? Well, now it's possible!
-
-# Features
+## ⚙️ Features
 - **Works like a resource pack**: ModelShifter allows you to change player models completely client-side, so that only you will be able to see them, even if other players look different
 - **Choose from a wide range of models**: The mod includes plenty of custom-made models for your player, with a lot more still to come in future updates (take a look at the [Gallery](https://modrinth.com/mod/model-shifter/gallery) for some examples)
 - **Model Selection GUI**: Change or disable your custom player model through ModelShifter's unique GUI, which can be accessed through the new purple button in the optios menu
