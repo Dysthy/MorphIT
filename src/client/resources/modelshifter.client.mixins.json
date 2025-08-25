@@ -4,11 +4,11 @@
   "package": "com.codingcat.modelshifter.client.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "hud.DebugHudMixin",
-    "renderer.EntityRenderDispatcherMixin",
-    "renderer.EntityRendererMixin",
-    "screen.InventoryScreenMixin",
-    "screen.OptionsScreenMixin"
+    "com.dysthy.morphit.client.mixin.hud.DebugHudMixin",
+    "com.dysthy.morphit.client.mixin.renderer.EntityRenderDispatcherMixin",
+    "com.dysthy.morphit.client.mixin.renderer.EntityRendererMixin",
+    "com.dysthy.morphit.client.mixin.screen.InventoryScreenMixin",
+    "com.dysthy.morphit.client.mixin.screen.OptionsScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

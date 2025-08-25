@@ -16,7 +16,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "com.codingcat.modelshifter.client.ModelShifterClient"
+      "com.dysthy.morphit.client.ModelShifterClient"
     ]
   },
   "mixins": [
