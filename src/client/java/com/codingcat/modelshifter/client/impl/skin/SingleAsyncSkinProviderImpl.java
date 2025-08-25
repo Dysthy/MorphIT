@@ -1,6 +1,5 @@
 package com.codingcat.modelshifter.client.impl.skin;
 
-import com.codingcat.modelshifter.client.api.skin.SingleAsyncSkinProvider;
 import com.mojang.authlib.GameProfile;
 //? <=1.20.1 {
 /*import com.mojang.authlib.minecraft.MinecraftProfileTexture;
